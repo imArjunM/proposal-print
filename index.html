@@ -1,1094 +1,1075 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TTD Business Proposal - StaTwig</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap");
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farview AI-OS — Phased Deployment Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
 
-      :root {
-        --saffron: #e8831a;
-        --deep-saffron: #c4601a;
-        --gold: #d4a017;
-        --dark: #1a1a2e;
-        --dark2: #16213e;
-        --accent: #0f3460;
-        --light-bg: #fdf8f0;
-        --card-bg: #ffffff;
-        --text: #2d2d2d;
-        --muted: #6b7280;
-        --border: #e5ddd0;
-      }
+  --color-bg:              #f8f6f2;
+  --color-surface:         #fdfcfa;
+  --color-surface-2:       #ffffff;
+  --color-surface-offset:  #f0ede8;
+  --color-divider:         #e2ddd8;
+  --color-border:          #d8d3cd;
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+  --color-text:            #1a1714;
+  --color-text-muted:      #6b6762;
+  --color-text-faint:      #a8a4a0;
 
-      body {
-        font-family: "Inter", sans-serif;
-        background: var(--light-bg);
-        color: var(--text);
-        font-size: 18px;
-        line-height: 1.7;
-      }
+  --color-primary:         #1a4a3a;
+  --color-primary-light:   #2d6b55;
+  --color-primary-highlight: #e8f0ec;
+  --color-primary-pale:    #f2f7f4;
 
-      /* ── COVER PAGE ── */
-      .cover {
-        background: linear-gradient(
-          145deg,
-          #1a1a2e 0%,
-          #0f3460 50%,
-          #1a1a2e 100%
-        );
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 10rem 40px;
-        position: relative;
-        overflow: hidden;
-        page-break-after: always;
-      }
-      .cover::before {
-        content: "";
-        position: absolute;
-        top: -100px;
-        right: -100px;
-        width: 500px;
-        height: 500px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(232, 131, 26, 0.15) 0%,
-          transparent 70%
-        );
-      }
-      .cover::after {
-        content: "";
-        position: absolute;
-        bottom: -80px;
-        left: -80px;
-        width: 400px;
-        height: 400px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(212, 160, 23, 0.1) 0%,
-          transparent 70%
-        );
-      }
-      .cover-badge {
-        background: rgba(232, 131, 26, 0.2);
-        border: 1px solid rgba(232, 131, 26, 0.5);
-        color: #e8831a;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        padding: 8px 20px;
-        border-radius: 50px;
-        margin-bottom: 30px;
-      }
-      .cover-symbol {
-        font-size: 64px;
-        margin-bottom: 20px;
-        filter: drop-shadow(0 0 20px rgba(232, 131, 26, 0.5));
-      }
-      .cover h1 {
-        font-family: "Playfair Display", serif;
-        font-size: 42px;
-        font-weight: 800;
-        color: #ffffff;
-        line-height: 1.2;
-        margin-bottom: 12px;
-      }
-      .cover h1 span {
-        color: #e8831a;
-      }
-      .cover-subtitle {
-        font-size: 18px;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 40px;
-        max-width: 520px;
-      }
-      .cover-divider {
-        width: 80px;
-        height: 3px;
-        background: linear-gradient(90deg, var(--saffron), var(--gold));
-        border-radius: 2px;
-        margin: 0 auto 40px;
-      }
-      .cover-meta {
-        display: flex;
-        gap: 50px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-bottom: 60px;
-      }
-      .cover-meta-item {
-        text-align: center;
-      }
-      .cover-meta-label {
-        font-size: 12px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.4);
-        margin-bottom: 4px;
-      }
-      .cover-meta-value {
-        font-size: 16px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
-      }
-      .cover-footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(232, 131, 26, 0.15);
-        border-top: 1px solid rgba(232, 131, 26, 0.3);
-        padding: 16px 40px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .cover-footer-brand {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--saffron);
-        letter-spacing: 1px;
-      }
-      .cover-footer-tag {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.5);
-      }
+  --color-accent:          #c47c2b;
+  --color-accent-light:    #e8a84a;
+  --color-accent-pale:     #fdf5e8;
 
-      /* ── LAYOUT ── */
-      .page {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 50px 40px;
-      }
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+  --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
 
-      /* ── SECTION HEADER ── */
-      .section-header {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 28px;
-        margin-top: 50px;
-      }
-      .section-number {
-        width: 42px;
-        height: 42px;
-        background: linear-gradient(
-          135deg,
-          var(--saffron),
-          var(--deep-saffron)
-        );
-        color: white;
-        font-size: 18px;
-        font-weight: 700;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        box-shadow: 0 4px 12px rgba(232, 131, 26, 0.3);
-      }
-      .section-title {
-        font-family: "Playfair Display", serif;
-        font-size: 22px;
-        font-weight: 700;
-        color: var(--accent);
-        border-bottom: 2px solid var(--border);
-        padding-bottom: 8px;
-        flex: 1;
-      }
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+  --text-3xl:  clamp(2.5rem,   1rem    + 4vw,    5rem);
 
-      /* ── CARDS ── */
-      .card {
-        background: var(--card-bg);
-        border-radius: 14px;
-        padding: 24px 28px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        border: 1px solid var(--border);
-      }
-      .card-title {
-        font-size: 15px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: var(--saffron);
-        margin-bottom: 12px;
-      }
+  --radius-sm: 0.375rem; --radius-md: 0.5rem; --radius-lg: 0.75rem;
+  --radius-xl: 1rem; --radius-2xl: 1.5rem; --radius-full: 9999px;
 
-      /* ── HIGHLIGHT BOX ── */
-      .highlight-box {
-        background: linear-gradient(135deg, #fff8ee, #fff3e0);
-        border-left: 4px solid var(--saffron);
-        border-radius: 0 12px 12px 0;
-        padding: 18px 22px;
-        margin: 24px 0;
-        font-style: italic;
-        color: var(--accent);
-        font-size: 16.5px;
-        font-weight: 500;
-      }
+  --shadow-sm: 0 1px 3px oklch(0.2 0.01 80 / 0.07), 0 1px 2px oklch(0.2 0.01 80 / 0.04);
+  --shadow-md: 0 4px 12px oklch(0.2 0.01 80 / 0.08), 0 2px 4px oklch(0.2 0.01 80 / 0.05);
+  --shadow-lg: 0 12px 32px oklch(0.2 0.01 80 / 0.10), 0 4px 8px oklch(0.2 0.01 80 / 0.06);
 
-      /* ── ICON GRID ── */
-      .icon-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 16px;
-        margin: 24px 0;
-      }
-      .icon-card {
-        background: var(--card-bg);
-        border-radius: 14px;
-        padding: 22px 18px;
-        text-align: center;
-        border: 1px solid var(--border);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s;
-      }
-      .icon-card:hover {
-        transform: translateY(-2px);
-      }
-      .icon-card .icon {
-        font-size: 32px;
-        margin-bottom: 10px;
-      }
-      .icon-card .label {
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--accent);
-        line-height: 1.4;
-      }
+  --content-narrow: 640px;
+  --content-default: 900px;
+  --content-wide: 1100px;
+}
 
-      /* ── BULLET LIST ── */
-      .bullet-list {
-        list-style: none;
-        padding: 0;
-      }
-      .bullet-list li {
-        padding: 8px 0 8px 28px;
-        position: relative;
-        border-bottom: 1px solid #f3ede3;
-        font-size: 16px;
-        color: var(--text);
-      }
-      .bullet-list li:last-child {
-        border-bottom: none;
-      }
-      .bullet-list li::before {
-        content: "›";
-        position: absolute;
-        left: 8px;
-        color: var(--saffron);
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 1.4;
-      }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--space-8); -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.7;
+  min-height: 100dvh;
+}
+img { display: block; max-width: 100%; height: auto; }
+h1,h2,h3,h4,h5,h6 { text-wrap: balance; line-height: 1.2; }
+p, li { text-wrap: pretty; }
+button { cursor: pointer; font: inherit; border: none; background: none; }
 
-      /* ── PHASE TIMELINE ── */
-      .timeline {
-        position: relative;
-        padding-left: 30px;
-        margin: 20px 0;
-      }
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 10px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: linear-gradient(180deg, var(--saffron), var(--gold));
-        border-radius: 2px;
-      }
-      .phase {
-        position: relative;
-        margin-bottom: 24px;
-        background: var(--card-bg);
-        border-radius: 12px;
-        padding: 18px 20px 18px 24px;
-        border: 1px solid var(--border);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      }
-      .phase::before {
-        content: "";
-        position: absolute;
-        left: -26px;
-        top: 22px;
-        width: 14px;
-        height: 14px;
-        background: var(--saffron);
-        border-radius: 50%;
-        border: 3px solid var(--light-bg);
-        box-shadow: 0 0 0 2px var(--saffron);
-      }
-      .phase-label {
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--saffron);
-        margin-bottom: 4px;
-      }
-      .phase-title {
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--accent);
-        margin-bottom: 8px;
-      }
-      .phase ul {
-        list-style: none;
-        padding: 0;
-      }
-      .phase ul li {
-        font-size: 16px;
-        color: var(--muted);
-        padding: 3px 0 3px 16px;
-        position: relative;
-      }
-      .phase ul li::before {
-        content: "•";
-        position: absolute;
-        left: 4px;
-        color: var(--gold);
-      }
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
 
-      /* ── OUTCOME COLUMNS ── */
-      .outcome-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        margin: 20px 0;
-      }
-      .outcome-card {
-        border-radius: 14px;
-        padding: 22px 18px;
-        border: 1px solid var(--border);
-      }
-      .outcome-card.op {
-        background: linear-gradient(135deg, #eff6ff, #dbeafe);
-        border-color: #bfdbfe;
-      }
-      .outcome-card.gov {
-        background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-        border-color: #bbf7d0;
-      }
-      .outcome-card.strat {
-        background: linear-gradient(135deg, #fff7ed, #fed7aa);
-        border-color: #fdba74;
-      }
-      .outcome-card .oc-icon {
-        font-size: 28px;
-        margin-bottom: 10px;
-      }
-      .outcome-card .oc-title {
-        font-size: 14px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 10px;
-      }
-      .outcome-card ul {
-        list-style: none;
-        padding: 0;
-      }
-      .outcome-card ul li {
-        font-size: 16.5px;
-        color: var(--text);
-        padding: 4px 0 4px 14px;
-        position: relative;
-      }
-      .outcome-card ul li::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: #16a34a;
-        font-size: 13px;
-      }
+/* ── LAYOUT ── */
+.container { max-width: var(--content-default); margin-inline: auto; padding-inline: clamp(var(--space-4), 5vw, var(--space-12)); }
+.container--wide { max-width: var(--content-wide); margin-inline: auto; padding-inline: clamp(var(--space-4), 5vw, var(--space-12)); }
 
-      /* ── RISK TABLE ── */
-      .risk-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        border-radius: 12px;
-        overflow: hidden;
-      }
-      .risk-table th {
-        background: linear-gradient(135deg, var(--accent), var(--dark2));
-        color: white;
-        padding: 14px 18px;
-        text-align: left;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-      .risk-table td {
-        padding: 14px 18px;
-        font-size: 14px;
-        border-bottom: 1px solid var(--border);
-      }
-      .risk-table tr:last-child td {
-        border-bottom: none;
-      }
-      .risk-table tr:nth-child(even) td {
-        background: #fafaf7;
-      }
-      .risk-icon {
-        font-size: 16px;
-        margin-right: 8px;
-      }
+/* ── HEADER / NAV ── */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: oklch(from var(--color-surface) l c h / 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid oklch(from var(--color-text) l c h / 0.07);
+  padding-block: var(--space-4);
+}
+.header-inner {
+  max-width: var(--content-wide); margin-inline: auto;
+  padding-inline: clamp(var(--space-4), 5vw, var(--space-12));
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-8);
+}
+.logo {
+  display: flex; align-items: center; gap: var(--space-3);
+  text-decoration: none; color: inherit;
+}
+.logo-mark {
+  width: 36px; height: 36px; flex-shrink: 0;
+}
+.logo-name {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+}
+nav { display: flex; align-items: center; gap: var(--space-6); }
+nav a {
+  font-size: var(--text-sm); font-weight: 500;
+  color: var(--color-text-muted); text-decoration: none;
+  transition: color 180ms ease;
+}
+nav a:hover { color: var(--color-primary); }
+.nav-cta {
+  font-size: var(--text-sm); font-weight: 500;
+  background: var(--color-primary);
+  color: #fff; text-decoration: none;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  transition: background 180ms ease, transform 180ms ease;
+}
+.nav-cta:hover { background: var(--color-primary-light); transform: translateY(-1px); }
 
-      /* ── VALUES ROW ── */
-      .values-row {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 14px;
-        margin: 20px 0;
-      }
-      .value-pill {
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 18px 14px;
-        text-align: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      }
-      .value-pill .vp-icon {
-        font-size: 26px;
-        margin-bottom: 8px;
-      }
-      .value-pill .vp-label {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--accent);
-        margin-bottom: 4px;
-      }
-      .value-pill .vp-desc {
-        font-size: 13px;
-        color: var(--muted);
-        line-height: 1.4;
-      }
+/* ── HERO ── */
+.hero {
+  position: relative;
+  padding-block: clamp(var(--space-16), 10vw, var(--space-24));
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 85% 30%, oklch(from var(--color-primary) l c h / 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, oklch(from var(--color-accent) l c h / 0.05) 0%, transparent 60%);
+}
+.hero-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--color-primary);
+  background: var(--color-primary-pale);
+  border: 1px solid oklch(from var(--color-primary) l c h / 0.15);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-6);
+}
+.eyebrow-dot { width: 6px; height: 6px; background: var(--color-primary); border-radius: 50%; }
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  line-height: 1.08;
+  margin-bottom: var(--space-6);
+}
+h1 em { font-style: italic; color: var(--color-primary); }
+.hero-sub {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 52ch;
+  margin-bottom: var(--space-8);
+  line-height: 1.6;
+}
+.hero-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm); font-weight: 600;
+  background: var(--color-primary); color: #fff;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 2px 8px oklch(from var(--color-primary) l c h / 0.25);
+}
+.btn-primary:hover { background: var(--color-primary-light); transform: translateY(-2px); box-shadow: 0 6px 16px oklch(from var(--color-primary) l c h / 0.28); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm); font-weight: 500;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text); background: transparent;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full); text-decoration: none;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+.btn-secondary:hover { border-color: var(--color-primary); background: var(--color-primary-pale); color: var(--color-primary); }
+.hero-card {
+  background: var(--color-surface-2);
+  border: 1px solid oklch(from var(--color-text) l c h / 0.08);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-lg);
+}
+.hero-card-label {
+  font-size: var(--text-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-4);
+}
+.risk-items { display: flex; flex-direction: column; gap: var(--space-3); }
+.risk-item {
+  display: grid; grid-template-columns: auto 1fr auto;
+  gap: var(--space-3); align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid oklch(from var(--color-text) l c h / 0.06);
+  border-radius: var(--radius-lg);
+}
+.risk-icon { font-size: 1.1rem; }
+.risk-label { font-size: var(--text-sm); font-weight: 500; color: var(--color-text); }
+.risk-badge {
+  font-size: var(--text-xs); font-weight: 600;
+  padding: 2px var(--space-2); border-radius: var(--radius-full);
+}
+.risk-badge.red { background: #fef2f2; color: #b91c1c; }
+.risk-badge.amber { background: #fffbeb; color: #b45309; }
+.risk-badge.green { background: #f0fdf4; color: #15803d; }
+.hero-card-footer {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-divider);
+  display: flex; gap: var(--space-6);
+}
+.stat-mini { text-align: center; }
+.stat-mini-val {
+  font-family: var(--font-display); font-size: var(--text-xl);
+  font-weight: 600; color: var(--color-primary); display: block; line-height: 1;
+  margin-bottom: var(--space-1);
+}
+.stat-mini-label { font-size: var(--text-xs); color: var(--color-text-faint); }
 
-      /* ── SCOPE GRID ── */
-      .scope-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        margin: 20px 0;
-      }
-      .scope-card {
-        background: var(--card-bg);
-        border-radius: 12px;
-        padding: 20px;
-        border: 1px solid var(--border);
-      }
-      .scope-card .sc-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 12px;
-      }
-      .scope-card .sc-letter {
-        width: 28px;
-        height: 28px;
-        background: linear-gradient(135deg, var(--saffron), var(--gold));
-        border-radius: 8px;
-        color: white;
-        font-weight: 700;
-        font-size: 13px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .scope-card .sc-title {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--accent);
-      }
-      .scope-card ul {
-        list-style: none;
-        padding: 0;
-      }
-      .scope-card ul li {
-        font-size: 16.5px;
-        color: var(--muted);
-        padding: 4px 0 4px 14px;
-        position: relative;
-      }
-      .scope-card ul li::before {
-        content: "→";
-        position: absolute;
-        left: 0;
-        color: var(--saffron);
-        font-size: 13px;
-        line-height: 1.8;
-      }
+/* ── SECTION SHARED ── */
+section { padding-block: clamp(var(--space-12), 7vw, var(--space-20)); }
+.section-label {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--color-primary); margin-bottom: var(--space-4);
+}
+.section-label::before {
+  content: ''; width: 20px; height: 1.5px;
+  background: var(--color-primary); display: block;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl); font-weight: 600;
+  letter-spacing: -0.025em; line-height: 1.12;
+  color: var(--color-text); margin-bottom: var(--space-4);
+}
+h2 em { font-style: italic; color: var(--color-primary); }
+.section-intro {
+  font-size: var(--text-lg); color: var(--color-text-muted);
+  max-width: 58ch; line-height: 1.65; margin-bottom: var(--space-12);
+}
+.divider {
+  border: none; border-top: 1px solid var(--color-divider);
+  margin-block: 0;
+}
 
-      /* ── CONCLUSION BANNER ── */
-      .conclusion-banner {
-        background: linear-gradient(135deg, var(--accent), var(--dark));
-        color: white;
-        border-radius: 16px;
-        padding: 36px 40px;
-        text-align: center;
-        margin-top: 50px;
-      }
-      .conclusion-banner .cb-icon {
-        font-size: 48px;
-        margin-bottom: 14px;
-      }
-      .conclusion-banner h3 {
-        font-family: "Playfair Display", serif;
-        font-size: 24px;
-        margin-bottom: 14px;
-        color: #fff;
-      }
-      .conclusion-banner p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.75);
-        max-width: 540px;
-        margin: 0 auto 24px;
-      }
-      .conclusion-highlight {
-        background: rgba(232, 131, 26, 0.2);
-        border: 1px solid rgba(232, 131, 26, 0.4);
-        border-radius: 10px;
-        padding: 14px 20px;
-        display: inline-block;
-        font-size: 15px;
-        color: #e8831a;
-        font-weight: 500;
-      }
+/* ── PROBLEM SECTION ── */
+.problem-bg { background: var(--color-surface); }
+.problem-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-10); align-items: start;
+}
+.problem-text p {
+  color: var(--color-text-muted); line-height: 1.75; margin-bottom: var(--space-4);
+  font-size: var(--text-base);
+}
+.problem-text p strong { color: var(--color-text); font-weight: 600; }
+.problem-pullquote {
+  margin-top: var(--space-8);
+  padding: var(--space-5) var(--space-6);
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-primary-pale);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+.problem-pullquote p {
+  font-family: var(--font-display); font-size: var(--text-lg);
+  font-style: italic; color: var(--color-primary); margin: 0 !important; line-height: 1.5;
+}
+.system-stack { display: flex; flex-direction: column; gap: var(--space-3); }
+.system-stack-title { font-size: var(--text-sm); font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-2); }
+.sys-item {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-2);
+  border: 1px solid oklch(from var(--color-text) l c h / 0.07);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.sys-icon { font-size: 1.1rem; flex-shrink: 0; }
+.sys-name { font-size: var(--text-sm); font-weight: 500; color: var(--color-text); flex: 1; }
+.sys-tag {
+  font-size: var(--text-xs); font-weight: 500; padding: 2px var(--space-2);
+  border-radius: var(--radius-full); background: var(--color-surface-offset);
+  color: var(--color-text-muted);
+}
+.gap-arrow {
+  display: flex; align-items: center; justify-content: center;
+  gap: var(--space-3); margin-block: var(--space-2);
+  color: var(--color-text-faint); font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.gap-arrow::before, .gap-arrow::after { content: ''; flex: 1; height: 1px; background: var(--color-divider); }
 
-      /* ── FOOTER ── */
-      .doc-footer {
-        text-align: center;
-        padding: 30px;
-        color: var(--muted);
-        font-size: 14px;
-        border-top: 1px solid var(--border);
-        margin-top: 60px;
-      }
-      .doc-footer strong {
-        color: var(--saffron);
-      }
+/* ── SOLUTION SECTION ── */
+.solution-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-10); align-items: start; }
+.solution-features { display: flex; flex-direction: column; gap: var(--space-5); margin-top: var(--space-8); }
+.feat {
+  display: flex; gap: var(--space-4); align-items: flex-start;
+}
+.feat-num {
+  flex-shrink: 0; width: 28px; height: 28px;
+  background: var(--color-primary); color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs); font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+.feat-body h4 { font-size: var(--text-base); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-1); }
+.feat-body p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+.solution-diagram {
+  background: var(--color-surface-2);
+  border: 1px solid oklch(from var(--color-text) l c h / 0.08);
+  border-radius: var(--radius-2xl); padding: var(--space-6); box-shadow: var(--shadow-md);
+}
+.diagram-title { font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-faint); margin-bottom: var(--space-5); text-align: center; }
+.layer-stack { display: flex; flex-direction: column; gap: var(--space-2); }
+.layer {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500;
+  text-align: center;
+}
+.layer.top { background: var(--color-primary); color: #fff; }
+.layer.mid { background: var(--color-primary-pale); color: var(--color-primary); border: 1.5px solid oklch(from var(--color-primary) l c h / 0.2); }
+.layer.bot { background: var(--color-surface-offset); color: var(--color-text-muted); border: 1px solid var(--color-divider); }
+.layer-connector { display: flex; justify-content: center; color: var(--color-text-faint); font-size: 0.9rem; }
+.integration-icons { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+.int-chip {
+  font-size: var(--text-xs); font-weight: 500;
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius-full); color: var(--color-text-muted);
+}
 
-      .objective-image {
-        width: 100%;
-      }
+/* ── PHASES SECTION ── */
+.phases-bg { background: var(--color-text); }
+.phases-bg .section-label { color: var(--color-accent-light); }
+.phases-bg .section-label::before { background: var(--color-accent-light); }
+.phases-bg h2 { color: #f5f3ef; }
+.phases-bg h2 em { color: var(--color-accent-light); }
+.phases-bg .section-intro { color: oklch(from #f5f3ef l c h / 0.6); }
+.phases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.phase-card {
+  background: oklch(from #f5f3ef l c h / 0.04);
+  border: 1px solid oklch(from #f5f3ef l c h / 0.1);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  position: relative; overflow: hidden;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+.phase-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px oklch(0 0 0 / 0.25); }
+.phase-card.featured {
+  background: oklch(from #f5f3ef l c h / 0.08);
+  border-color: oklch(from #f5f3ef l c h / 0.22);
+}
+.phase-featured-badge {
+  position: absolute; top: var(--space-4); right: var(--space-4);
+  font-size: var(--text-xs); font-weight: 600;
+  background: var(--color-accent); color: #fff;
+  padding: 2px var(--space-3); border-radius: var(--radius-full);
+}
+.phase-number {
+  font-size: var(--text-xs); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--color-accent-light); margin-bottom: var(--space-3);
+}
+.phase-title {
+  font-family: var(--font-display); font-size: var(--text-xl);
+  font-weight: 600; color: #f5f3ef; margin-bottom: var(--space-2);
+  line-height: 1.2;
+}
+.phase-objective {
+  font-size: var(--text-sm); color: oklch(from #f5f3ef l c h / 0.55);
+  margin-bottom: var(--space-6); line-height: 1.55;
+}
+.phase-meta { display: flex; flex-direction: column; gap: var(--space-3); }
+.meta-row {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+}
+.meta-icon { font-size: 0.9rem; margin-top: 1px; flex-shrink: 0; }
+.meta-content {}
+.meta-label { font-size: var(--text-xs); color: oklch(from #f5f3ef l c h / 0.4); text-transform: uppercase; letter-spacing: 0.08em; line-height: 1; margin-bottom: 2px; }
+.meta-val { font-size: var(--text-sm); font-weight: 500; color: #f5f3ef; }
+.phase-divider { border: none; border-top: 1px solid oklch(from #f5f3ef l c h / 0.1); margin-block: var(--space-5); }
+.phase-gate {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); font-weight: 500;
+  color: var(--color-accent-light);
+}
+.phase-gate svg { flex-shrink: 0; }
+.phase-optional {
+  font-size: var(--text-xs); color: oklch(from #f5f3ef l c h / 0.35);
+  font-style: italic;
+}
+.phase-budget {
+  margin-top: var(--space-4);
+  font-family: var(--font-display); font-size: var(--text-xl);
+  font-weight: 600; color: var(--color-accent-light);
+}
 
-      /* ── PRINT ── */
-      /* @media print {
-        body {
-          background: white;
-        }
-        .cover {
-          min-height: auto;
-          padding: 40px;
-        }
-        .page {
-          padding: 30px;
-        }
-      } */
-    </style>
-  </head>
-  <body>
-    <!-- ══════════════ COVER PAGE ══════════════ -->
-    <div class="cover">
-      <!-- <div class="cover-badge">Concept Note · Confidential</div> -->
-      <!-- <div class="cover-symbol">🕌</div> -->
-      <h1>
-        Enhancing Supply Chain<br /><span>Transparency & Governance</span>
-      </h1>
-      <p class="cover-subtitle">
-        A Digital Traceability Initiative for Tirumala Tirupati Devasthanams
-      </p>
-      <div class="cover-divider"></div>
-      <div class="cover-meta">
-        <div class="cover-meta-item">
-          <div class="cover-meta-label">Submitted To</div>
-          <div class="cover-meta-value">CM office</div>
-        </div>
-        <div class="cover-meta-item">
-          <div class="cover-meta-label">Submitted By</div>
-          <div class="cover-meta-value">StaTwig</div>
-        </div>
-        <div class="cover-meta-item">
-          <div class="cover-meta-label">Pilot Duration</div>
-          <div class="cover-meta-value">90 Days (PoC)</div>
-        </div>
-        <div class="cover-meta-item">
-          <div class="cover-meta-label">Date</div>
-          <div class="cover-meta-value">April 2026</div>
-        </div>
-      </div>
-      <div class="cover-footer">
-        <div class="cover-footer-brand">StaTwig</div>
-        <div class="cover-footer-tag">
-          Supply Chain Transparency &amp; Traceability Solutions
-        </div>
-      </div>
-    </div>
+/* ── WHY WORKS ── */
+.why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+.why-card {
+  background: var(--color-surface-2);
+  border: 1px solid oklch(from var(--color-text) l c h / 0.07);
+  border-radius: var(--radius-xl); padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.why-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.why-icon { font-size: 1.5rem; margin-bottom: var(--space-3); }
+.why-card h4 { font-size: var(--text-base); font-weight: 600; color: var(--color-text); margin-bottom: var(--space-2); }
+.why-card p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+.why-side { display: flex; flex-direction: column; justify-content: center; }
+.why-side h3 {
+  font-family: var(--font-display); font-size: var(--text-xl);
+  font-weight: 600; color: var(--color-text);
+  margin-bottom: var(--space-4); line-height: 1.2;
+}
+.why-side p { color: var(--color-text-muted); line-height: 1.7; margin-bottom: var(--space-4); }
 
-    <!-- ══════════════ MAIN CONTENT ══════════════ -->
-    <div class="page">
-      <!-- 1. Background -->
-      <div class="section-header">
-        <div class="section-number">1</div>
-        <div class="section-title">Background &amp; Context</div>
-      </div>
-      <p style="color: var(--muted); margin-bottom: 20px">
-        Tirumala Tirupati Devasthanams is one of the most respected and
-        large-scale religious institutions in the world, managing offerings and
-        services for <strong>millions of devotees annually</strong>. Its
-        operational complexity demands robust systems for transparency and
-        governance.
-      </p>
-      <div class="icon-grid">
-        <div class="icon-card">
-          <div class="icon">🍬</div>
-          <div class="label">Daily preparation of lakhs of laddus</div>
-        </div>
-        <div class="icon-card">
-          <div class="icon">🍚</div>
-          <div class="label">Large-scale Anna Prasadam services</div>
-        </div>
-        <!-- <div class="icon-card">
-          <div class="icon">🧈</div>
-          <div class="label">High-volume raw material procurement</div>
-        </div> -->
-        <div class="icon-card">
-          <div class="icon">🏢</div>
-          <div class="label">Multi-vendor procurement systems</div>
-        </div>
-        <div class="icon-card">
-          <div class="icon">📋</div>
-          <div class="label">Continuous audit &amp; compliance</div>
-        </div>
-      </div>
-      <div
-        class="card"
-        style="background: linear-gradient(135deg, #fff8ee, #fff)"
-      >
-        <div class="card-title">⚠️ Operational Challenges</div>
-        <ul class="bullet-list">
-          <li>Real-time inventory visibility gaps across warehouses</li>
-          <li>
-            Batch-level traceability from procurement to final consumption
-          </li>
-          <li>Vendor quality monitoring and performance tracking</li>
-          <li>Audit readiness and digital reconciliation</li>
-          <li>Demand forecasting during high-footfall festival periods</li>
-        </ul>
-      </div>
+/* ── ABOUT SECTION ── */
+.about-bg { background: var(--color-surface); }
+.about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-12); align-items: center; }
+.about-text p { color: var(--color-text-muted); line-height: 1.75; margin-bottom: var(--space-4); }
+.client-logos { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
+.client-logo {
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm); font-weight: 600; color: var(--color-text);
+}
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+.about-stat {
+  background: var(--color-surface-2);
+  border: 1px solid oklch(from var(--color-text) l c h / 0.07);
+  border-radius: var(--radius-xl); padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+.about-stat-val {
+  font-family: var(--font-display); font-size: var(--text-2xl);
+  font-weight: 600; color: var(--color-primary); line-height: 1;
+  margin-bottom: var(--space-2);
+}
+.about-stat-label { font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
 
-      <!-- 2. Objective -->
-      <div class="section-header">
-        <div class="section-number">2</div>
-        <div class="section-title">Objective</div>
-      </div>
-      <div class="highlight-box">
-        "To design and implement a Supply Chain Transparency and Governance
-        Layer that delivers end-to-end visibility, traceability, and data-driven
-        insights — enhancing administrative efficiency while reinforcing devotee
-        trust."
-      </div>
-      <div
-        class="icon-grid"
-        style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"
-      >
-        <div class="icon-card">
-          <div class="icon">🔍</div>
-          <div class="label">End-to-end raw material visibility</div>
-        </div>
-        <div class="icon-card">
-          <div class="icon">📦</div>
-          <div class="label">Real-time inventory tracking</div>
-        </div>
-        <div class="icon-card">
-          <div class="icon">🔗</div>
-          <div class="label">Batch-level traceability</div>
-        </div>
-        <div class="icon-card">
-          <div class="icon">🤖</div>
-          <div class="label">Automated reconciliation</div>
-        </div>
-        <div class="icon-card">
-          <div class="icon">📊</div>
-          <div class="label">Vendor &amp; quality insights</div>
-        </div>
-      </div>
+/* ── OPTIONAL EXPLORATION ── */
+.optional-banner {
+  background: var(--color-accent-pale);
+  border: 1px solid oklch(from var(--color-accent) l c h / 0.2);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6) var(--space-8);
+  display: flex; gap: var(--space-5); align-items: flex-start;
+}
+.optional-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+.optional-body h4 { font-size: var(--text-base); font-weight: 600; color: var(--color-accent); margin-bottom: var(--space-2); }
+.optional-body p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.65; max-width: 72ch; }
 
+/* ── CTA ── */
+.cta-section {
+  background: var(--color-primary);
+  padding-block: clamp(var(--space-12), 7vw, var(--space-20));
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 15% 50%, oklch(from #fff l c h / 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 85% 30%, oklch(from var(--color-accent) l c h / 0.1) 0%, transparent 50%);
+}
+.cta-section .container { position: relative; z-index: 1; }
+.cta-eyebrow {
+  font-size: var(--text-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: oklch(from #fff l c h / 0.55); margin-bottom: var(--space-4);
+}
+.cta-section h2 {
+  font-family: var(--font-display); font-size: var(--text-2xl);
+  font-weight: 600; color: #fff; margin-bottom: var(--space-4);
+  letter-spacing: -0.025em; line-height: 1.1;
+}
+.cta-section p {
+  font-size: var(--text-lg); color: oklch(from #fff l c h / 0.65);
+  max-width: 52ch; margin-inline: auto; margin-bottom: var(--space-10);
+  line-height: 1.6;
+}
+.cta-actions { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm); font-weight: 600;
+  background: #fff; color: var(--color-primary);
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-full); text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 2px 12px oklch(0 0 0 / 0.15);
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px oklch(0 0 0 / 0.2); }
+.btn-ghost-white {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm); font-weight: 500;
+  border: 1.5px solid oklch(from #fff l c h / 0.4);
+  color: #fff; padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-full); text-decoration: none;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+.btn-ghost-white:hover { border-color: #fff; background: oklch(from #fff l c h / 0.08); }
+.cta-trust {
+  margin-top: var(--space-8);
+  font-size: var(--text-xs); color: oklch(from #fff l c h / 0.4);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--color-text);
+  padding-block: var(--space-10);
+}
+.footer-inner {
+  max-width: var(--content-wide); margin-inline: auto;
+  padding-inline: clamp(var(--space-4), 5vw, var(--space-12));
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: var(--space-4);
+}
+.footer-logo { display: flex; align-items: center; gap: var(--space-3); }
+.footer-logo-name {
+  font-family: var(--font-display); font-size: var(--text-lg);
+  font-weight: 600; color: #f5f3ef;
+}
+.footer-copy { font-size: var(--text-xs); color: oklch(from #f5f3ef l c h / 0.3); }
+.footer-links { display: flex; gap: var(--space-5); }
+.footer-links a { font-size: var(--text-xs); color: oklch(from #f5f3ef l c h / 0.4); text-decoration: none; }
+.footer-links a:hover { color: oklch(from #f5f3ef l c h / 0.8); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+  .problem-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .solution-cols { grid-template-columns: 1fr; gap: var(--space-8); }
+  .phases-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+  .why-section-cols { grid-template-columns: 1fr; gap: var(--space-8); }
+  .about-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  nav { display: none; }
+}
+
+/* Why section two-col */
+.why-section-cols { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--space-12); align-items: start; }
+
+/* Scroll progress */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
+  background: var(--color-primary); width: 0%; transition: width 0.1s linear;
+}
+</style>
+</head>
+<body>
+
+<!-- Scroll progress -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <svg class="logo-mark" viewBox="0 0 36 36" fill="none" aria-label="Farview logo">
+        <rect width="36" height="36" rx="8" fill="#1a4a3a"/>
+        <path d="M10 26 L18 10 L26 26" stroke="#f5f3ef" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M13.5 20 L22.5 20" stroke="#c47c2b" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="18" cy="10" r="2" fill="#c47c2b"/>
+      </svg>
+      <span class="logo-name">Farview</span>
+    </a>
+    <nav>
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#phases">Phases</a>
+      <a href="#about">About</a>
+      <a href="#cta" class="nav-cta">Start Phase 0 →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="container--wide">
+    <div class="hero-grid">
       <div>
-        <img src="Main.png" alt="Ghee Supply Chain" class="objective-image" />
-      </div>
-
-      <!-- 3. Proposed Approach -->
-      <div class="section-header">
-        <div class="section-number">3</div>
-        <div class="section-title">Proposed Approach</div>
-      </div>
-      <div class="card">
-        <div class="card-title">🧭 Guiding Principle</div>
-        <p style="font-size: 14px; color: var(--text)">
-          The proposed system will
-          <strong
-            >augment existing processes without replacing or disrupting
-            them</strong
-          >. It operates as a non-intrusive overlay with minimal workflow
-          changes and measurable outcomes within a short duration.
-        </p>
-      </div>
-
-      <div
-        class="card"
-        style="background: linear-gradient(135deg, #fff3e0, #fff)"
-      >
-        <div class="card-title">
-          🧈 Phase 1 Pilot: Ghee Supply Chain Tracking (90 Days)
-        </div>
-        <p style="font-size: 15px; color: var(--muted); margin-bottom: 14px">
-          Selected for its high procurement value, critical importance in laddu
-          preparation, quality sensitivity, and frequent audit relevance.
-        </p>
-      </div>
-
-      <div class="scope-grid">
-        <div class="scope-card">
-          <div class="sc-header">
-            <div class="sc-letter">A</div>
-            <div class="sc-title">Procurement &amp; Vendor Layer</div>
-          </div>
-          <ul>
-            <li>Digital onboarding of selected vendors</li>
-            <li>Batch-level tagging of supplied materials</li>
-            <li>Vendor performance capture</li>
-          </ul>
-        </div>
-        <div class="scope-card">
-          <div class="sc-header">
-            <div class="sc-letter">B</div>
-            <div class="sc-title">Inward &amp; Storage</div>
-          </div>
-          <ul>
-            <li>Digital recording of inward receipts</li>
-            <li>Warehouse-level inventory visibility</li>
-            <li>Batch identification and tracking</li>
-          </ul>
-        </div>
-        <div class="scope-card">
-          <div class="sc-header">
-            <div class="sc-letter">C</div>
-            <div class="sc-title">Consumption Tracking</div>
-          </div>
-          <ul>
-            <li>Batch-wise consumption at kitchen level</li>
-            <li>Mapping input materials to production output</li>
-          </ul>
-        </div>
-        <div class="scope-card">
-          <div class="sc-header">
-            <div class="sc-letter">D</div>
-            <div class="sc-title">Dashboard &amp; Analytics</div>
-          </div>
-          <ul>
-            <li>Real-time stock visibility</li>
-            <li>Batch traceability reports</li>
-            <li>Consumption vs procurement reconciliation</li>
-            <li>Anomaly alerts and deviations</li>
-          </ul>
+        <div class="hero-eyebrow reveal"><span class="eyebrow-dot"></span> Proposal · April 2026</div>
+        <h1 class="reveal">See risks <em>before</em> they reach your reports.</h1>
+        <p class="hero-sub reveal reveal-delay-1">Farview is an AI-driven intelligence layer for complex, multi-year development projects — connecting your existing systems to surface cost and schedule risks weeks earlier.</p>
+        <div class="hero-actions reveal reveal-delay-2">
+          <a href="#phases" class="btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            View Phase 0
+          </a>
+          <a href="#solution" class="btn-secondary">How it works</a>
         </div>
       </div>
-
-      <div>
-        <img src="Main-1.png" alt="Ghee Supply Chain" class="objective-image" />
-      </div>
-
-      <!-- 4. Expected Outcomes -->
-      <div class="section-header">
-        <div class="section-number">4</div>
-        <div class="section-title">Expected Outcomes</div>
-      </div>
-      <div class="outcome-grid">
-        <div class="outcome-card op">
-          <div class="oc-icon">⚙️</div>
-          <div class="oc-title">Operational</div>
-          <ul>
-            <li>Reduced manual reconciliation effort</li>
-            <li>Faster audit processes</li>
-            <li>Improved inventory accuracy</li>
-            <li>Real-time decision-making</li>
-          </ul>
-        </div>
-        <div class="outcome-card gov">
-          <div class="oc-icon">🏛️</div>
-          <div class="oc-title">Governance</div>
-          <ul>
-            <li>Enhanced transparency in material usage</li>
-            <li>Digitally verifiable audit trail</li>
-            <li>Improved vendor accountability</li>
-          </ul>
-        </div>
-        <div class="outcome-card strat">
-          <div class="oc-icon">🚀</div>
-          <div class="oc-title">Strategic</div>
-          <ul>
-            <li>Scalable model for other departments</li>
-            <li>TTD as a leader in institutional transparency</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 5. Technology Approach -->
-      <div class="section-header">
-        <div class="section-number">5</div>
-        <div class="section-title">Technology Approach</div>
-      </div>
-      <div
-        class="icon-grid"
-        style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr))"
-      >
-        <div class="icon-card">
-          <div class="icon">💾</div>
-          <div class="label">Digital inventory tracking systems</div>
-        </div>
-        <div class="icon-card">
-          <div class="icon">🔐</div>
-          <div class="label">Secure, tamper-evident data recording</div>
-        </div>
-        <div class="icon-card">
-          <div class="icon">🔎</div>
-          <div class="label">Batch-level traceability frameworks</div>
-        </div>
-        <div class="icon-card">
-          <div class="icon">📈</div>
-          <div class="label">Analytics &amp; reporting dashboards</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">🔑 Key Technology Principles</div>
-        <ul class="bullet-list">
-          <li>Non-invasive integration with existing ERP/systems</li>
-          <li>Secure data handling and access controls</li>
-          <li>Scalability across departments post pilot</li>
-          <li>Ease of use for operational field staff</li>
-        </ul>
-      </div>
-
-      <!-- 6. Implementation Methodology -->
-      <div class="section-header">
-        <div class="section-number">6</div>
-        <div class="section-title">Implementation Methodology</div>
-      </div>
-      <div class="timeline">
-        <div class="phase">
-          <div class="phase-label">Phase 1 · Weeks 1–3</div>
-          <div class="phase-title">🔧 Setup &amp; Configuration</div>
-          <ul>
-            <li>Stakeholder alignment and requirement gathering</li>
-            <li>Process mapping and gap analysis</li>
-            <li>Vendor selection and onboarding</li>
-            <li>System configuration and environment setup</li>
-          </ul>
-        </div>
-        <div class="phase">
-          <div class="phase-label">Phase 2 · Weeks 4–8</div>
-          <div class="phase-title">🚀 Pilot Deployment</div>
-          <ul>
-            <li>Pilot rollout in selected warehouse/kitchen locations</li>
-            <li>Staff training and change management</li>
-            <li>Live tracking of transactions and data collection</li>
-          </ul>
-        </div>
-        <div class="phase">
-          <div class="phase-label">Phase 3 · Weeks 9–12</div>
-          <div class="phase-title">📊 Monitoring &amp; Optimization</div>
-          <ul>
-            <li>Performance tracking and KPI measurement</li>
-            <li>Issue resolution and bug fixes</li>
-            <li>Dashboard refinement and user feedback integration</li>
-          </ul>
-        </div>
-        <div class="phase">
-          <div class="phase-label">Phase 4 · Post Week 12</div>
-          <div class="phase-title">📝 Evaluation &amp; Scale-Up Plan</div>
-          <ul>
-            <li>Full impact assessment and ROI analysis</li>
-            <li>Reporting to TTD leadership</li>
-            <li>Recommendations for enterprise-wide rollout</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 7. Future Expansion -->
-      <div class="section-header">
-        <div class="section-number">7</div>
-        <div class="section-title">Future Expansion</div>
-      </div>
-      <div class="card">
-        <div class="card-title">
-          📐 Post-Pilot Roadmap (Subject to Pilot Success)
-        </div>
-        <div
-          class="icon-grid"
-          style="
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            margin: 12px 0 0;
-          "
-        >
-          <div class="icon-card">
-            <div class="icon">🍛</div>
-            <div class="label">Anna Prasadam supply chain</div>
-          </div>
-          <div class="icon-card">
-            <div class="icon">🌾</div>
-            <div class="label">
-              Additional raw materials (sugar, rice, dry fruits)
+      <div class="reveal reveal-delay-2">
+        <div class="hero-card">
+          <div class="hero-card-label">Risk Signals — Active Projects</div>
+          <div class="risk-items">
+            <div class="risk-item">
+              <span class="risk-icon">📐</span>
+              <span class="risk-label">Tower A — Schedule variance growing</span>
+              <span class="risk-badge amber">+14 days</span>
+            </div>
+            <div class="risk-item">
+              <span class="risk-icon">💰</span>
+              <span class="risk-label">Block 3 — Sub-contractor cost drift</span>
+              <span class="risk-badge red">+$180K</span>
+            </div>
+            <div class="risk-item">
+              <span class="risk-icon">🚢</span>
+              <span class="risk-label">Hull Sec 4 — Procurement delay risk</span>
+              <span class="risk-badge amber">Medium</span>
+            </div>
+            <div class="risk-item">
+              <span class="risk-icon">✅</span>
+              <span class="risk-label">Site B — On track, no signals</span>
+              <span class="risk-badge green">On track</span>
             </div>
           </div>
-          <div class="icon-card">
-            <div class="icon">🏭</div>
-            <div class="label">Warehouse-wide inventory management</div>
-          </div>
-          <div class="icon-card">
-            <div class="icon">📅</div>
-            <div class="label">Festival demand forecasting</div>
-          </div>
-          <div class="icon-card">
-            <div class="icon">💰</div>
-            <div class="label">Donation asset tracking</div>
+          <div class="hero-card-footer">
+            <div class="stat-mini"><span class="stat-mini-val">16wk</span><span class="stat-mini-label">Phase 0</span></div>
+            <div class="stat-mini"><span class="stat-mini-val">$60K</span><span class="stat-mini-label">Starting at</span></div>
+            <div class="stat-mini"><span class="stat-mini-val">0</span><span class="stat-mini-label">Systems replaced</span></div>
           </div>
         </div>
-      </div>
-
-      <!-- 8. Risk Mitigation -->
-      <div class="section-header">
-        <div class="section-number">8</div>
-        <div class="section-title">Risk Mitigation</div>
-      </div>
-      <table class="risk-table">
-        <thead>
-          <tr>
-            <th>⚠️ Risk</th>
-            <th>🛡️ Mitigation Strategy</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <span class="risk-icon">👥</span>Operational resistance from staff
-            </td>
-            <td>Parallel "shadow mode" deployment — no forced cutover</td>
-          </tr>
-          <tr>
-            <td><span class="risk-icon">💻</span>System disruption concerns</td>
-            <td>Non-intrusive overlay; existing systems untouched</td>
-          </tr>
-          <tr>
-            <td>
-              <span class="risk-icon">🚚</span>Vendor adaptation challenges
-            </td>
-            <td>Limited vendor pilot group initially with dedicated support</td>
-          </tr>
-          <tr>
-            <td><span class="risk-icon">🔢</span>Data accuracy issues</td>
-            <td>Validation checkpoints, automated alerts, and manual audits</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- 9. Strategic Significance -->
-      <div class="section-header">
-        <div class="section-number">9</div>
-        <div class="section-title">Strategic Significance for TTD</div>
-      </div>
-      <div class="values-row">
-        <div class="value-pill">
-          <div class="vp-icon">⚖️</div>
-          <div class="vp-label">Accountability</div>
-          <div class="vp-desc">Stronger audit and governance systems</div>
-        </div>
-        <div class="value-pill">
-          <div class="vp-icon">⚡</div>
-          <div class="vp-label">Efficiency</div>
-          <div class="vp-desc">
-            Reduced manual overhead and faster processes
-          </div>
-        </div>
-        <div class="value-pill">
-          <div class="vp-icon">🔭</div>
-          <div class="vp-label">Transparency</div>
-          <div class="vp-desc">Clear visibility into all operations</div>
-        </div>
-        <div class="value-pill">
-          <div class="vp-icon">🙏</div>
-          <div class="vp-label">Devotee Trust</div>
-          <div class="vp-desc">
-            Reinforcing confidence in institutional integrity
-          </div>
-        </div>
-      </div>
-
-      <!-- 10. Conclusion -->
-      <div class="section-header">
-        <div class="section-number">10</div>
-        <div class="section-title">Conclusion</div>
-      </div>
-      <p style="color: var(--muted); margin-bottom: 20px">
-        Tirumala Tirupati Devasthanams has consistently set benchmarks in scale,
-        discipline, and service. This initiative represents an opportunity to
-        <strong
-          >strengthen operational excellence while reinforcing the sacred trust
-          placed by devotees</strong
-        >.
-      </p>
-      <div class="conclusion-banner">
-        <div class="cb-icon">🏆</div>
-        <h3>A Focused Pilot. A Transformative Impact.</h3>
-        <p>
-          We request the opportunity to present a detailed pilot plan and
-          proceed with a Proof of Concept for your consideration.
-        </p>
-        <div
-          style="
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 10px;
-          "
-        >
-          <div class="conclusion-highlight">✅ Low Risk</div>
-          <div class="conclusion-highlight">🎯 High Impact</div>
-          <div class="conclusion-highlight">📊 Clear Measurable Outcomes</div>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="doc-footer">
-        <p>
-          Submitted by <strong>StaTwig</strong> — Supply Chain Transparency
-          &amp; Traceability Solutions
-        </p>
-        <p style="margin-top: 6px">
-          Submitted to: CM office &nbsp;|&nbsp; April
-          2026
-        </p>
       </div>
     </div>
-  </body>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── PROBLEM ── -->
+<section class="problem-bg" id="problem">
+  <div class="container--wide">
+    <div class="problem-grid">
+      <div class="problem-text">
+        <div class="section-label reveal">The Problem</div>
+        <h2 class="reveal">Data exists. <em>Visibility</em> doesn't.</h2>
+        <p class="reveal reveal-delay-1">Across development and construction, critical project data lives across multiple disconnected systems. Schedule lives in Primavera P6. Costs sit in Procore or Yardi. Consultant reports arrive as PDFs. Operational updates come via email.</p>
+        <p class="reveal reveal-delay-2"><strong>Even with strong teams and modern tools</strong>, cost and schedule risks are consistently identified weeks — sometimes months — after they have already formed. By the time a risk appears in a monthly report, the window for low-cost intervention has often closed.</p>
+        <p class="reveal reveal-delay-3">The challenge is not a lack of data. It is a lack of <strong>early, cross-system visibility</strong>.</p>
+        <div class="problem-pullquote reveal reveal-delay-4">
+          <p>"The risk wasn't invisible — it was just in a system no one had time to cross-reference."</p>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="system-stack-title">Data lives across disconnected systems</div>
+        <div class="system-stack">
+          <div class="sys-item">
+            <span class="sys-icon">📅</span>
+            <span class="sys-name">Primavera P6</span>
+            <span class="sys-tag">Schedule</span>
+          </div>
+          <div class="sys-item">
+            <span class="sys-icon">🏗️</span>
+            <span class="sys-name">Procore</span>
+            <span class="sys-tag">Site & Cost</span>
+          </div>
+          <div class="sys-item">
+            <span class="sys-icon">🏢</span>
+            <span class="sys-name">Yardi</span>
+            <span class="sys-tag">Real Estate Ops</span>
+          </div>
+          <div class="sys-item">
+            <span class="sys-icon">📊</span>
+            <span class="sys-name">Excel / Spreadsheets</span>
+            <span class="sys-tag">Ad Hoc</span>
+          </div>
+          <div class="sys-item">
+            <span class="sys-icon">📄</span>
+            <span class="sys-name">Consultant Reports</span>
+            <span class="sys-tag">Unstructured</span>
+          </div>
+        </div>
+        <div class="gap-arrow">No cross-system view</div>
+        <div class="sys-item" style="border-color: #fca5a5; background: #fef2f2;">
+          <span class="sys-icon">⚠️</span>
+          <span class="sys-name" style="color: #b91c1c;">Risk identified weeks too late</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── SOLUTION ── -->
+<section id="solution">
+  <div class="container--wide">
+    <div class="solution-cols">
+      <div>
+        <div class="section-label reveal">What Farview Does</div>
+        <h2 class="reveal">An intelligence layer — <em>not</em> a replacement.</h2>
+        <p class="section-intro reveal reveal-delay-1" style="margin-bottom: var(--space-4);">Farview connects your existing systems through a read-only AI layer that surfaces early risk signals, explains what's driving them, and helps teams act before costs compound.</p>
+        <div class="solution-features">
+          <div class="feat reveal reveal-delay-1">
+            <div class="feat-num">1</div>
+            <div class="feat-body">
+              <h4>Cross-System Integration</h4>
+              <p>Read-only connections to Procore, Primavera, Yardi, Excel, and document sources — no migration required.</p>
+            </div>
+          </div>
+          <div class="feat reveal reveal-delay-2">
+            <div class="feat-num">2</div>
+            <div class="feat-body">
+              <h4>Early Risk Detection</h4>
+              <p>AI identifies signals across schedule, cost, and operational data — days or weeks before they surface in reports.</p>
+            </div>
+          </div>
+          <div class="feat reveal reveal-delay-3">
+            <div class="feat-num">3</div>
+            <div class="feat-body">
+              <h4>Explainable Insights</h4>
+              <p>Every signal is explained in plain language — what's happening, why it matters, and what's driving it.</p>
+            </div>
+          </div>
+          <div class="feat reveal reveal-delay-4">
+            <div class="feat-num">4</div>
+            <div class="feat-body">
+              <h4>Weekly Delivery</h4>
+              <p>Structured weekly insights delivered to decision-makers — no new dashboards to learn or maintain.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="solution-diagram">
+          <div class="diagram-title">Farview Intelligence Architecture</div>
+          <div class="layer-stack">
+            <div class="layer top">🧠 Farview AI — Decision Visibility Layer</div>
+            <div class="layer-connector">↑ Risk signals &amp; weekly insights</div>
+            <div class="layer mid">⚡ Intelligence Engine — Cross-system analysis</div>
+            <div class="layer-connector">↑ Normalised data streams</div>
+            <div class="layer bot">🔌 Read-only connectors (no disruption)</div>
+          </div>
+          <div class="integration-icons" style="margin-top: var(--space-5);">
+            <span class="int-chip">Procore</span>
+            <span class="int-chip">Primavera P6</span>
+            <span class="int-chip">Yardi</span>
+            <span class="int-chip">Excel</span>
+            <span class="int-chip">Consultant Reports</span>
+            <span class="int-chip">+ Custom</span>
+          </div>
+          <div style="margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--color-divider);">
+            <div style="font-size: var(--text-xs); color: var(--color-text-faint); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-3);">Existing systems remain unchanged</div>
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Read-only access — zero write permissions</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span style="font-size: var(--text-sm); color: var(--color-text-muted);">No workflow changes for project teams</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Onsite build — data stays within your environment</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── PHASES ── -->
+<section class="phases-bg" id="phases">
+  <div class="container--wide">
+    <div class="section-label reveal">Deployment Approach</div>
+    <h2 class="reveal">Three phases. <em>One commitment at a time.</em></h2>
+    <p class="section-intro reveal reveal-delay-1">Each phase is independently gated. You only proceed when you see clear evidence of value. There is no lock-in.</p>
+    <div class="phases-grid">
+      <!-- Phase 0 -->
+      <div class="phase-card featured reveal reveal-delay-1">
+        <div class="phase-featured-badge">Start Here</div>
+        <div class="phase-number">Phase 0</div>
+        <div class="phase-title">Diagnostic + Prototype</div>
+        <div class="phase-objective">Test whether early risk visibility can be meaningfully improved using AI — in your environment, with your data.</div>
+        <div class="phase-meta">
+          <div class="meta-row">
+            <span class="meta-icon">🎯</span>
+            <div class="meta-content">
+              <div class="meta-label">Objective</div>
+              <div class="meta-val">Validate AI-driven early risk detection</div>
+            </div>
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">📐</span>
+            <div class="meta-content">
+              <div class="meta-label">Scope</div>
+              <div class="meta-val">1 project · 1–2 workflows · Read-only · Onsite build</div>
+            </div>
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">📦</span>
+            <div class="meta-content">
+              <div class="meta-label">Deliverables</div>
+              <div class="meta-val">Working prototype · Weekly insights · Final evaluation</div>
+            </div>
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">⏱️</span>
+            <div class="meta-content">
+              <div class="meta-label">Timeline</div>
+              <div class="meta-val">16 weeks</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase-budget">$60K – $90K</div>
+        <hr class="phase-divider">
+        <div class="phase-gate">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Decision gate: continue only with clear evidence
+        </div>
+      </div>
+      <!-- Phase 1 -->
+      <div class="phase-card reveal reveal-delay-2">
+        <div class="phase-number">Phase 1</div>
+        <div class="phase-title">Controlled Expansion</div>
+        <div class="phase-objective">Validate that the Phase 0 approach is repeatable across a broader set of projects and workflows.</div>
+        <div class="phase-meta">
+          <div class="meta-row">
+            <span class="meta-icon">🎯</span>
+            <div class="meta-content">
+              <div class="meta-label">Objective</div>
+              <div class="meta-val">Prove repeatability at scale</div>
+            </div>
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">📐</span>
+            <div class="meta-content">
+              <div class="meta-label">Scope</div>
+              <div class="meta-val">2–3 projects · Expanded workflows</div>
+            </div>
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">⏱️</span>
+            <div class="meta-content">
+              <div class="meta-label">Timeline</div>
+              <div class="meta-val">4–6 months</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase-budget">$150K – $300K</div>
+        <hr class="phase-divider">
+        <div class="phase-optional">Optional — unlocked after Phase 0 gate</div>
+      </div>
+      <!-- Phase 2 -->
+      <div class="phase-card reveal reveal-delay-3">
+        <div class="phase-number">Phase 2</div>
+        <div class="phase-title">Production System</div>
+        <div class="phase-objective">Scale Farview across the full project portfolio with deep integrations and automated operational workflows.</div>
+        <div class="phase-meta">
+          <div class="meta-row">
+            <span class="meta-icon">🎯</span>
+            <div class="meta-content">
+              <div class="meta-label">Objective</div>
+              <div class="meta-val">Full portfolio AI operating system</div>
+            </div>
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">📐</span>
+            <div class="meta-content">
+              <div class="meta-label">Scope</div>
+              <div class="meta-val">Portfolio-wide deployment · Full integrations</div>
+            </div>
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">⏱️</span>
+            <div class="meta-content">
+              <div class="meta-label">Timeline</div>
+              <div class="meta-val">6–12 months</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase-budget">Custom</div>
+        <hr class="phase-divider">
+        <div class="phase-optional">Optional — unlocked after Phase 1 gate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY IT WORKS ── -->
+<section id="why">
+  <div class="container--wide">
+    <div class="why-section-cols">
+      <div class="why-side">
+        <div class="section-label reveal">Why This Works</div>
+        <h3 class="reveal">Built so the decision to start is <em>easy</em>.</h3>
+        <p class="reveal reveal-delay-1">The instinct with new technology is to wait — for a bigger budget cycle, a calmer quarter, a better moment. Farview is designed to remove that friction entirely.</p>
+        <p class="reveal reveal-delay-2">Phase 0 is intentionally scoped to be small, safe, and fast. The goal is to make it easier to try than to ignore.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-icon">🪶</div>
+          <h4>Low upfront commitment</h4>
+          <p>A fixed-scope, fixed-timeline engagement — not an open-ended contract. One project, 16 weeks, clear deliverables.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-icon">🔌</div>
+          <h4>Minimal disruption</h4>
+          <p>Read-only access only. No changes to existing systems. No new workflows for project teams to learn.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-3">
+          <div class="why-icon">🚪</div>
+          <h4>Clear exit point</h4>
+          <p>The decision gate at the end of Phase 0 is real. If value isn't demonstrated, there is no obligation to continue.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-4">
+          <div class="why-icon">⚡</div>
+          <h4>Fast value validation</h4>
+          <p>Weekly insights begin within weeks of data access — not at the end of the engagement. Value is visible early.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── ABOUT ── -->
+<section class="about-bg" id="about">
+  <div class="container--wide">
+    <div class="about-grid">
+      <div>
+        <div class="section-label reveal">About Farview</div>
+        <h2 class="reveal">Built by people who've <em>shipped</em> at scale.</h2>
+        <div class="about-text">
+          <p class="reveal reveal-delay-1">Farview is being built by a team with a track record of deploying large-scale data and AI systems in high-stakes, complex environments — including global health programs, pharmaceutical supply chains, and government operations.</p>
+          <p class="reveal reveal-delay-2">This is not a first attempt at complex data infrastructure. The team brings hard-won experience in making AI systems work in the real world — where data is messy, organizations are cautious, and reliability is non-negotiable.</p>
+        </div>
+        <div class="client-logos reveal reveal-delay-3">
+          <div class="client-logo">🌐 UNICEF</div>
+          <div class="client-logo">💊 Pfizer</div>
+          <div class="client-logo">🏥 Gavi</div>
+          <div class="client-logo">🏛️ Government Programs</div>
+        </div>
+      </div>
+      <div>
+        <div class="about-stats">
+          <div class="about-stat reveal reveal-delay-1">
+            <div class="about-stat-val">16wk</div>
+            <div class="about-stat-label">Phase 0 duration</div>
+          </div>
+          <div class="about-stat reveal reveal-delay-2">
+            <div class="about-stat-val">$60K</div>
+            <div class="about-stat-label">Phase 0 starting budget</div>
+          </div>
+          <div class="about-stat reveal reveal-delay-3">
+            <div class="about-stat-val">0</div>
+            <div class="about-stat-label">Systems replaced or disrupted</div>
+          </div>
+          <div class="about-stat reveal reveal-delay-4">
+            <div class="about-stat-val">3</div>
+            <div class="about-stat-label">Optional phases total</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── OPTIONAL EXPLORATION ── -->
+<section id="optional">
+  <div class="container">
+    <div class="section-label reveal">Optional Exploration</div>
+    <div class="optional-banner reveal reveal-delay-1">
+      <div class="optional-icon">🔍</div>
+      <div class="optional-body">
+        <h4>Workflow Consolidation Opportunity</h4>
+        <p>As an optional workstream alongside Phase 0, Farview can evaluate whether existing workflows currently handled across tools like Salesforce can be consolidated within the Farview layer — reducing tool sprawl and improving cross-functional visibility. This is exploratory only and does not affect the primary Phase 0 scope or timeline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="cta">
+  <div class="cta-bg"></div>
+  <div class="container">
+    <div class="cta-eyebrow reveal">Ready to Begin</div>
+    <h2 class="reveal reveal-delay-1">Make Phase 0 the easiest yes<br>you make this quarter.</h2>
+    <p class="reveal reveal-delay-2">Low commitment. Clear exit. Real value within weeks. Let's start the conversation about your first project.</p>
+    <div class="cta-actions reveal reveal-delay-3">
+      <a href="mailto:hello@farview.ai" class="btn-white">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Schedule a conversation
+      </a>
+      <a href="#phases" class="btn-ghost-white">Review the phases →</a>
+    </div>
+    <div class="cta-trust reveal reveal-delay-4">No lock-in · Read-only access · Fixed-scope Phase 0</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <rect width="36" height="36" rx="8" fill="#2d6b55"/>
+        <path d="M10 26 L18 10 L26 26" stroke="#f5f3ef" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M13.5 20 L22.5 20" stroke="#c47c2b" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="18" cy="10" r="2" fill="#c47c2b"/>
+      </svg>
+      <span class="footer-logo-name">Farview</span>
+    </div>
+    <span class="footer-copy">© 2026 Farview. AI-OS for complex projects.</span>
+    <div class="footer-links">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#phases">Phases</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll progress bar
+const bar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(r => observer.observe(r));
+</script>
+</body>
 </html>
