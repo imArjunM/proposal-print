@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TTD Business Proposal - StaTwig</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap");
+
+      :root {
+        --saffron: #e8831a;
+        --deep-saffron: #c4601a;
+        --gold: #d4a017;
+        --dark: #1a1a2e;
+        --dark2: #16213e;
+        --accent: #0f3460;
+        --light-bg: #fdf8f0;
+        --card-bg: #ffffff;
+        --text: #2d2d2d;
+        --muted: #6b7280;
+        --border: #e5ddd0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--light-bg);
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      /* ── COVER PAGE ── */
+      .cover {
+        background: linear-gradient(
+          145deg,
+          #1a1a2e 0%,
+          #0f3460 50%,
+          #1a1a2e 100%
+        );
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 40px;
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+      }
+      .cover::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(232, 131, 26, 0.15) 0%,
+          transparent 70%
+        );
+      }
+      .cover::after {
+        content: "";
+        position: absolute;
+        bottom: -80px;
+        left: -80px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(212, 160, 23, 0.1) 0%,
+          transparent 70%
+        );
+      }
+      .cover-badge {
+        background: rgba(232, 131, 26, 0.2);
+        border: 1px solid rgba(232, 131, 26, 0.5);
+        color: #e8831a;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 8px 20px;
+        border-radius: 50px;
+        margin-bottom: 30px;
+      }
+      .cover-symbol {
+        font-size: 64px;
+        margin-bottom: 20px;
+        filter: drop-shadow(0 0 20px rgba(232, 131, 26, 0.5));
+      }
+      .cover h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 42px;
+        font-weight: 800;
+        color: #ffffff;
+        line-height: 1.2;
+        margin-bottom: 12px;
+      }
+      .cover h1 span {
+        color: #e8831a;
+      }
+      .cover-subtitle {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 40px;
+        max-width: 520px;
+      }
+      .cover-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--saffron), var(--gold));
+        border-radius: 2px;
+        margin: 0 auto 40px;
+      }
+      .cover-meta {
+        display: flex;
+        gap: 50px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 60px;
+      }
+      .cover-meta-item {
+        text-align: center;
+      }
+      .cover-meta-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 4px;
+      }
+      .cover-meta-value {
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .cover-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(232, 131, 26, 0.15);
+        border-top: 1px solid rgba(232, 131, 26, 0.3);
+        padding: 16px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .cover-footer-brand {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--saffron);
+        letter-spacing: 1px;
+      }
+      .cover-footer-tag {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* ── LAYOUT ── */
+      .page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 50px 40px;
+      }
+
+      /* ── SECTION HEADER ── */
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 28px;
+        margin-top: 50px;
+      }
+      .section-number {
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(
+          135deg,
+          var(--saffron),
+          var(--deep-saffron)
+        );
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(232, 131, 26, 0.3);
+      }
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--accent);
+        border-bottom: 2px solid var(--border);
+        padding-bottom: 8px;
+        flex: 1;
+      }
+
+      /* ── CARDS ── */
+      .card {
+        background: var(--card-bg);
+        border-radius: 14px;
+        padding: 24px 28px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        border: 1px solid var(--border);
+      }
+      .card-title {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--saffron);
+        margin-bottom: 12px;
+      }
+
+      /* ── HIGHLIGHT BOX ── */
+      .highlight-box {
+        background: linear-gradient(135deg, #fff8ee, #fff3e0);
+        border-left: 4px solid var(--saffron);
+        border-radius: 0 12px 12px 0;
+        padding: 18px 22px;
+        margin: 24px 0;
+        font-style: italic;
+        color: var(--accent);
+        font-size: 14.5px;
+        font-weight: 500;
+      }
+
+      /* ── ICON GRID ── */
+      .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin: 24px 0;
+      }
+      .icon-card {
+        background: var(--card-bg);
+        border-radius: 14px;
+        padding: 22px 18px;
+        text-align: center;
+        border: 1px solid var(--border);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s;
+      }
+      .icon-card:hover {
+        transform: translateY(-2px);
+      }
+      .icon-card .icon {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+      .icon-card .label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--accent);
+        line-height: 1.4;
+      }
+
+      /* ── BULLET LIST ── */
+      .bullet-list {
+        list-style: none;
+        padding: 0;
+      }
+      .bullet-list li {
+        padding: 8px 0 8px 28px;
+        position: relative;
+        border-bottom: 1px solid #f3ede3;
+        font-size: 14px;
+        color: var(--text);
+      }
+      .bullet-list li:last-child {
+        border-bottom: none;
+      }
+      .bullet-list li::before {
+        content: "›";
+        position: absolute;
+        left: 8px;
+        color: var(--saffron);
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      /* ── PHASE TIMELINE ── */
+      .timeline {
+        position: relative;
+        padding-left: 30px;
+        margin: 20px 0;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(180deg, var(--saffron), var(--gold));
+        border-radius: 2px;
+      }
+      .phase {
+        position: relative;
+        margin-bottom: 24px;
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 18px 20px 18px 24px;
+        border: 1px solid var(--border);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      .phase::before {
+        content: "";
+        position: absolute;
+        left: -26px;
+        top: 22px;
+        width: 14px;
+        height: 14px;
+        background: var(--saffron);
+        border-radius: 50%;
+        border: 3px solid var(--light-bg);
+        box-shadow: 0 0 0 2px var(--saffron);
+      }
+      .phase-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--saffron);
+        margin-bottom: 4px;
+      }
+      .phase-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+      .phase ul {
+        list-style: none;
+        padding: 0;
+      }
+      .phase ul li {
+        font-size: 13px;
+        color: var(--muted);
+        padding: 3px 0 3px 16px;
+        position: relative;
+      }
+      .phase ul li::before {
+        content: "•";
+        position: absolute;
+        left: 4px;
+        color: var(--gold);
+      }
+
+      /* ── OUTCOME COLUMNS ── */
+      .outcome-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin: 20px 0;
+      }
+      .outcome-card {
+        border-radius: 14px;
+        padding: 22px 18px;
+        border: 1px solid var(--border);
+      }
+      .outcome-card.op {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        border-color: #bfdbfe;
+      }
+      .outcome-card.gov {
+        background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        border-color: #bbf7d0;
+      }
+      .outcome-card.strat {
+        background: linear-gradient(135deg, #fff7ed, #fed7aa);
+        border-color: #fdba74;
+      }
+      .outcome-card .oc-icon {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+      .outcome-card .oc-title {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
+      .outcome-card ul {
+        list-style: none;
+        padding: 0;
+      }
+      .outcome-card ul li {
+        font-size: 12.5px;
+        color: var(--text);
+        padding: 4px 0 4px 14px;
+        position: relative;
+      }
+      .outcome-card ul li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #16a34a;
+        font-size: 11px;
+      }
+
+      /* ── RISK TABLE ── */
+      .risk-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .risk-table th {
+        background: linear-gradient(135deg, var(--accent), var(--dark2));
+        color: white;
+        padding: 14px 18px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .risk-table td {
+        padding: 14px 18px;
+        font-size: 13px;
+        border-bottom: 1px solid var(--border);
+      }
+      .risk-table tr:last-child td {
+        border-bottom: none;
+      }
+      .risk-table tr:nth-child(even) td {
+        background: #fafaf7;
+      }
+      .risk-icon {
+        font-size: 16px;
+        margin-right: 8px;
+      }
+
+      /* ── VALUES ROW ── */
+      .values-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin: 20px 0;
+      }
+      .value-pill {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 18px 14px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      .value-pill .vp-icon {
+        font-size: 26px;
+        margin-bottom: 8px;
+      }
+      .value-pill .vp-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 4px;
+      }
+      .value-pill .vp-desc {
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      /* ── SCOPE GRID ── */
+      .scope-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 20px 0;
+      }
+      .scope-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px;
+        border: 1px solid var(--border);
+      }
+      .scope-card .sc-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .scope-card .sc-letter {
+        width: 28px;
+        height: 28px;
+        background: linear-gradient(135deg, var(--saffron), var(--gold));
+        border-radius: 8px;
+        color: white;
+        font-weight: 700;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .scope-card .sc-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--accent);
+      }
+      .scope-card ul {
+        list-style: none;
+        padding: 0;
+      }
+      .scope-card ul li {
+        font-size: 12.5px;
+        color: var(--muted);
+        padding: 4px 0 4px 14px;
+        position: relative;
+      }
+      .scope-card ul li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--saffron);
+        font-size: 11px;
+        line-height: 1.8;
+      }
+
+      /* ── CONCLUSION BANNER ── */
+      .conclusion-banner {
+        background: linear-gradient(135deg, var(--accent), var(--dark));
+        color: white;
+        border-radius: 16px;
+        padding: 36px 40px;
+        text-align: center;
+        margin-top: 50px;
+      }
+      .conclusion-banner .cb-icon {
+        font-size: 48px;
+        margin-bottom: 14px;
+      }
+      .conclusion-banner h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        margin-bottom: 14px;
+        color: #fff;
+      }
+      .conclusion-banner p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.75);
+        max-width: 540px;
+        margin: 0 auto 24px;
+      }
+      .conclusion-highlight {
+        background: rgba(232, 131, 26, 0.2);
+        border: 1px solid rgba(232, 131, 26, 0.4);
+        border-radius: 10px;
+        padding: 14px 20px;
+        display: inline-block;
+        font-size: 13px;
+        color: #e8831a;
+        font-weight: 500;
+      }
+
+      /* ── FOOTER ── */
+      .doc-footer {
+        text-align: center;
+        padding: 30px;
+        color: var(--muted);
+        font-size: 12px;
+        border-top: 1px solid var(--border);
+        margin-top: 60px;
+      }
+      .doc-footer strong {
+        color: var(--saffron);
+      }
+
+      .objective-image {
+        width: 100%;
+      }
+
+      /* ── PRINT ── */
+      /* @media print {
+        body {
+          background: white;
+        }
+        .cover {
+          min-height: auto;
+          padding: 40px;
+        }
+        .page {
+          padding: 30px;
+        }
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════ COVER PAGE ══════════════ -->
+    <div class="cover">
+      <!-- <div class="cover-badge">Concept Note · Confidential</div> -->
+      <!-- <div class="cover-symbol">🕌</div> -->
+      <h1>
+        Enhancing Supply Chain<br /><span>Transparency & Governance</span>
+      </h1>
+      <p class="cover-subtitle">
+        A Digital Traceability Initiative for Tirumala Tirupati Devasthanams
+      </p>
+      <div class="cover-divider"></div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Submitted To</div>
+          <div class="cover-meta-value">Additional Executive Officer, TTD</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Submitted By</div>
+          <div class="cover-meta-value">StaTwig</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Pilot Duration</div>
+          <div class="cover-meta-value">90 Days (PoC)</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Date</div>
+          <div class="cover-meta-value">April 2026</div>
+        </div>
+      </div>
+      <div class="cover-footer">
+        <div class="cover-footer-brand">StaTwig</div>
+        <div class="cover-footer-tag">
+          Supply Chain Transparency &amp; Traceability Solutions
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ MAIN CONTENT ══════════════ -->
+    <div class="page">
+      <!-- 1. Background -->
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">Background &amp; Context</div>
+      </div>
+      <p style="color: var(--muted); margin-bottom: 20px">
+        Tirumala Tirupati Devasthanams is one of the most respected and
+        large-scale religious institutions in the world, managing offerings and
+        services for <strong>millions of devotees annually</strong>. Its
+        operational complexity demands robust systems for transparency and
+        governance.
+      </p>
+      <div class="icon-grid">
+        <div class="icon-card">
+          <div class="icon">🍬</div>
+          <div class="label">Daily preparation of lakhs of laddus</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">🍚</div>
+          <div class="label">Large-scale Anna Prasadam services</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">🧈</div>
+          <div class="label">High-volume raw material procurement</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">🏢</div>
+          <div class="label">Multi-vendor procurement systems</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">📋</div>
+          <div class="label">Continuous audit &amp; compliance</div>
+        </div>
+      </div>
+      <div
+        class="card"
+        style="background: linear-gradient(135deg, #fff8ee, #fff)"
+      >
+        <div class="card-title">⚠️ Operational Challenges</div>
+        <ul class="bullet-list">
+          <li>Real-time inventory visibility gaps across warehouses</li>
+          <li>
+            Batch-level traceability from procurement to final consumption
+          </li>
+          <li>Vendor quality monitoring and performance tracking</li>
+          <li>Audit readiness and digital reconciliation</li>
+          <li>Demand forecasting during high-footfall festival periods</li>
+        </ul>
+      </div>
+
+      <!-- 2. Objective -->
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <div class="section-title">Objective</div>
+      </div>
+      <div class="highlight-box">
+        "To design and implement a Supply Chain Transparency and Governance
+        Layer that delivers end-to-end visibility, traceability, and data-driven
+        insights — enhancing administrative efficiency while reinforcing devotee
+        trust."
+      </div>
+      <div
+        class="icon-grid"
+        style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"
+      >
+        <div class="icon-card">
+          <div class="icon">🔍</div>
+          <div class="label">End-to-end raw material visibility</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">📦</div>
+          <div class="label">Real-time inventory tracking</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">🔗</div>
+          <div class="label">Batch-level traceability</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">🤖</div>
+          <div class="label">Automated reconciliation</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">📊</div>
+          <div class="label">Vendor &amp; quality insights</div>
+        </div>
+      </div>
+
+      <div>
+        <img src="Main.png" alt="Ghee Supply Chain" class="objective-image" />
+      </div>
+
+      <!-- 3. Proposed Approach -->
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <div class="section-title">Proposed Approach</div>
+      </div>
+      <div class="card">
+        <div class="card-title">🧭 Guiding Principle</div>
+        <p style="font-size: 14px; color: var(--text)">
+          The proposed system will
+          <strong
+            >augment existing processes without replacing or disrupting
+            them</strong
+          >. It operates as a non-intrusive overlay with minimal workflow
+          changes and measurable outcomes within a short duration.
+        </p>
+      </div>
+
+      <div
+        class="card"
+        style="background: linear-gradient(135deg, #fff3e0, #fff)"
+      >
+        <div class="card-title">
+          🧈 Phase 1 Pilot: Ghee Supply Chain Tracking (90 Days)
+        </div>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 14px">
+          Selected for its high procurement value, critical importance in laddu
+          preparation, quality sensitivity, and frequent audit relevance.
+        </p>
+      </div>
+
+      <div class="scope-grid">
+        <div class="scope-card">
+          <div class="sc-header">
+            <div class="sc-letter">A</div>
+            <div class="sc-title">Procurement &amp; Vendor Layer</div>
+          </div>
+          <ul>
+            <li>Digital onboarding of selected vendors</li>
+            <li>Batch-level tagging of supplied materials</li>
+            <li>Vendor performance capture</li>
+          </ul>
+        </div>
+        <div class="scope-card">
+          <div class="sc-header">
+            <div class="sc-letter">B</div>
+            <div class="sc-title">Inward &amp; Storage</div>
+          </div>
+          <ul>
+            <li>Digital recording of inward receipts</li>
+            <li>Warehouse-level inventory visibility</li>
+            <li>Batch identification and tracking</li>
+          </ul>
+        </div>
+        <div class="scope-card">
+          <div class="sc-header">
+            <div class="sc-letter">C</div>
+            <div class="sc-title">Consumption Tracking</div>
+          </div>
+          <ul>
+            <li>Batch-wise consumption at kitchen level</li>
+            <li>Mapping input materials to production output</li>
+          </ul>
+        </div>
+        <div class="scope-card">
+          <div class="sc-header">
+            <div class="sc-letter">D</div>
+            <div class="sc-title">Dashboard &amp; Analytics</div>
+          </div>
+          <ul>
+            <li>Real-time stock visibility</li>
+            <li>Batch traceability reports</li>
+            <li>Consumption vs procurement reconciliation</li>
+            <li>Anomaly alerts and deviations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <img src="Main-1.png" alt="Ghee Supply Chain" class="objective-image" />
+      </div>
+
+      <!-- 4. Expected Outcomes -->
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <div class="section-title">Expected Outcomes</div>
+      </div>
+      <div class="outcome-grid">
+        <div class="outcome-card op">
+          <div class="oc-icon">⚙️</div>
+          <div class="oc-title">Operational</div>
+          <ul>
+            <li>Reduced manual reconciliation effort</li>
+            <li>Faster audit processes</li>
+            <li>Improved inventory accuracy</li>
+            <li>Real-time decision-making</li>
+          </ul>
+        </div>
+        <div class="outcome-card gov">
+          <div class="oc-icon">🏛️</div>
+          <div class="oc-title">Governance</div>
+          <ul>
+            <li>Enhanced transparency in material usage</li>
+            <li>Digitally verifiable audit trail</li>
+            <li>Improved vendor accountability</li>
+          </ul>
+        </div>
+        <div class="outcome-card strat">
+          <div class="oc-icon">🚀</div>
+          <div class="oc-title">Strategic</div>
+          <ul>
+            <li>Scalable model for other departments</li>
+            <li>TTD as a leader in institutional transparency</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 5. Technology Approach -->
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <div class="section-title">Technology Approach</div>
+      </div>
+      <div
+        class="icon-grid"
+        style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr))"
+      >
+        <div class="icon-card">
+          <div class="icon">💾</div>
+          <div class="label">Digital inventory tracking systems</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">🔐</div>
+          <div class="label">Secure, tamper-evident data recording</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">🔎</div>
+          <div class="label">Batch-level traceability frameworks</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon">📈</div>
+          <div class="label">Analytics &amp; reporting dashboards</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔑 Key Technology Principles</div>
+        <ul class="bullet-list">
+          <li>Non-invasive integration with existing ERP/systems</li>
+          <li>Secure data handling and access controls</li>
+          <li>Scalability across departments post pilot</li>
+          <li>Ease of use for operational field staff</li>
+        </ul>
+      </div>
+
+      <!-- 6. Implementation Methodology -->
+      <div class="section-header">
+        <div class="section-number">6</div>
+        <div class="section-title">Implementation Methodology</div>
+      </div>
+      <div class="timeline">
+        <div class="phase">
+          <div class="phase-label">Phase 1 · Weeks 1–3</div>
+          <div class="phase-title">🔧 Setup &amp; Configuration</div>
+          <ul>
+            <li>Stakeholder alignment and requirement gathering</li>
+            <li>Process mapping and gap analysis</li>
+            <li>Vendor selection and onboarding</li>
+            <li>System configuration and environment setup</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Phase 2 · Weeks 4–8</div>
+          <div class="phase-title">🚀 Pilot Deployment</div>
+          <ul>
+            <li>Pilot rollout in selected warehouse/kitchen locations</li>
+            <li>Staff training and change management</li>
+            <li>Live tracking of transactions and data collection</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Phase 3 · Weeks 9–12</div>
+          <div class="phase-title">📊 Monitoring &amp; Optimization</div>
+          <ul>
+            <li>Performance tracking and KPI measurement</li>
+            <li>Issue resolution and bug fixes</li>
+            <li>Dashboard refinement and user feedback integration</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Phase 4 · Post Week 12</div>
+          <div class="phase-title">📝 Evaluation &amp; Scale-Up Plan</div>
+          <ul>
+            <li>Full impact assessment and ROI analysis</li>
+            <li>Reporting to TTD leadership</li>
+            <li>Recommendations for enterprise-wide rollout</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 7. Future Expansion -->
+      <div class="section-header">
+        <div class="section-number">7</div>
+        <div class="section-title">Future Expansion</div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          📐 Post-Pilot Roadmap (Subject to Pilot Success)
+        </div>
+        <div
+          class="icon-grid"
+          style="
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            margin: 12px 0 0;
+          "
+        >
+          <div class="icon-card">
+            <div class="icon">🍛</div>
+            <div class="label">Anna Prasadam supply chain</div>
+          </div>
+          <div class="icon-card">
+            <div class="icon">🌾</div>
+            <div class="label">
+              Additional raw materials (sugar, rice, dry fruits)
+            </div>
+          </div>
+          <div class="icon-card">
+            <div class="icon">🏭</div>
+            <div class="label">Warehouse-wide inventory management</div>
+          </div>
+          <div class="icon-card">
+            <div class="icon">📅</div>
+            <div class="label">Festival demand forecasting</div>
+          </div>
+          <div class="icon-card">
+            <div class="icon">💰</div>
+            <div class="label">Donation asset tracking</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Risk Mitigation -->
+      <div class="section-header">
+        <div class="section-number">8</div>
+        <div class="section-title">Risk Mitigation</div>
+      </div>
+      <table class="risk-table">
+        <thead>
+          <tr>
+            <th>⚠️ Risk</th>
+            <th>🛡️ Mitigation Strategy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="risk-icon">👥</span>Operational resistance from staff
+            </td>
+            <td>Parallel "shadow mode" deployment — no forced cutover</td>
+          </tr>
+          <tr>
+            <td><span class="risk-icon">💻</span>System disruption concerns</td>
+            <td>Non-intrusive overlay; existing systems untouched</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="risk-icon">🚚</span>Vendor adaptation challenges
+            </td>
+            <td>Limited vendor pilot group initially with dedicated support</td>
+          </tr>
+          <tr>
+            <td><span class="risk-icon">🔢</span>Data accuracy issues</td>
+            <td>Validation checkpoints, automated alerts, and manual audits</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 9. Strategic Significance -->
+      <div class="section-header">
+        <div class="section-number">9</div>
+        <div class="section-title">Strategic Significance for TTD</div>
+      </div>
+      <div class="values-row">
+        <div class="value-pill">
+          <div class="vp-icon">⚖️</div>
+          <div class="vp-label">Accountability</div>
+          <div class="vp-desc">Stronger audit and governance systems</div>
+        </div>
+        <div class="value-pill">
+          <div class="vp-icon">⚡</div>
+          <div class="vp-label">Efficiency</div>
+          <div class="vp-desc">
+            Reduced manual overhead and faster processes
+          </div>
+        </div>
+        <div class="value-pill">
+          <div class="vp-icon">🔭</div>
+          <div class="vp-label">Transparency</div>
+          <div class="vp-desc">Clear visibility into all operations</div>
+        </div>
+        <div class="value-pill">
+          <div class="vp-icon">🙏</div>
+          <div class="vp-label">Devotee Trust</div>
+          <div class="vp-desc">
+            Reinforcing confidence in institutional integrity
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Conclusion -->
+      <div class="section-header">
+        <div class="section-number">10</div>
+        <div class="section-title">Conclusion</div>
+      </div>
+      <p style="color: var(--muted); margin-bottom: 20px">
+        Tirumala Tirupati Devasthanams has consistently set benchmarks in scale,
+        discipline, and service. This initiative represents an opportunity to
+        <strong
+          >strengthen operational excellence while reinforcing the sacred trust
+          placed by devotees</strong
+        >.
+      </p>
+      <div class="conclusion-banner">
+        <div class="cb-icon">🏆</div>
+        <h3>A Focused Pilot. A Transformative Impact.</h3>
+        <p>
+          We request the opportunity to present a detailed pilot plan and
+          proceed with a Proof of Concept for your consideration.
+        </p>
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+          "
+        >
+          <div class="conclusion-highlight">✅ Low Risk</div>
+          <div class="conclusion-highlight">🎯 High Impact</div>
+          <div class="conclusion-highlight">📊 Clear Measurable Outcomes</div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="doc-footer">
+        <p>
+          Submitted by <strong>StaTwig</strong> — Supply Chain Transparency
+          &amp; Traceability Solutions
+        </p>
+        <p style="margin-top: 6px">
+          Submitted to: Additional Executive Officer, TTD &nbsp;|&nbsp; April
+          2026
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
