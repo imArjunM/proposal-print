@@ -578,9 +578,249 @@ footer {
   position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
   background: var(--color-primary); width: 0%; transition: width 0.1s linear;
 }
+
+/* ── COVER PAGE ── */
+.cover-page {
+  position: relative;
+  
+  display: flex; align-items: stretch;
+  background: #0e1f19;
+  overflow: hidden;
+}
+.cover-bg-mesh {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 20% 50%, #1a4a3a 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 20%, #0b2e22 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 70% 85%, #c47c2b18 0%, transparent 50%),
+    radial-gradient(ellipse 30% 30% at 10% 90%, #2d6b5520 0%, transparent 50%);
+}
+.cover-grain {
+  position: absolute; inset: 0; z-index: 1; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+.cover-inner {
+  position: relative; z-index: 2;
+  width: 100%; display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(var(--space-8), 5vw, var(--space-12));
+  max-width: var(--content-wide); margin-inline: auto;
+  gap: var(--space-8);
+}
+.cover-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: var(--space-2);
+}
+.cover-logo {
+  display: flex; align-items: center; gap: var(--space-3);
+}
+.cover-logo-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 600; letter-spacing: -0.02em;
+  color: #f5f3ef;
+}
+.cover-doc-meta {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); font-weight: 500;
+  color: oklch(from #f5f3ef l c h / 0.35);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.cover-meta-dot { color: oklch(from #f5f3ef l c h / 0.2); }
+
+.cover-center {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; flex: 1; justify-content: center;
+  padding-block: var(--space-8);
+}
+.cover-eyebrow {
+  display: flex; align-items: center; gap: var(--space-4);
+  font-size: var(--text-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  color: oklch(from #f5f3ef l c h / 0.4);
+  margin-bottom: clamp(var(--space-6), 3vw, var(--space-10));
+}
+.cover-eye-line {
+  display: block; width: clamp(30px, 5vw, 60px); height: 1px;
+  background: oklch(from #f5f3ef l c h / 0.2);
+}
+.cover-headline {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0; line-height: 1; margin-bottom: clamp(var(--space-6), 3vw, var(--space-8));
+  font-family: var(--font-display) !important;
+}
+.cover-hl-top {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 400; letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: oklch(from #f5f3ef l c h / 0.45);
+  font-family: var(--font-display);
+}
+.cover-hl-main {
+  font-size: clamp(5rem, 16vw, 11rem);
+  font-weight: 600; letter-spacing: -0.04em;
+  color: #f5f3ef; font-family: var(--font-display);
+  line-height: 0.9;
+}
+.cover-hl-main em {
+  font-style: italic; color: #c47c2b;
+}
+.cover-tagline {
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  color: oklch(from #f5f3ef l c h / 0.55);
+  line-height: 1.65; max-width: 46ch;
+  margin-bottom: clamp(var(--space-8), 4vw, var(--space-12));
+  font-weight: 300; letter-spacing: 0.01em;
+}
+.cover-chips {
+  display: flex; align-items: center; gap: 0;
+  background: oklch(from #f5f3ef l c h / 0.05);
+  border: 1px solid oklch(from #f5f3ef l c h / 0.12);
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-6);
+  margin-bottom: clamp(var(--space-8), 4vw, var(--space-12));
+  backdrop-filter: blur(8px);
+}
+.cover-chip { text-align: center; padding-inline: var(--space-6); }
+.cover-chip-val {
+  display: block; font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 600; color: #f5f3ef; line-height: 1;
+  margin-bottom: 2px;
+}
+.cover-chip-label {
+  font-size: var(--text-xs); color: oklch(from #f5f3ef l c h / 0.4);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.cover-chip-divider {
+  width: 1px; height: 32px;
+  background: oklch(from #f5f3ef l c h / 0.15);
+  flex-shrink: 0;
+}
+.cover-scroll-cta {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm); font-weight: 500;
+  color: oklch(from #f5f3ef l c h / 0.5);
+  text-decoration: none;
+  border: 1px solid oklch(from #f5f3ef l c h / 0.15);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  transition: color 200ms ease, border-color 200ms ease, transform 200ms ease;
+  animation: float 3s ease-in-out infinite;
+}
+.cover-scroll-cta:hover {
+  color: #f5f3ef; border-color: oklch(from #f5f3ef l c h / 0.4);
+  transform: translateY(3px);
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+.cover-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding-bottom: var(--space-2); flex-wrap: wrap; gap: var(--space-4);
+}
+.cover-industries { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+.cover-ind-label {
+  font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.1em;
+  color: oklch(from #f5f3ef l c h / 0.3); font-weight: 500;
+}
+.cover-ind-tags { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.cover-ind-tags span {
+  font-size: var(--text-xs); font-weight: 500;
+  color: oklch(from #f5f3ef l c h / 0.5);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid oklch(from #f5f3ef l c h / 0.12);
+  border-radius: var(--radius-full);
+}
+.cover-prepared {
+  font-size: var(--text-xs); color: oklch(from #f5f3ef l c h / 0.25);
+}
+
+/* Thin decorative horizontal rule between cover and header */
+.cover-rule {
+  border: none; border-top: 1px solid #1e3a30;
+}
+
 </style>
 </head>
 <body>
+
+
+<!-- ── COVER PAGE ── -->
+<section class="cover-page" id="cover">
+  <div class="cover-bg-mesh"></div>
+  <div class="cover-grain"></div>
+  <div class="cover-inner">
+    <!-- <div class="cover-top reveal">
+      <div class="cover-logo">
+        <svg width="52" height="52" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="9" fill="#2d6b55"/>
+          <path d="M10 26 L18 10 L26 26" stroke="#f5f3ef" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M13.5 20 L22.5 20" stroke="#c47c2b" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="18" cy="10" r="2.2" fill="#c47c2b"/>
+        </svg>
+        <span class="cover-logo-name">Farview</span>
+      </div>
+      <div class="cover-doc-meta">
+        <span>Confidential</span>
+        <span class="cover-meta-dot">·</span>
+        <span>April 2026</span>
+      </div>
+    </div> -->
+
+    <div class="cover-center">
+      <div class="cover-eyebrow reveal reveal-delay-1">
+        <span class="cover-eye-line"></span>
+        Phased Deployment Proposal
+        <span class="cover-eye-line"></span>
+      </div>
+      <h1 class="cover-headline reveal reveal-delay-2">
+        <span class="cover-hl-top">Farview</span>
+        <span class="cover-hl-main">AI<em>-OS</em></span>
+      </h1>
+      <p class="cover-tagline reveal reveal-delay-3">Identify cost and schedule risks earlier —<br>before they appear in reports.</p>
+
+      <div class="cover-chips reveal reveal-delay-4">
+        <div class="cover-chip">
+          <span class="cover-chip-val">16 weeks</span>
+          <span class="cover-chip-label">Phase 0</span>
+        </div>
+        <div class="cover-chip-divider"></div>
+        <div class="cover-chip">
+          <span class="cover-chip-val">$60K–$90K</span>
+          <span class="cover-chip-label">Starting budget</span>
+        </div>
+        <div class="cover-chip-divider"></div>
+        <div class="cover-chip">
+          <span class="cover-chip-val">0</span>
+          <span class="cover-chip-label">Systems replaced</span>
+        </div>
+      </div>
+
+      <!-- <a href="#problem" class="cover-scroll-cta reveal reveal-delay-5">
+        <span>Read Proposal</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a> -->
+    </div>
+
+    <div class="cover-bottom reveal reveal-delay-4">
+      <div class="cover-industries">
+        <span class="cover-ind-label">Designed for</span>
+        <div class="cover-ind-tags">
+          <span>🚢 Shipbuilding</span>
+          <span>🏗️ Real Estate Development</span>
+          <span>⚙️ Complex Multi-Year Projects</span>
+        </div>
+      </div>
+      <div class="cover-bottom-right">
+        <span class="cover-prepared">Prepared by the Farview Team</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Scroll progress -->
 <div class="progress-bar" id="progressBar"></div>
@@ -616,13 +856,13 @@ footer {
         <div class="hero-eyebrow reveal"><span class="eyebrow-dot"></span> Proposal · April 2026</div>
         <h1 class="reveal">See risks <em>before</em> they reach your reports.</h1>
         <p class="hero-sub reveal reveal-delay-1">Farview is an AI-driven intelligence layer for complex, multi-year development projects — connecting your existing systems to surface cost and schedule risks weeks earlier.</p>
-        <!-- <div class="hero-actions reveal reveal-delay-2">
-          <a href="#phases" class="btn-primary">
+        <div class="hero-actions reveal reveal-delay-2">
+          <!-- <a href="#phases" class="btn-primary">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             View Phase 0
           </a>
-          <a href="#solution" class="btn-secondary">How it works</a>
-        </div> -->
+          <a href="#solution" class="btn-secondary">How it works</a> -->
+        </div>
       </div>
       <div class="reveal reveal-delay-2">
         <div class="hero-card">
