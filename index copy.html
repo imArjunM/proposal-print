@@ -17,7 +17,7 @@
         --gold-light: #e8d49a;
         --slate: #353b47;
         --mist: #cacfd6;
-        --mistDark: rgb(72, 75, 78) 6;
+        --mistDark:rgb(72, 75, 78)6;
         --accent: #2b89ee;
         --accent-bright: #2760a8;
         --rule: #d8d0c0;
@@ -33,7 +33,7 @@
         background: var(--paper);
         color: var(--ink);
         font-family: "DM Sans", sans-serif;
-        font-size: 16px;
+        font-size: 16pt;
         line-height: 1.7;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
@@ -47,6 +47,7 @@
 
       /* ─── COVER ─── */
       .cover {
+        /* min-height: 100vh; */
         display: grid;
         grid-template-rows: auto 1fr auto;
         background: var(--ink);
@@ -120,7 +121,7 @@
       .cover-meta {
         text-align: right;
         color: var(--mist);
-        font-size: 15px;
+        font-size: 14pt;
         letter-spacing: 0.08em;
         text-transform: uppercase;
         font-weight: 500;
@@ -143,7 +144,7 @@
         background: rgba(201, 168, 76, 0.12);
         border: 1px solid rgba(201, 168, 76, 0.3);
         color: var(--gold-light);
-        font-size: 15px;
+        font-size: 8.5pt;
         letter-spacing: 0.14em;
         text-transform: uppercase;
         font-weight: 600;
@@ -197,7 +198,7 @@
       .cover-desc {
         max-width: 520px;
         color: #f1f1f1;
-        font-size: 16px;
+        font-size: 11.5pt;
         line-height: 1.75;
       }
 
@@ -230,7 +231,7 @@
       }
 
       .stat-label {
-        font-size: 15px;
+        font-size: 8pt;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--mist);
@@ -239,7 +240,7 @@
 
       .cover-page-num {
         color: var(--mist);
-        font-size: 15px;
+        font-size: 9pt;
         font-family: "DM Mono", monospace;
       }
 
@@ -263,7 +264,7 @@
 
       .eyebrow-num {
         font-family: "DM Mono", monospace;
-        font-size: 15px;
+        font-size: 9pt;
         color: var(--gold);
         font-weight: 500;
       }
@@ -275,7 +276,7 @@
       }
 
       .eyebrow-label {
-        font-size: 15px;
+        font-size: 8.5pt;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #13161f;
@@ -309,7 +310,6 @@
         color: #444c5a;
         line-height: 1.75;
         margin-bottom: 16px;
-        font-size: 16px;
       }
 
       p:last-child {
@@ -386,7 +386,7 @@
 
       .layer-text {
         flex: 1;
-        font-size: 15px;
+        font-size: 9pt;
         color: var(--mist);
         letter-spacing: 0.04em;
         font-family: "DM Mono", monospace;
@@ -398,7 +398,7 @@
       }
 
       .layer-badge {
-        font-size: 15px;
+        font-size: 7.5pt;
         padding: 2px 8px;
         border-radius: 2px;
         background: rgba(201, 168, 76, 0.2);
@@ -409,7 +409,7 @@
       }
 
       .stack-label {
-        font-size: 15px;
+        font-size: 8pt;
         color: #5a6275;
         text-align: center;
         margin-top: 16px;
@@ -454,13 +454,13 @@
       }
 
       .problem-card h3 {
-        font-size: 17px;
+        font-size: 15px;
         color: #fff;
         margin-bottom: 10px;
       }
 
       .problem-card p {
-        font-size: 15px;
+        font-size: 9.5pt;
         color: #e0e4eb;
         line-height: 1.65;
         margin: 0;
@@ -477,7 +477,7 @@
 
       .problem-callout p {
         font-family: "Playfair Display", serif;
-        font-size: 18px;
+        font-size: 15pt;
         font-style: italic;
         color: var(--gold-light);
         margin: 0;
@@ -507,19 +507,19 @@
 
       .cap-num {
         font-family: "DM Mono", monospace;
-        font-size: 15px;
+        font-size: 9pt;
         color: var(--gold);
         font-weight: 500;
         margin-bottom: 14px;
       }
 
       .cap-card h3 {
-        font-size: 17px;
+        font-size: 14.5px;
         margin-bottom: 10px;
       }
 
       .cap-card p {
-        font-size: 15px;
+        font-size: 9.5pt;
         color: #6a7585;
         margin: 0;
         line-height: 1.65;
@@ -550,7 +550,7 @@
       }
 
       .farview-note p {
-        font-size: 16px;
+        font-size: 10pt;
         color: var(--accent);
         margin: 0;
         font-weight: 500;
@@ -592,7 +592,7 @@
       }
 
       .scope-list li span {
-        font-size: 16px;
+        font-size: 10pt;
         color: var(--slate);
         line-height: 1.5;
       }
@@ -626,7 +626,7 @@
       }
 
       .deliverable span {
-        font-size: 16px;
+        font-size: 10pt;
         color: var(--slate);
       }
 
@@ -700,7 +700,7 @@
       }
 
       .tnode-label {
-        font-size: 15px;
+        font-size: 8.5pt;
         font-weight: 600;
         color: var(--ink);
         text-align: center;
@@ -708,7 +708,7 @@
       }
 
       .tnode-sub {
-        font-size: 15px;
+        font-size: 8pt;
         color: var(--mistDark);
         text-align: center;
         font-family: "DM Mono", monospace;
@@ -735,7 +735,7 @@
       }
 
       .budget-label {
-        font-size: 15px;
+        font-size: 8.5pt;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         color: var(--mistDark);
@@ -762,7 +762,7 @@
       }
 
       .budget-note {
-        font-size: 15px;
+        font-size: 9pt;
         color: var(--mistDark);
         margin: 0;
       }
@@ -808,7 +808,7 @@
       .gate-box p {
         font-family: "Playfair Display", serif;
         font-style: italic;
-        font-size: 18px;
+        font-size: 14pt;
         color: var(--gold-light);
         margin-bottom: 12px;
         line-height: 1.5;
@@ -817,7 +817,7 @@
       .gate-sub {
         font-family: "DM Sans", sans-serif !important;
         font-style: normal !important;
-        font-size: 15px !important;
+        font-size: 9.5pt !important;
         color: #d6d8da !important;
         margin: 0 !important;
       }
@@ -837,7 +837,7 @@
       }
 
       .outcome-tag {
-        font-size: 15px;
+        font-size: 8pt;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
@@ -857,7 +857,7 @@
       }
 
       .outcome p {
-        font-size: 15px;
+        font-size: 9.5pt;
         color: #dde0e5;
         margin: 0;
         line-height: 1.6;
@@ -900,7 +900,7 @@
       }
 
       .step-phase {
-        font-size: 15px;
+        font-size: 8pt;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         font-weight: 600;
@@ -910,7 +910,7 @@
       }
 
       .step-card h3 {
-        font-size: 17px;
+        font-size: 15px;
         margin-bottom: 16px;
       }
 
@@ -922,7 +922,7 @@
       }
 
       .step-items li {
-        font-size: 15px;
+        font-size: 9.5pt;
         color: #636870;
         padding-left: 16px;
         position: relative;
@@ -934,7 +934,7 @@
         position: absolute;
         left: 0;
         color: var(--gold);
-        font-size: 15px;
+        font-size: 8pt;
         top: 1px;
       }
 
@@ -966,12 +966,12 @@
       }
 
       .pricing-factor h3 {
-        font-size: 17px;
+        font-size: 14px;
         margin-bottom: 8px;
       }
 
       .pricing-factor p {
-        font-size: 15px;
+        font-size: 9pt;
         color: var(--misDark);
         margin: 0;
       }
@@ -989,7 +989,7 @@
 
       .commercial-note p {
         color: #8a95a8;
-        font-size: 16px;
+        font-size: 10pt;
         margin: 0;
         line-height: 1.65;
       }
@@ -1019,7 +1019,7 @@
       }
 
       .footer-copy {
-        font-size: 15px;
+        font-size: 8.5pt;
         color: #cfd1d8;
         text-align: right;
         line-height: 1.8;
@@ -1055,13 +1055,13 @@
       }
 
       .entry-highlight h3 {
-        font-size: 17px;
+        font-size: 14px;
         color: #2a6b4a;
         margin-bottom: 8px;
       }
 
       .entry-highlight p {
-        font-size: 15px;
+        font-size: 9.5pt;
         color: #4a6558;
         margin: 0;
         line-height: 1.6;
@@ -1085,7 +1085,7 @@
       }
 
       .reason span {
-        font-size: 16px;
+        font-size: 10pt;
         color: var(--slate);
         line-height: 1.5;
       }
@@ -1098,7 +1098,7 @@
       }
 
       .entry-note p {
-        font-size: 15px;
+        font-size: 9.5pt;
         color: #2a6b4a;
         margin: 0;
         font-style: italic;
@@ -1608,7 +1608,7 @@
               style="
                 margin-top: 32px;
                 margin-bottom: 4px;
-                font-size: 15px;
+                font-size: 13px;
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
                 color: var(--mistDark);
@@ -1725,10 +1725,10 @@
               style="
                 margin-top: 28px;
                 margin-bottom: 4px;
-                font-size: 15px;
+                font-size: 13px;
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
-                color: var(--mistDark);
+               color: var(--mistDark);
                 font-family: &quot;DM Mono&quot;, monospace;
                 font-weight: 500;
               "
@@ -1833,7 +1833,7 @@
               style="
                 margin-top: 32px;
                 margin-bottom: 4px;
-                font-size: 15px;
+                font-size: 13px;
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
                 color: var(--mistDark);
@@ -1899,7 +1899,7 @@
             >
               <div
                 style="
-                  font-size: 15px;
+                  font-size: 8pt;
                   text-transform: uppercase;
                   letter-spacing: 0.1em;
                   color: var(--mistDark);
@@ -1912,7 +1912,7 @@
               </div>
               <p
                 style="
-                  font-size: 15px;
+                  font-size: 9.5pt;
                   color: var(--slate);
                   margin: 0;
                   font-style: italic;
