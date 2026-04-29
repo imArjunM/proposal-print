@@ -1,808 +1,2555 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Supply Chain Visibility Platform — Business Proposal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0B1220;
-    --ink-2:#1A2238;
-    --paper:#F6F1E7;
-    --paper-2:#EFE7D6;
-    --cream:#FBF7EE;
-    --accent:#E85D2F;       /* WFP-inspired warm orange */
-    --accent-2:#F2A03D;     /* grain gold */
-    --green:#2F6B3A;        /* harvest green */
-    --green-2:#5D8C46;
-    --line:rgba(11,18,32,.14);
-    --soft:rgba(11,18,32,.06);
-    --muted:#5A6275;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased}
-  ::selection{background:var(--accent);color:#fff}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supply Chain Visibility Platform — Business Proposal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0b1220;
+        --ink-2: #1a2238;
+        --paper: #f6f1e7;
+        --paper-2: #efe7d6;
+        --cream: #fbf7ee;
+        --accent: #e85d2f; /* WFP-inspired warm orange */
+        --accent-2: #f2a03d; /* grain gold */
+        --green: #2f6b3a; /* harvest green */
+        --green-2: #5d8c46;
+        --line: rgba(11, 18, 32, 0.14);
+        --soft: rgba(11, 18, 32, 0.06);
+        --muted: #5a6275;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection {
+        background: var(--accent);
+        color: #fff;
+      }
 
-  .doc{max-width:1180px;margin:0 auto;padding:48px 56px 96px}
-  h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.02em;color:var(--ink)}
-  h1{font-size:clamp(48px,7vw,104px);line-height:.95;font-weight:800}
-  h2{font-size:clamp(34px,4vw,52px);line-height:1.05}
-  h3{font-size:clamp(22px,2.2vw,28px);line-height:1.2}
-  h4{font-size:18px;font-family:'Inter',sans-serif;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
-  p{font-size:16px;color:#22304a}
-  .mono{font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
-  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);font-weight:600}
+      .doc {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 48px 56px 96px;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+      }
+      h1 {
+        font-size: clamp(48px, 7vw, 104px);
+        line-height: 0.95;
+        font-weight: 800;
+      }
+      h2 {
+        font-size: clamp(34px, 4vw, 52px);
+        line-height: 1.05;
+      }
+      h3 {
+        font-size: clamp(22px, 2.2vw, 28px);
+        line-height: 1.2;
+      }
+      h4 {
+        font-size: 18px;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+      p {
+        font-size: 16px;
+        color: #22304a;
+      }
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.04em;
+      }
+      .eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 600;
+      }
 
-  /* HERO */
-  .hero{
-    position:relative;
-    border-radius:32px;
-    overflow:hidden;
-    background:
-      radial-gradient(1200px 600px at 90% -10%, rgba(232,93,47,.25), transparent 60%),
-      radial-gradient(800px 500px at -10% 110%, rgba(47,107,58,.35), transparent 60%),
-      linear-gradient(160deg,#0B1220 0%, #1A2238 60%, #243049 100%);
-    color:#FBF7EE;
-    padding:64px 56px 72px;
-    isolation:isolate;
-  }
-  .hero::before{
-    content:"";position:absolute;inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-    background-size:48px 48px;
-    mask-image:radial-gradient(ellipse at center, black 40%, transparent 80%);
-    z-index:-1;
-  }
-  .hero-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:80px;flex-wrap:wrap;gap:16px;padding-right:220px}
-  .brand{display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#FBF7EE}
-  .brand-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:#0B1220;font-family:'Fraunces',serif;font-weight:800;font-size:18px}
-  .meta{display:flex;gap:28px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(251,247,238,.65)}
-  .meta b{display:block;color:#FBF7EE;margin-top:4px;font-weight:600;letter-spacing:.16em}
+      /* HERO */
+      .hero {
+        position: relative;
+        border-radius: 32px;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            1200px 600px at 90% -10%,
+            rgba(232, 93, 47, 0.25),
+            transparent 60%
+          ),
+          radial-gradient(
+            800px 500px at -10% 110%,
+            rgba(47, 107, 58, 0.35),
+            transparent 60%
+          ),
+          linear-gradient(160deg, #0b1220 0%, #1a2238 60%, #243049 100%);
+        color: #fbf7ee;
+        padding: 64px 56px 72px;
+        isolation: isolate;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(
+          ellipse at center,
+          black 40%,
+          transparent 80%
+        );
+        z-index: -1;
+      }
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 80px;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding-right: 220px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: #fbf7ee;
+      }
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: grid;
+        place-items: center;
+        color: #0b1220;
+        font-family: "Fraunces", serif;
+        font-weight: 800;
+        font-size: 18px;
+      }
+      .meta {
+        display: flex;
+        gap: 28px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(251, 247, 238, 0.65);
+      }
+      .meta b {
+        display: block;
+        color: #fbf7ee;
+        margin-top: 4px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+      }
 
-  .hero h1{color:#FBF7EE;max-width:14ch}
-  .hero h1 em{font-style:italic;color:var(--accent-2);font-weight:400}
-  .hero-sub{margin-top:28px;max-width:62ch;font-size:18px;color:rgba(251,247,238,.78);line-height:1.6}
-  .hero-foot{margin-top:64px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;border-top:1px solid rgba(255,255,255,.12);padding-top:28px}
-  .hero-foot div .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent-2)}
-  .hero-foot div .v{font-family:'Fraunces',serif;font-size:28px;font-weight:600;margin-top:6px;color:#FBF7EE}
-  .hero-tag{position:absolute;top:24px;right:24px;border:1px solid rgba(255,255,255,.2);padding:8px 14px;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(251,247,238,.85);backdrop-filter:blur(6px);background:rgba(11,18,32,.5)}
-  .hero-tag .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:8px;box-shadow:0 0 0 4px rgba(232,93,47,.25)}
+      .hero h1 {
+        color: #fbf7ee;
+        max-width: 14ch;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--accent-2);
+        font-weight: 400;
+      }
+      .hero-sub {
+        margin-top: 28px;
+        max-width: 62ch;
+        font-size: 18px;
+        color: rgba(251, 247, 238, 0.78);
+        line-height: 1.6;
+      }
+      .hero-foot {
+        margin-top: 64px;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        padding-top: 28px;
+      }
+      .hero-foot div .k {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--accent-2);
+      }
+      .hero-foot div .v {
+        font-family: "Fraunces", serif;
+        font-size: 28px;
+        font-weight: 600;
+        margin-top: 6px;
+        color: #fbf7ee;
+      }
+      .hero-tag {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(251, 247, 238, 0.85);
+        backdrop-filter: blur(6px);
+        background: rgba(11, 18, 32, 0.5);
+      }
+      .hero-tag .dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin-right: 8px;
+        box-shadow: 0 0 0 4px rgba(232, 93, 47, 0.25);
+      }
 
-  /* SECTIONS */
-  section{margin-top:96px}
-  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:40px;border-bottom:1px solid var(--line);padding-bottom:20px}
-  .sec-head .left{max-width:780px}
-  .sec-num{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.32em;color:var(--accent);font-weight:600}
-  .sec-head h2{margin-top:8px}
-  .sec-head .right{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);text-align:right;white-space:nowrap}
+      /* SECTIONS */
+      section {
+        margin-top: 96px;
+      }
+      .sec-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 32px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 20px;
+      }
+      .sec-head .left {
+        max-width: 780px;
+      }
+      .sec-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.32em;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .sec-head h2 {
+        margin-top: 8px;
+      }
+      .sec-head .right {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-align: right;
+        white-space: nowrap;
+      }
 
-  /* GRID UTILS */
-  .grid{display:grid;gap:24px}
-  .g-2{grid-template-columns:repeat(2,1fr)}
-  .g-3{grid-template-columns:repeat(3,1fr)}
-  .g-4{grid-template-columns:repeat(4,1fr)}
-  .g-6{grid-template-columns:repeat(6,1fr)}
-  @media (max-width:900px){.g-2,.g-3,.g-4,.g-6{grid-template-columns:1fr 1fr}.hero-foot{grid-template-columns:1fr 1fr}}
-  @media (max-width:560px){.g-2,.g-3,.g-4,.g-6,.hero-foot{grid-template-columns:1fr}.doc{padding:24px}}
+      /* GRID UTILS */
+      .grid {
+        display: grid;
+        gap: 24px;
+      }
+      .g-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .g-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .g-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .g-6 {
+        grid-template-columns: repeat(6, 1fr);
+      }
+      @media (max-width: 900px) {
+        .g-2,
+        .g-3,
+        .g-4,
+        .g-6 {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hero-foot {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        .g-2,
+        .g-3,
+        .g-4,
+        .g-6,
+        .hero-foot {
+          grid-template-columns: 1fr;
+        }
+        .doc {
+          padding: 24px;
+        }
+      }
 
-  .card{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:28px}
-  .card h3{margin-bottom:10px}
-  .card p{color:var(--muted)}
-  .card .ic{width:42px;height:42px;border-radius:12px;background:var(--paper-2);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:700;color:var(--ink);margin-bottom:18px;border:1px solid var(--line)}
-  .card.dark{background:var(--ink);color:#FBF7EE;border-color:transparent}
-  .card.dark h3,.card.dark p{color:#FBF7EE}
-  .card.dark p{color:rgba(251,247,238,.7)}
-  .card.dark .ic{background:rgba(255,255,255,.08);color:var(--accent-2);border-color:rgba(255,255,255,.1)}
-  .card.accent{background:var(--accent);color:#fff;border-color:transparent}
-  .card.accent h3,.card.accent p{color:#fff}
-  .card.accent p{color:rgba(255,255,255,.85)}
-  .card.accent .ic{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.2)}
+      .card {
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 28px;
+      }
+      .card h3 {
+        margin-bottom: 10px;
+      }
+      .card p {
+        color: var(--muted);
+      }
+      .card .ic {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: var(--paper-2);
+        display: grid;
+        place-items: center;
+        font-family: "Fraunces", serif;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 18px;
+        border: 1px solid var(--line);
+      }
+      .card.dark {
+        background: var(--ink);
+        color: #fbf7ee;
+        border-color: transparent;
+      }
+      .card.dark h3,
+      .card.dark p {
+        color: #fbf7ee;
+      }
+      .card.dark p {
+        color: rgba(251, 247, 238, 0.7);
+      }
+      .card.dark .ic {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--accent-2);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      .card.accent {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+      }
+      .card.accent h3,
+      .card.accent p {
+        color: #fff;
+      }
+      .card.accent p {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .card.accent .ic {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.2);
+      }
 
-  /* OBJECTIVES list */
-  .obj-list{list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
-  .obj-list li{display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:24px;padding:22px 8px;border-bottom:1px solid var(--line);transition:background .2s}
-  .obj-list li:hover{background:var(--soft)}
-  .obj-list li .n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:.2em}
-  .obj-list li .t{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink)}
-  .obj-list li .b{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);padding:6px 12px;border:1px solid var(--line);border-radius:999px}
+      /* OBJECTIVES list */
+      .obj-list {
+        list-style: none;
+        display: grid;
+        gap: 0;
+        border-top: 1px solid var(--line);
+      }
+      .obj-list li {
+        display: grid;
+        grid-template-columns: 80px 1fr auto;
+        align-items: center;
+        gap: 24px;
+        padding: 22px 8px;
+        border-bottom: 1px solid var(--line);
+        transition: background 0.2s;
+      }
+      .obj-list li:hover {
+        background: var(--soft);
+      }
+      .obj-list li .n {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--accent);
+        letter-spacing: 0.2em;
+      }
+      .obj-list li .t {
+        font-family: "Fraunces", serif;
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .obj-list li .b {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 6px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+      }
 
-  /* SUPPLY CHAIN FLOW */
-  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:var(--cream);border:1px solid var(--line);border-radius:24px;overflow:hidden}
-  .flow .stage{padding:28px 22px;border-right:1px solid var(--line);position:relative;background:var(--cream)}
-  .flow .stage:last-child{border-right:none}
-  .flow .stage .step{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;color:var(--accent);font-weight:600}
-  .flow .stage h3{font-size:20px;margin-top:8px;margin-bottom:10px}
-  .flow .stage p{font-size:13px;color:var(--muted);line-height:1.5}
-  .flow .stage .arrow{position:absolute;right:-10px;top:50%;transform:translateY(-50%);width:20px;height:20px;background:var(--accent);border-radius:50%;display:grid;place-items:center;color:#fff;font-size:10px;z-index:2}
-  .flow .stage:last-child .arrow{display:none}
-  @media (max-width:900px){.flow{grid-template-columns:1fr}.flow .stage{border-right:none;border-bottom:1px solid var(--line)}.flow .stage .arrow{right:auto;left:50%;top:auto;bottom:-10px;transform:translateX(-50%) rotate(90deg)}}
+      /* SUPPLY CHAIN FLOW */
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        overflow: hidden;
+      }
+      .flow .stage {
+        padding: 28px 22px;
+        border-right: 1px solid var(--line);
+        position: relative;
+        background: var(--cream);
+      }
+      .flow .stage:last-child {
+        border-right: none;
+      }
+      .flow .stage .step {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .flow .stage h3 {
+        font-size: 20px;
+        margin-top: 8px;
+        margin-bottom: 10px;
+      }
+      .flow .stage p {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .flow .stage .arrow {
+        position: absolute;
+        right: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-size: 10px;
+        z-index: 2;
+      }
+      .flow .stage:last-child .arrow {
+        display: none;
+      }
+      @media (max-width: 900px) {
+        .flow {
+          grid-template-columns: 1fr;
+        }
+        .flow .stage {
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+        }
+        .flow .stage .arrow {
+          right: auto;
+          left: 50%;
+          top: auto;
+          bottom: -10px;
+          transform: translateX(-50%) rotate(90deg);
+        }
+      }
 
-  /* TWO-COL feature spread */
-  .spread{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:stretch}
-  @media (max-width:900px){.spread{grid-template-columns:1fr}}
-  .spread .left,.spread .right{border-radius:24px;padding:36px;border:1px solid var(--line)}
-  .spread .left{background:var(--ink);color:#FBF7EE;border-color:transparent;position:relative;overflow:hidden}
-  .spread .left::after{content:"";position:absolute;right:-80px;bottom:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(232,93,47,.4),transparent 70%)}
-  .spread .left h3{color:#FBF7EE;font-size:34px;margin-bottom:16px}
-  .spread .left p{color:rgba(251,247,238,.75)}
-  .spread .right{background:var(--paper-2)}
+      /* TWO-COL feature spread */
+      .spread {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 32px;
+        align-items: stretch;
+      }
+      @media (max-width: 900px) {
+        .spread {
+          grid-template-columns: 1fr;
+        }
+      }
+      .spread .left,
+      .spread .right {
+        border-radius: 24px;
+        padding: 36px;
+        border: 1px solid var(--line);
+      }
+      .spread .left {
+        background: var(--ink);
+        color: #fbf7ee;
+        border-color: transparent;
+        position: relative;
+        overflow: hidden;
+      }
+      .spread .left::after {
+        content: "";
+        position: absolute;
+        right: -80px;
+        bottom: -80px;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(232, 93, 47, 0.4),
+          transparent 70%
+        );
+      }
+      .spread .left h3 {
+        color: #fbf7ee;
+        font-size: 34px;
+        margin-bottom: 16px;
+      }
+      .spread .left p {
+        color: rgba(251, 247, 238, 0.75);
+      }
+      .spread .right {
+        background: var(--paper-2);
+      }
 
-  .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-  .pill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08);color:#FBF7EE;border:1px solid rgba(255,255,255,.15)}
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+      .pill {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fbf7ee;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
 
-  .bag-vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--cream)}
-  .bag-vs > div{padding:28px}
-  .bag-vs > div + div{border-left:1px solid var(--line)}
-  .bag-vs h4{color:var(--accent);margin-bottom:12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em}
-  .bag-vs ul{list-style:none;margin-top:16px}
-  .bag-vs ul li{padding:10px 0;border-bottom:1px dashed var(--line);font-family:'Fraunces',serif;font-size:18px;color:var(--ink)}
-  .bag-vs ul li:last-child{border-bottom:none}
-  @media (max-width:560px){.bag-vs{grid-template-columns:1fr}.bag-vs > div + div{border-left:none;border-top:1px solid var(--line)}}
+      .bag-vs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+        background: var(--cream);
+      }
+      .bag-vs > div {
+        padding: 28px;
+      }
+      .bag-vs > div + div {
+        border-left: 1px solid var(--line);
+      }
+      .bag-vs h4 {
+        color: var(--accent);
+        margin-bottom: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.3em;
+      }
+      .bag-vs ul {
+        list-style: none;
+        margin-top: 16px;
+      }
+      .bag-vs ul li {
+        padding: 10px 0;
+        border-bottom: 1px dashed var(--line);
+        font-family: "Fraunces", serif;
+        font-size: 18px;
+        color: var(--ink);
+      }
+      .bag-vs ul li:last-child {
+        border-bottom: none;
+      }
+      @media (max-width: 560px) {
+        .bag-vs {
+          grid-template-columns: 1fr;
+        }
+        .bag-vs > div + div {
+          border-left: none;
+          border-top: 1px solid var(--line);
+        }
+      }
 
-  /* ARCHITECTURE LAYERS */
-  .layers{display:flex;flex-direction:column;gap:14px}
-  .layer{display:grid;grid-template-columns:140px 1fr auto;gap:24px;align-items:center;padding:24px 28px;border:1px solid var(--line);border-radius:18px;background:var(--cream);transition:transform .2s, background .2s}
-  .layer:hover{background:var(--paper-2);transform:translateX(4px)}
-  .layer .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;color:var(--accent);font-weight:600}
-  .layer h3{font-size:22px}
-  .layer .tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;max-width:420px}
-  .layer .tags span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:6px 10px;border-radius:6px;background:var(--paper-2);color:var(--ink-2);border:1px solid var(--line)}
-  @media (max-width:900px){.layer{grid-template-columns:1fr}.layer .tags{justify-content:flex-start;max-width:100%}}
+      /* ARCHITECTURE LAYERS */
+      .layers {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .layer {
+        display: grid;
+        grid-template-columns: 140px 1fr auto;
+        gap: 24px;
+        align-items: center;
+        padding: 24px 28px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--cream);
+        transition:
+          transform 0.2s,
+          background 0.2s;
+      }
+      .layer:hover {
+        background: var(--paper-2);
+        transform: translateX(4px);
+      }
+      .layer .lbl {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .layer h3 {
+        font-size: 22px;
+      }
+      .layer .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
+        max-width: 420px;
+      }
+      .layer .tags span {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 6px 10px;
+        border-radius: 6px;
+        background: var(--paper-2);
+        color: var(--ink-2);
+        border: 1px solid var(--line);
+      }
+      @media (max-width: 900px) {
+        .layer {
+          grid-template-columns: 1fr;
+        }
+        .layer .tags {
+          justify-content: flex-start;
+          max-width: 100%;
+        }
+      }
 
-  /* DASHBOARD MOCK */
-  .dash{background:var(--ink);border-radius:28px;padding:36px;color:#FBF7EE;position:relative;overflow:hidden}
-  .dash::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px;opacity:.5}
-  .dash > *{position:relative}
-  .dash-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:12px}
-  .dash-head .title{display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(251,247,238,.7)}
-  .dash-head .live{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#7BD389}
-  .dash-head .live .pulse{width:8px;height:8px;border-radius:50%;background:#7BD389;box-shadow:0 0 0 4px rgba(123,211,137,.2);animation:pulse 1.6s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-  .dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
-  .stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px}
-  .stat .l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,247,238,.55)}
-  .stat .v{font-family:'Fraunces',serif;font-size:30px;font-weight:600;margin-top:6px;color:#FBF7EE}
-  .stat .d{font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:4px;color:var(--accent-2)}
-  .stat.up .d{color:#7BD389}
-  .stat.down .d{color:#FF8E72}
-  .dash-row{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
-  .panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px}
-  .panel h4{color:rgba(251,247,238,.7);font-size:11px;letter-spacing:.24em;margin-bottom:14px}
-  .bars{display:flex;align-items:flex-end;gap:8px;height:130px;margin-top:8px}
-  .bars .bar{flex:1;background:linear-gradient(180deg,var(--accent-2),var(--accent));border-radius:4px 4px 0 0;position:relative}
-  .bars .bar.alt{background:linear-gradient(180deg,#7BD389,var(--green))}
-  .alerts{display:flex;flex-direction:column;gap:10px}
-  .alerts .a{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.04);font-size:13px;color:rgba(251,247,238,.85)}
-  .alerts .a .dot{width:8px;height:8px;border-radius:50%}
-  .alerts .a .t{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(251,247,238,.5);letter-spacing:.18em}
-  @media (max-width:900px){.dash-grid{grid-template-columns:1fr 1fr}.dash-row{grid-template-columns:1fr}}
+      /* DASHBOARD MOCK */
+      .dash {
+        background: var(--ink);
+        border-radius: 28px;
+        padding: 36px;
+        color: #fbf7ee;
+        position: relative;
+        overflow: hidden;
+      }
+      .dash::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 32px 32px;
+        opacity: 0.5;
+      }
+      .dash > * {
+        position: relative;
+      }
+      .dash-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .dash-head .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(251, 247, 238, 0.7);
+      }
+      .dash-head .live {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: #7bd389;
+      }
+      .dash-head .live .pulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #7bd389;
+        box-shadow: 0 0 0 4px rgba(123, 211, 137, 0.2);
+        animation: pulse 1.6s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+      .dash-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+      .stat {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 18px;
+      }
+      .stat .l {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(251, 247, 238, 0.55);
+      }
+      .stat .v {
+        font-family: "Fraunces", serif;
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: 6px;
+        color: #fbf7ee;
+      }
+      .stat .d {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        margin-top: 4px;
+        color: var(--accent-2);
+      }
+      .stat.up .d {
+        color: #7bd389;
+      }
+      .stat.down .d {
+        color: #ff8e72;
+      }
+      .dash-row {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 14px;
+      }
+      .panel {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 20px;
+      }
+      .panel h4 {
+        color: rgba(251, 247, 238, 0.7);
+        font-size: 11px;
+        letter-spacing: 0.24em;
+        margin-bottom: 14px;
+      }
+      .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        height: 130px;
+        margin-top: 8px;
+      }
+      .bars .bar {
+        flex: 1;
+        background: linear-gradient(180deg, var(--accent-2), var(--accent));
+        border-radius: 4px 4px 0 0;
+        position: relative;
+      }
+      .bars .bar.alt {
+        background: linear-gradient(180deg, #7bd389, var(--green));
+      }
+      .alerts {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .alerts .a {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 12px;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        font-size: 13px;
+        color: rgba(251, 247, 238, 0.85);
+      }
+      .alerts .a .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .alerts .a .t {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        color: rgba(251, 247, 238, 0.5);
+        letter-spacing: 0.18em;
+      }
 
-  .cap-list{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:24px}
-  .cap{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:20px;min-height:160px;display:flex;flex-direction:column;justify-content:space-between}
-  .cap .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;color:var(--accent);font-weight:600}
-  .cap h4{font-family:'Fraunces',serif;font-size:18px;font-weight:600;text-transform:none;letter-spacing:-0.01em}
-  .cap p{font-size:13px;color:var(--muted);margin-top:6px}
-  @media (max-width:900px){.cap-list{grid-template-columns:1fr 1fr}}
-  @media (max-width:560px){.cap-list{grid-template-columns:1fr}}
+      .image_full_view {
+        width: 100%;
+      }
 
-  /* AI FEATURES */
-  .ai-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-  @media (max-width:900px){.ai-grid{grid-template-columns:1fr}}
-  .ai-card{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:32px;position:relative;overflow:hidden;transition:transform .25s}
-  .ai-card:hover{transform:translateY(-4px)}
-  .ai-card .num{position:absolute;top:24px;right:28px;font-family:'Fraunces',serif;font-size:80px;font-weight:600;color:var(--paper-2);line-height:1;z-index:0}
-  .ai-card > *{position:relative;z-index:1}
-  .ai-card h3{font-size:22px;margin-bottom:12px}
-  .ai-card ul{list-style:none;margin-top:14px}
-  .ai-card ul li{padding:8px 0;color:var(--muted);font-size:14px;border-bottom:1px dashed var(--line)}
-  .ai-card ul li:last-child{border-bottom:none}
-  .ai-card ul li::before{content:"→";color:var(--accent);margin-right:10px;font-family:'JetBrains Mono',monospace}
+      @media (max-width: 900px) {
+        .dash-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .dash-row {
+          grid-template-columns: 1fr;
+        }
+      }
 
-  .quote-card{background:var(--ink-2);color:#FBF7EE;border-radius:20px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;border:none}
-  .quote-card h3{color:var(--accent-2);font-size:22px;margin-bottom:12px}
-  .quote-card .ex{font-family:'Fraunces',serif;font-style:italic;font-size:24px;line-height:1.3;color:#FBF7EE;border-left:3px solid var(--accent);padding-left:18px;margin:14px 0}
-  .quote-card .ex + .ex{margin-top:18px}
+      .cap-list {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+        margin-top: 24px;
+      }
+      .cap {
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px;
+        min-height: 160px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .cap .k {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.24em;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .cap h4 {
+        font-family: "Fraunces", serif;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: none;
+        letter-spacing: -0.01em;
+      }
+      .cap p {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      @media (max-width: 900px) {
+        .cap-list {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        .cap-list {
+          grid-template-columns: 1fr;
+        }
+      }
 
-  /* AUTOMATION */
-  .auto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--cream)}
-  .auto-grid > div{padding:32px;border-right:1px solid var(--line)}
-  .auto-grid > div:last-child{border-right:none}
-  .auto-grid h3{font-size:22px;margin-bottom:16px}
-  .auto-grid ul{list-style:none}
-  .auto-grid ul li{padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px;color:var(--ink-2);display:flex;align-items:center;gap:10px}
-  .auto-grid ul li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
-  .auto-grid ul li:last-child{border-bottom:none}
-  @media (max-width:900px){.auto-grid{grid-template-columns:1fr}.auto-grid > div{border-right:none;border-bottom:1px solid var(--line)}}
+      /* AI FEATURES */
+      .ai-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      @media (max-width: 900px) {
+        .ai-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .ai-card {
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s;
+      }
+      .ai-card:hover {
+        transform: translateY(-4px);
+      }
+      .ai-card .num {
+        position: absolute;
+        top: 24px;
+        right: 28px;
+        font-family: "Fraunces", serif;
+        font-size: 80px;
+        font-weight: 600;
+        color: var(--paper-2);
+        line-height: 1;
+        z-index: 0;
+      }
+      .ai-card > * {
+        position: relative;
+        z-index: 1;
+      }
+      .ai-card h3 {
+        font-size: 22px;
+        margin-bottom: 12px;
+      }
+      .ai-card ul {
+        list-style: none;
+        margin-top: 14px;
+      }
+      .ai-card ul li {
+        padding: 8px 0;
+        color: var(--muted);
+        font-size: 14px;
+        border-bottom: 1px dashed var(--line);
+      }
+      .ai-card ul li:last-child {
+        border-bottom: none;
+      }
+      .ai-card ul li::before {
+        content: "→";
+        color: var(--accent);
+        margin-right: 10px;
+        font-family: "JetBrains Mono", monospace;
+      }
 
-  .principle{margin-top:28px;background:var(--ink);color:#FBF7EE;border-radius:20px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;overflow:hidden}
-  .principle::after{content:"❝";position:absolute;left:24px;top:-30px;font-family:'Fraunces',serif;font-size:200px;color:rgba(232,93,47,.15);line-height:1}
-  .principle .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;color:var(--accent-2);text-transform:uppercase;position:relative;z-index:1}
-  .principle .txt{font-family:'Fraunces',serif;font-size:32px;font-weight:600;line-height:1.2;color:#FBF7EE;flex:1;min-width:300px;position:relative;z-index:1}
+      .quote-card {
+        background: var(--ink-2);
+        color: #fbf7ee;
+        border-radius: 20px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: none;
+      }
+      .quote-card h3 {
+        color: var(--accent-2);
+        font-size: 22px;
+        margin-bottom: 12px;
+      }
+      .quote-card .ex {
+        font-family: "Fraunces", serif;
+        font-style: italic;
+        font-size: 24px;
+        line-height: 1.3;
+        color: #fbf7ee;
+        border-left: 3px solid var(--accent);
+        padding-left: 18px;
+        margin: 14px 0;
+      }
+      .quote-card .ex + .ex {
+        margin-top: 18px;
+      }
 
-  /* BENEFITS */
-  .ben-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-  @media (max-width:900px){.ben-grid{grid-template-columns:1fr 1fr}}
-  @media (max-width:560px){.ben-grid{grid-template-columns:1fr}}
-  .ben{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:24px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;transition:all .25s}
-  .ben:hover{background:var(--accent);color:#fff;border-color:transparent}
-  .ben:hover h3,.ben:hover p,.ben:hover .num{color:#fff}
-  .ben:hover .num{opacity:.4}
-  .ben .num{font-family:'Fraunces',serif;font-size:46px;font-weight:600;color:var(--accent);opacity:.3;line-height:1}
-  .ben h3{font-size:20px;margin-top:14px}
-  .ben p{font-size:13px;color:var(--muted);margin-top:8px}
+      /* INSPECTION COMMAND CENTER */
+      .insp-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 1100px) {
+        .insp-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 560px) {
+        .insp-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .insp-card {
+        position: relative;
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        overflow: hidden;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+      .insp-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px -24px rgba(11, 18, 32, 0.25);
+      }
+      .insp-card--wide {
+        grid-column: span 4;
+        background: var(--paper-2);
+      }
+      @media (max-width: 1100px) {
+        .insp-card--wide {
+          grid-column: span 2;
+        }
+      }
+      @media (max-width: 560px) {
+        .insp-card--wide {
+          grid-column: span 1;
+        }
+      }
+      .insp-card--dark {
+        background: var(--ink);
+        color: #fbf7ee;
+        border-color: transparent;
+      }
+      .insp-card--dark .insp-title,
+      .insp-card--dark .insp-value,
+      .insp-card--dark .insp-unit {
+        color: #fbf7ee;
+      }
+      .insp-card--dark .insp-desc {
+        color: rgba(251, 247, 238, 0.7);
+      }
+      .insp-card--dark .insp-num {
+        color: var(--accent-2);
+      }
+      .insp-card--accent {
+        background: linear-gradient(160deg, var(--accent), #b8421f);
+        color: #fff;
+        border-color: transparent;
+      }
+      .insp-card--accent .insp-title,
+      .insp-card--accent .insp-value,
+      .insp-card--accent .insp-unit {
+        color: #fff;
+      }
+      .insp-card--accent .insp-desc {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .insp-card--accent .insp-num {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .insp-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .insp-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .insp-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: var(--paper-2);
+        color: var(--ink-2);
+        border: 1px solid var(--line);
+      }
+      .insp-tag--ok {
+        background: rgba(47, 107, 58, 0.12);
+        color: #2f6b3a;
+        border-color: rgba(47, 107, 58, 0.2);
+      }
+      .insp-tag--warn {
+        background: rgba(242, 180, 65, 0.18);
+        color: #8a5a00;
+        border-color: rgba(242, 180, 65, 0.35);
+      }
+      .insp-tag--crit {
+        background: rgba(255, 255, 255, 0.18);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      .insp-tag--bio {
+        background: rgba(232, 93, 47, 0.12);
+        color: var(--accent);
+        border-color: rgba(232, 93, 47, 0.25);
+      }
+      .insp-card--dark .insp-tag {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fbf7ee;
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+      .insp-metric {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin-top: 6px;
+      }
+      .insp-value {
+        font-family: "Fraunces", serif;
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 1;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+      }
+      .insp-pct {
+        font-size: 24px;
+        font-weight: 500;
+        margin-left: 2px;
+      }
+      .insp-unit {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .insp-title {
+        font-family: "Fraunces", serif;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--ink);
+        margin: 0;
+      }
+      .insp-desc {
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--muted);
+        margin: 0;
+      }
+      .insp-bar {
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(11, 18, 32, 0.06);
+        overflow: hidden;
+        margin-top: auto;
+      }
+      .insp-card--dark .insp-bar,
+      .insp-card--accent .insp-bar {
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .insp-bar span {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+      }
+      .insp-split {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 28px;
+        align-items: center;
+      }
+      @media (max-width: 700px) {
+        .insp-split {
+          grid-template-columns: 1fr;
+        }
+      }
+      .insp-pathos {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .patho {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 4px;
+        border-bottom: 1px dashed var(--line);
+      }
+      .patho:last-child {
+        border-bottom: none;
+      }
+      .patho .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .dot--red {
+        background: #d9342b;
+      }
+      .dot--orange {
+        background: var(--accent);
+      }
+      .dot--yellow {
+        background: #f2b441;
+      }
+      .patho .lbl {
+        font-family: "Fraunces", serif;
+        font-style: italic;
+        font-size: 16px;
+        color: var(--ink);
+      }
+      .patho .ct {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        color: var(--ink-2);
+        font-weight: 600;
+      }
 
-  /* ROADMAP */
-  .roadmap{position:relative;padding-left:0}
-  .road-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  @media (max-width:900px){.road-grid{grid-template-columns:1fr}}
-  .phase{background:var(--cream);border:1px solid var(--line);border-radius:24px;padding:32px;position:relative;overflow:hidden;min-height:280px;display:flex;flex-direction:column;justify-content:space-between}
-  .phase .ph{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;color:var(--accent);font-weight:600}
-  .phase h3{font-size:34px;margin-top:8px;font-weight:800}
-  .phase ul{list-style:none;margin-top:20px}
-  .phase ul li{padding:8px 0;font-size:14px;color:var(--ink-2);border-bottom:1px dashed var(--line);display:flex;gap:10px;align-items:center}
-  .phase ul li:last-child{border-bottom:none}
-  .phase ul li::before{content:"●";color:var(--accent);font-size:8px}
-  .phase .seq{position:absolute;top:24px;right:28px;font-family:'Fraunces',serif;font-size:90px;font-weight:800;color:var(--paper-2);line-height:1}
-  .phase.p2{background:var(--accent);color:#fff;border-color:transparent}
-  .phase.p2 .ph{color:#FBF7EE}
-  .phase.p2 h3,.phase.p2 ul li{color:#fff}
-  .phase.p2 ul li::before{color:#fff}
-  .phase.p2 ul li{border-color:rgba(255,255,255,.2)}
-  .phase.p2 .seq{color:rgba(255,255,255,.2)}
-  .phase.p3{background:var(--ink);color:#FBF7EE;border-color:transparent}
-  .phase.p3 .ph{color:var(--accent-2)}
-  .phase.p3 h3,.phase.p3 ul li{color:#FBF7EE}
-  .phase.p3 ul li{border-color:rgba(255,255,255,.15)}
-  .phase.p3 .seq{color:rgba(255,255,255,.08)}
+      /* AUTOMATION */
+      .auto-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        overflow: hidden;
+        background: var(--cream);
+      }
+      .auto-grid > div {
+        padding: 32px;
+        border-right: 1px solid var(--line);
+      }
+      .auto-grid > div:last-child {
+        border-right: none;
+      }
+      .auto-grid h3 {
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+      .auto-grid ul {
+        list-style: none;
+      }
+      .auto-grid ul li {
+        padding: 10px 0;
+        border-bottom: 1px dashed var(--line);
+        font-size: 14px;
+        color: var(--ink-2);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .auto-grid ul li::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      .auto-grid ul li:last-child {
+        border-bottom: none;
+      }
+      @media (max-width: 900px) {
+        .auto-grid {
+          grid-template-columns: 1fr;
+        }
+        .auto-grid > div {
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+        }
+      }
 
-  /* CONCLUSION */
-  .closing{margin-top:96px;background:linear-gradient(160deg,#0B1220,#1A2238 70%, #2F1A12);color:#FBF7EE;border-radius:32px;padding:80px 64px;position:relative;overflow:hidden}
-  .closing::before{content:"";position:absolute;right:-100px;top:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(232,93,47,.35),transparent 70%)}
-  .closing::after{content:"";position:absolute;left:-80px;bottom:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(242,160,61,.25),transparent 70%)}
-  .closing > *{position:relative;z-index:1}
-  .closing .eyebrow{color:var(--accent-2)}
-  .closing h2{color:#FBF7EE;font-size:clamp(40px,5vw,72px);max-width:18ch;margin-top:14px;font-weight:800}
-  .closing p{color:rgba(251,247,238,.78);font-size:18px;max-width:65ch;margin-top:24px;line-height:1.65}
-  .closing .sig{margin-top:48px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;border-top:1px solid rgba(255,255,255,.15);padding-top:28px}
-  .closing .sig .left{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(251,247,238,.6)}
-  .closing .sig .left b{display:block;color:#FBF7EE;margin-top:6px;font-size:14px;letter-spacing:.18em}
-  .closing .sig .right{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:var(--accent-2)}
+      .principle {
+        margin-top: 28px;
+        background: var(--ink);
+        color: #fbf7ee;
+        border-radius: 20px;
+        padding: 36px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+      }
+      .principle::after {
+        content: "❝";
+        position: absolute;
+        left: 24px;
+        top: -30px;
+        font-family: "Fraunces", serif;
+        font-size: 200px;
+        color: rgba(232, 93, 47, 0.15);
+        line-height: 1;
+      }
+      .principle .lbl {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        color: var(--accent-2);
+        text-transform: uppercase;
+        position: relative;
+        z-index: 1;
+      }
+      .principle .txt {
+        font-family: "Fraunces", serif;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 1.2;
+        color: #fbf7ee;
+        flex: 1;
+        min-width: 300px;
+        position: relative;
+        z-index: 1;
+      }
 
-  footer{text-align:center;margin-top:48px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
-</style>
-</head>
-<body>
-<div class="doc">
+      /* BENEFITS */
+      .ben-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+      }
+      @media (max-width: 900px) {
+        .ben-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        .ben-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .ben {
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 24px;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.25s;
+      }
+      .ben:hover {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+      }
+      .ben:hover h3,
+      .ben:hover p,
+      .ben:hover .num {
+        color: #fff;
+      }
+      .ben:hover .num {
+        opacity: 0.4;
+      }
+      .ben .num {
+        font-family: "Fraunces", serif;
+        font-size: 46px;
+        font-weight: 600;
+        color: var(--accent);
+        opacity: 0.3;
+        line-height: 1;
+      }
+      .ben h3 {
+        font-size: 20px;
+        margin-top: 14px;
+      }
+      .ben p {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 8px;
+      }
 
-  <!-- ============== HERO ============== -->
-  <header class="hero">
-    <div class="hero-tag"><span class="dot"></span>Confidential Proposal · v1.0</div>
-    <div class="hero-top">
-      <div class="brand">
-        <div class="brand-mark">G</div>
-        <span>Grain Trace · Government &amp; WFP Ecosystem</span>
-      </div>
-      <div class="meta">
-        <div>Issued<b>2025</b></div>
-        <div>Audience<b>Commissioners</b></div>
-        <div>Domain<b>Public Distribution</b></div>
-      </div>
-    </div>
+      /* ROADMAP */
+      .roadmap {
+        position: relative;
+        padding-left: 0;
+      }
+      .road-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      @media (max-width: 900px) {
+        .road-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .phase {
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .phase .ph {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .phase h3 {
+        font-size: 34px;
+        margin-top: 8px;
+        font-weight: 800;
+      }
+      .phase ul {
+        list-style: none;
+        margin-top: 20px;
+      }
+      .phase ul li {
+        padding: 8px 0;
+        font-size: 14px;
+        color: var(--ink-2);
+        border-bottom: 1px dashed var(--line);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .phase ul li:last-child {
+        border-bottom: none;
+      }
+      .phase ul li::before {
+        content: "●";
+        color: var(--accent);
+        font-size: 8px;
+      }
+      .phase .seq {
+        position: absolute;
+        top: 24px;
+        right: 28px;
+        font-family: "Fraunces", serif;
+        font-size: 90px;
+        font-weight: 800;
+        color: var(--paper-2);
+        line-height: 1;
+      }
+      .phase.p2 {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+      }
+      .phase.p2 .ph {
+        color: #fbf7ee;
+      }
+      .phase.p2 h3,
+      .phase.p2 ul li {
+        color: #fff;
+      }
+      .phase.p2 ul li::before {
+        color: #fff;
+      }
+      .phase.p2 ul li {
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      .phase.p2 .seq {
+        color: rgba(255, 255, 255, 0.2);
+      }
+      .phase.p3 {
+        background: var(--ink);
+        color: #fbf7ee;
+        border-color: transparent;
+      }
+      .phase.p3 .ph {
+        color: var(--accent-2);
+      }
+      .phase.p3 h3,
+      .phase.p3 ul li {
+        color: #fbf7ee;
+      }
+      .phase.p3 ul li {
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+      .phase.p3 .seq {
+        color: rgba(255, 255, 255, 0.08);
+      }
 
-    <span class="eyebrow" style="color:var(--accent-2)">Business Proposal — 01</span>
-    <h1 style="margin-top:14px">Supply Chain<br/>Visibility <em>Platform</em><br/>for Food Distribution</h1>
-    <p class="hero-sub">A bag-level supply chain visibility platform for food distribution systems operated by governments and supported by humanitarian organizations such as the World Food Programme (WFP) — digitizing and tracking the movement of food grains from procurement to final distribution.</p>
+      /* CONCLUSION */
+      .closing {
+        margin-top: 96px;
+        background: linear-gradient(160deg, #0b1220, #1a2238 70%, #2f1a12);
+        color: #fbf7ee;
+        border-radius: 32px;
+        padding: 80px 64px;
+        position: relative;
+        overflow: hidden;
+      }
+      .closing::before {
+        content: "";
+        position: absolute;
+        right: -100px;
+        top: -100px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(232, 93, 47, 0.35),
+          transparent 70%
+        );
+      }
+      .closing::after {
+        content: "";
+        position: absolute;
+        left: -80px;
+        bottom: -80px;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(242, 160, 61, 0.25),
+          transparent 70%
+        );
+      }
+      .closing > * {
+        position: relative;
+        z-index: 1;
+      }
+      .closing .eyebrow {
+        color: var(--accent-2);
+      }
+      .closing h2 {
+        color: #fbf7ee;
+        font-size: clamp(40px, 5vw, 72px);
+        max-width: 18ch;
+        margin-top: 14px;
+        font-weight: 800;
+      }
+      .closing p {
+        color: rgba(251, 247, 238, 0.78);
+        font-size: 18px;
+        max-width: 65ch;
+        margin-top: 24px;
+        line-height: 1.65;
+      }
+      .closing .sig {
+        margin-top: 48px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding-top: 28px;
+      }
+      .closing .sig .left {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(251, 247, 238, 0.6);
+      }
+      .closing .sig .left b {
+        display: block;
+        color: #fbf7ee;
+        margin-top: 6px;
+        font-size: 14px;
+        letter-spacing: 0.18em;
+      }
+      .closing .sig .right {
+        font-family: "Fraunces", serif;
+        font-style: italic;
+        font-size: 22px;
+        color: var(--accent-2);
+      }
 
-    <div class="hero-foot">
-      <div><div class="k">Scope</div><div class="v">Bag-Level</div></div>
-      <div><div class="k">Capture</div><div class="v">Automated</div></div>
-      <div><div class="k">Insight</div><div class="v">AI-Driven</div></div>
-      <div><div class="k">Audience</div><div class="v">Senior Stakeholders</div></div>
-    </div>
-  </header>
-
-  <!-- ============== EXECUTIVE SUMMARY ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">01 — Executive Summary</div>
-        <h2>Transparency from farmer to beneficiary.</h2>
-      </div>
-      <div class="right">Section · 01<br/>Overview</div>
-    </div>
-    <div class="grid g-2">
-      <div class="card">
-        <p style="font-size:18px;color:var(--ink-2);line-height:1.65">This document outlines the design and implementation of a <b>bag-level supply chain visibility platform</b> for food distribution systems operated by governments and supported by humanitarian organizations such as the World Food Programme (WFP).</p>
-      </div>
-      <div class="card dark">
-        <p style="font-size:18px;line-height:1.65">The platform aims to digitize and track the movement of food grains from procurement to final distribution, ensuring <span style="color:var(--accent-2)">transparency, accountability, and efficiency</span> across the entire supply chain. A key focus is enabling automated tracking mechanisms and AI-driven dashboards for high-level stakeholders, including national and state-level commissioners.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== OBJECTIVES ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">02 — Objectives</div>
-        <h2>Six commitments shaping every layer of the platform.</h2>
-      </div>
-      <div class="right">Section · 02<br/>Goals</div>
-    </div>
-    <ul class="obj-list">
-      <li><span class="n">/ 01</span><span class="t">Enable end-to-end visibility of food grain movement</span><span class="b">Visibility</span></li>
-      <li><span class="n">/ 02</span><span class="t">Track both empty bags and filled grain bags at the unit level</span><span class="b">Traceability</span></li>
-      <li><span class="n">/ 03</span><span class="t">Reduce losses, leakages, and inefficiencies</span><span class="b">Integrity</span></li>
-      <li><span class="n">/ 04</span><span class="t">Minimize reliance on manual barcode scanning</span><span class="b">Automation</span></li>
-      <li><span class="n">/ 05</span><span class="t">Provide real-time dashboards for decision-makers</span><span class="b">Insight</span></li>
-      <li><span class="n">/ 06</span><span class="t">Incorporate AI-based reporting and predictive insights</span><span class="b">Intelligence</span></li>
-    </ul>
-  </section>
-
-  <!-- ============== SUPPLY CHAIN OVERVIEW ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">03 — Supply Chain Overview</div>
-        <h2>Five stages, one continuous trail of accountability.</h2>
-      </div>
-      <div class="right">Section · 03<br/>Flow</div>
-    </div>
-    <div class="flow">
-      <div class="stage">
-        <div class="step">3.1 / Stage One</div>
-        <h3>Procurement</h3>
-        <p>Grains are procured directly from farmers. Initial aggregation points may vary by country.</p>
-        <div class="arrow">→</div>
-      </div>
-      <div class="stage">
-        <div class="step">3.2 / Stage Two</div>
-        <h3>Processing (Mills)</h3>
-        <p>Grains are transported to mills (or equivalent facilities). At mills, grains are processed and packaged into bags. Each bag is tagged with a barcode or RFID tag.</p>
-        <div class="arrow">→</div>
-      </div>
-      <div class="stage">
-        <div class="step">3.3 / Stage Three</div>
-        <h3>Central Warehousing</h3>
-        <p>Bagged grains are transported to central warehouses. Bulk storage and inventory management occur here.</p>
-        <div class="arrow">→</div>
-      </div>
-      <div class="stage">
-        <div class="step">3.4 / Stage Four</div>
-        <h3>Regional Distribution</h3>
-        <p>Goods are distributed from central warehouses to regional warehouses and local storage facilities.</p>
-        <div class="arrow">→</div>
-      </div>
-      <div class="stage">
-        <div class="step">3.5 / Stage Five</div>
-        <h3>Last-Mile Distribution</h3>
-        <p>Bags are sent to distribution outlets and finally delivered to beneficiaries.</p>
-        <div class="arrow">→</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== CORE FUNCTIONAL REQUIREMENTS ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">04 — Core Functional Requirements</div>
-        <h2>Every bag tracked. Every movement captured.</h2>
-      </div>
-      <div class="right">Section · 04<br/>Capabilities</div>
-    </div>
-
-    <div class="spread">
-      <div class="left">
-        <div class="eyebrow" style="color:var(--accent-2)">4.1 — Bag-Level Tracking</div>
-        <h3>Unique identification of every bag — empty and filled — across its full lifecycle.</h3>
-        <p style="margin-top:14px">Lifecycle tracking covers every state a bag can pass through, from creation at the mill to return after use.</p>
-        <div class="pill-row">
-          <span class="pill">Creation</span>
-          <span class="pill">Filling</span>
-          <span class="pill">Movement</span>
-          <span class="pill">Delivery</span>
-          <span class="pill">Return (empty bags)</span>
+      footer {
+        text-align: center;
+        margin-top: 48px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="doc">
+      <!-- ============== HERO ============== -->
+      <header class="hero">
+        <div class="hero-tag">
+          <span class="dot"></span>Confidential Proposal · v1.0
         </div>
-      </div>
-      <div class="right">
-        <div class="eyebrow">4.2 — Dual Bag Tracking</div>
-        <h3 style="margin-top:8px">Two parallel chains, one ledger.</h3>
-        <div class="bag-vs" style="margin-top:18px;border:none;background:transparent">
-          <div style="border:1px solid var(--line);border-radius:14px;background:var(--cream)">
-            <h4>Empty Bags</h4>
+
+        <span class="eyebrow" style="color: var(--accent-2); font-size: 36px"
+          >AGROLEDGER</span
+        >
+        <h1 style="margin-top: 24px">
+          Supply Chain<br />Visibility <em>Platform</em><br />for Food
+          Distribution
+        </h1>
+        <p class="hero-sub">
+          A bag-level supply chain visibility platform for food distribution
+          systems operated by governments and supported by humanitarian
+          organizations such as the World Food Programme (WFP) — digitizing and
+          tracking the movement of food grains from procurement to final
+          distribution.
+        </p>
+
+        <div class="hero-foot">
+          <div>
+            <div class="k">Scope</div>
+            <div class="v">Bag-Level Track and Trace</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============== EXECUTIVE SUMMARY ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">01 — Executive Summary</div>
+            <h2>Transparency from farmer to beneficiary.</h2>
+          </div>
+          <div class="right">Section · 01<br />Overview</div>
+        </div>
+        <div class="grid g-2">
+          <div class="card">
+            <p style="font-size: 18px; color: var(--ink-2); line-height: 1.65">
+              This document outlines the design and implementation of a
+              <b>bag-level supply chain visibility platform</b> for food
+              distribution systems operated by governments and supported by
+              humanitarian organizations such as the World Food Programme (WFP).
+            </p>
+          </div>
+          <div class="card dark">
+            <p style="font-size: 18px; line-height: 1.65">
+              The platform aims to digitize and track the movement of food
+              grains from procurement to final distribution, ensuring
+              <span style="color: var(--accent-2)"
+                >transparency, accountability, and efficiency</span
+              >
+              across the entire supply chain. A key focus is enabling automated
+              tracking mechanisms and AI-driven dashboards for high-level
+              stakeholders, including national and state-level commissioners.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== OBJECTIVES ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">02 — Objectives</div>
+            <h2>Six commitments shaping every layer of the platform.</h2>
+          </div>
+          <div class="right">Section · 02<br />Goals</div>
+        </div>
+        <ul class="obj-list">
+          <li>
+            <span class="n">/ 01</span
+            ><span class="t"
+              >Enable end-to-end visibility of food grain movement</span
+            ><span class="b">Visibility</span>
+          </li>
+          <li>
+            <span class="n">/ 02</span
+            ><span class="t"
+              >Track both empty bags and filled grain bags at the unit
+              level</span
+            ><span class="b">Traceability</span>
+          </li>
+          <li>
+            <span class="n">/ 03</span
+            ><span class="t">Reduce losses, leakages, and inefficiencies</span
+            ><span class="b">Integrity</span>
+          </li>
+          <li>
+            <span class="n">/ 04</span
+            ><span class="t">Minimize reliance on manual barcode scanning</span
+            ><span class="b">Automation</span>
+          </li>
+          <li>
+            <span class="n">/ 05</span
+            ><span class="t"
+              >Provide real-time dashboards for decision-makers</span
+            ><span class="b">Insight</span>
+          </li>
+          <li>
+            <span class="n">/ 06</span
+            ><span class="t"
+              >Incorporate AI-based reporting and predictive insights</span
+            ><span class="b">Intelligence</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ============== SUPPLY CHAIN OVERVIEW ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">03 — Supply Chain Overview</div>
+            <h2>Five stages, one continuous trail of accountability.</h2>
+          </div>
+          <div class="right">Section · 03<br />Flow</div>
+        </div>
+        <div class="flow">
+          <div class="stage">
+            <div class="step">3.1 / Stage One</div>
+            <h3>Procurement</h3>
+            <p>
+              Grains are procured directly from farmers. Initial aggregation
+              points may vary by country.
+            </p>
+            <div class="arrow">→</div>
+          </div>
+          <div class="stage">
+            <div class="step">3.2 / Stage Two</div>
+            <h3>Processing (Mills)</h3>
+            <p>
+              Grains are transported to mills (or equivalent facilities). At
+              mills, grains are processed and packaged into bags. Each bag is
+              tagged with a barcode or RFID tag.
+            </p>
+            <div class="arrow">→</div>
+          </div>
+          <div class="stage">
+            <div class="step">3.3 / Stage Three</div>
+            <h3>Central Warehousing</h3>
+            <p>
+              Bagged grains are transported to central warehouses. Bulk storage
+              and inventory management occur here.
+            </p>
+            <div class="arrow">→</div>
+          </div>
+          <div class="stage">
+            <div class="step">3.4 / Stage Four</div>
+            <h3>Regional Distribution</h3>
+            <p>
+              Goods are distributed from central warehouses to regional
+              warehouses and local storage facilities.
+            </p>
+            <div class="arrow">→</div>
+          </div>
+          <div class="stage">
+            <div class="step">3.5 / Stage Five</div>
+            <h3>Last-Mile Distribution</h3>
+            <p>
+              Bags are sent to distribution outlets and finally delivered to
+              beneficiaries.
+            </p>
+            <div class="arrow">→</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== CORE FUNCTIONAL REQUIREMENTS ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">04 — Core Functional Requirements</div>
+            <h2>Every bag tracked. Every movement captured.</h2>
+          </div>
+          <div class="right">Section · 04<br />Capabilities</div>
+        </div>
+
+        <div class="spread">
+          <div class="left">
+            <div class="eyebrow" style="color: var(--accent-2)">
+              4.1 — Bag-Level Tracking
+            </div>
+            <h3>
+              Unique identification of every bag — empty and filled — across its
+              full lifecycle.
+            </h3>
+            <p style="margin-top: 14px">
+              Lifecycle tracking covers every state a bag can pass through, from
+              creation at the mill to return after use.
+            </p>
+            <div class="pill-row">
+              <span class="pill">Creation</span>
+              <span class="pill">Filling</span>
+              <span class="pill">Movement</span>
+              <span class="pill">Delivery</span>
+              <span class="pill">Return (empty bags)</span>
+            </div>
+          </div>
+          <div class="right">
+            <div class="eyebrow">4.2 — Dual Bag Tracking</div>
+            <h3 style="margin-top: 8px">Two parallel chains, one ledger.</h3>
+            <div
+              class="bag-vs"
+              style="margin-top: 18px; border: none; background: transparent"
+            >
+              <div
+                style="
+                  border: 1px solid var(--line);
+                  border-radius: 14px;
+                  background: var(--cream);
+                "
+              >
+                <h4>Empty Bags</h4>
+                <ul>
+                  <li>Issued to mills</li>
+                  <li>Tracked for reuse and inventory</li>
+                </ul>
+              </div>
+              <div
+                style="
+                  border: 1px solid var(--line);
+                  border-radius: 14px;
+                  background: var(--ink);
+                  color: #fbf7ee;
+                  margin-left: 12px;
+                "
+              >
+                <h4 style="color: var(--accent-2)">Filled Bags</h4>
+                <ul style="color: #fbf7ee">
+                  <li
+                    style="
+                      color: #fbf7ee;
+                      border-color: rgba(255, 255, 255, 0.15);
+                    "
+                  >
+                    Tagged post-processing
+                  </li>
+                  <li
+                    style="
+                      color: #fbf7ee;
+                      border-color: rgba(255, 255, 255, 0.15);
+                    "
+                  >
+                    Tracked until delivery to beneficiaries
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 32px">
+          <div class="eyebrow">4.3 — Automated Data Capture</div>
+          <h3 style="margin-top: 6px; margin-bottom: 18px">
+            Due to limited government capacity for manual scanning, the system
+            must support automated mechanisms.
+          </h3>
+          <div class="cap-list">
+            <div class="cap">
+              <div>
+                <div class="k">/ 01</div>
+                <h4>RFID Gate Scanners</h4>
+              </div>
+              <p>Deployed at warehouses for hands-free capture.</p>
+            </div>
+            <div class="cap">
+              <div>
+                <div class="k">/ 02</div>
+                <h4>Conveyor Barcode Scanners</h4>
+              </div>
+              <p>Inline at mills during packaging.</p>
+            </div>
+            <div class="cap">
+              <div>
+                <div class="k">/ 03</div>
+                <h4>IoT Scanning Tunnels</h4>
+              </div>
+              <p>High-throughput tunnels for bulk capture.</p>
+            </div>
+            <div class="cap">
+              <div>
+                <div class="k">/ 04</div>
+                <h4>Mobile Bulk Scanning</h4>
+              </div>
+              <p>Camera-based AI recognition on handhelds.</p>
+            </div>
+            <div class="cap">
+              <div>
+                <div class="k">/ 05</div>
+                <h4>GPS Vehicle Tracking</h4>
+              </div>
+              <p>Integrated with shipment data for geo-validation.</p>
+            </div>
+          </div>
+
+          <div class="principle">
+            <div>
+              <div class="lbl">Key Principle</div>
+              <div class="txt">
+                “Zero or minimal manual intervention for data capture.”
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== SYSTEM ARCHITECTURE ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">05 — System Architecture</div>
+            <h2>Six layers, working as one ecosystem.</h2>
+          </div>
+          <div class="right">Section · 05<br />Components</div>
+        </div>
+        <div class="layers">
+          <div class="layer">
+            <div class="lbl">5.1 / Layer 01</div>
+            <h3>Data Capture Layer</h3>
+            <div class="tags">
+              <span>RFID scanners</span><span>Barcode scanners</span
+              ><span>IoT devices</span><span>Mobile applications</span>
+            </div>
+          </div>
+          <div class="layer">
+            <div class="lbl">5.1 / Layer 02</div>
+            <h3>Integration Layer</h3>
+            <div class="tags">
+              <span>APIs for external systems</span
+              ><span>Government databases</span><span>WFP platforms</span>
+            </div>
+          </div>
+          <div class="layer">
+            <div class="lbl">5.1 / Layer 03</div>
+            <h3>Processing Layer</h3>
+            <div class="tags">
+              <span>Event processing engine</span
+              ><span>Supply chain tracking logic</span
+              ><span>Exception detection</span>
+            </div>
+          </div>
+          <div class="layer">
+            <div class="lbl">5.1 / Layer 04</div>
+            <h3>Data Storage</h3>
+            <div class="tags">
+              <span>Centralized cloud database</span
+              ><span>Historical tracking logs</span>
+            </div>
+          </div>
+          <div class="layer">
+            <div class="lbl">5.1 / Layer 05</div>
+            <h3>Application Layer</h3>
+            <div class="tags">
+              <span>Web portal</span><span>Mobile apps</span
+              ><span>Admin interfaces</span>
+            </div>
+          </div>
+          <div class="layer">
+            <div class="lbl">5.1 / Layer 06</div>
+            <h3>Analytics &amp; AI Layer</h3>
+            <div class="tags">
+              <span>Predictive analytics</span><span>Anomaly detection</span
+              ><span>Reporting engine</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== DASHBOARD ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">06 — Dashboard &amp; Visualization</div>
+            <h2>
+              The most critical component — designed for senior stakeholders.
+            </h2>
+          </div>
+          <div class="right">Section · 06<br />Key Feature</div>
+        </div>
+
+        <div class="dash">
+          <div class="dash-head">
+            <div class="title">
+              <div
+                class="brand-mark"
+                style="width: 28px; height: 28px; font-size: 14px"
+              >
+                G
+              </div>
+              Commissioner Dashboard · National Overview
+            </div>
+            <div class="live"><span class="pulse"></span>Live Monitoring</div>
+          </div>
+          <div class="dash-grid">
+            <div class="stat up">
+              <div class="l">Total Stock</div>
+              <div class="v">1.84M</div>
+              <div class="d">▲ Bags across locations</div>
+            </div>
+            <div class="stat up">
+              <div class="l">In-Transit</div>
+              <div class="v">126K</div>
+              <div class="d">▲ Live shipments</div>
+            </div>
+            <div class="stat down">
+              <div class="l">Loss &amp; Damage</div>
+              <div class="v">0.42%</div>
+              <div class="d">▼ Bags lost in transit</div>
+            </div>
+            <div class="stat up">
+              <div class="l">Turnaround</div>
+              <div class="v">36h</div>
+              <div class="d">▲ Avg. mill → warehouse</div>
+            </div>
+          </div>
+          <div class="dash-row">
+            <div class="panel">
+              <h4>// MOVEMENT — REGIONAL DISTRIBUTION (LIVE)</h4>
+              <div class="bars">
+                <div class="bar" style="height: 60%"></div>
+                <div class="bar alt" style="height: 80%"></div>
+                <div class="bar" style="height: 45%"></div>
+                <div class="bar alt" style="height: 92%"></div>
+                <div class="bar" style="height: 70%"></div>
+                <div class="bar alt" style="height: 55%"></div>
+                <div class="bar" style="height: 88%"></div>
+                <div class="bar alt" style="height: 38%"></div>
+                <div class="bar" style="height: 74%"></div>
+                <div class="bar alt" style="height: 62%"></div>
+                <div class="bar" style="height: 95%"></div>
+                <div class="bar alt" style="height: 50%"></div>
+              </div>
+            </div>
+            <div class="panel">
+              <h4>// EXCEPTION ALERTS</h4>
+              <div class="alerts">
+                <div class="a">
+                  <div class="dot" style="background: var(--accent)"></div>
+                  <div>Missing scan · WH-North-04</div>
+                  <div class="t">02m</div>
+                </div>
+                <div class="a">
+                  <div class="dot" style="background: #f2a03d"></div>
+                  <div>Route deviation · TRK-1182</div>
+                  <div class="t">14m</div>
+                </div>
+                <div class="a">
+                  <div class="dot" style="background: #7bd389"></div>
+                  <div>Inventory mismatch resolved</div>
+                  <div class="t">28m</div>
+                </div>
+                <div class="a">
+                  <div class="dot" style="background: var(--accent)"></div>
+                  <div>Low stock · Region E-South</div>
+                  <div class="t">41m</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 48px; margin-bottom: 8px">6.1 — Target Users</h3>
+        <div class="grid g-4" style="margin-top: 18px">
+          <div class="card">
+            <div class="ic">N</div>
+            <h3>National Commissioners</h3>
+            <p>Country-level oversight and accountability.</p>
+          </div>
+          <div class="card">
+            <div class="ic">S</div>
+            <h3>State-Level Officials</h3>
+            <p>Regional performance &amp; intervention.</p>
+          </div>
+          <div class="card">
+            <div class="ic">A</div>
+            <h3>Supply Chain Admins</h3>
+            <p>Day-to-day operational control.</p>
+          </div>
+          <div class="card">
+            <div class="ic">W</div>
+            <h3>WFP Program Managers</h3>
+            <p>Humanitarian program oversight.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 48px; margin-bottom: 18px">
+          6.2 — Dashboard Capabilities
+        </h3>
+        <div class="grid g-3">
+          <div class="card accent">
+            <div class="ic">A</div>
+            <h3>Real-Time Monitoring</h3>
+            <p>
+              Total stock across locations · Movement of goods (live tracking) ·
+              In-transit shipments.
+            </p>
+          </div>
+          <div class="card">
+            <div class="ic">B</div>
+            <h3>Inventory Insights</h3>
+            <p>
+              Number of empty vs filled bags · Stock levels by region ·
+              Warehouse capacity utilization.
+            </p>
+          </div>
+          <div class="card dark">
+            <div class="ic">C</div>
+            <h3>Loss &amp; Damage Tracking</h3>
+            <p>
+              Bags lost in transit · Damaged goods · Leakage points in the
+              supply chain.
+            </p>
+          </div>
+          <div class="card">
+            <div class="ic">D</div>
+            <h3>Operational Performance</h3>
+            <p>
+              Turnaround time at each stage · Delays and bottlenecks ·
+              Processing efficiency at mills.
+            </p>
+          </div>
+          <div class="card dark">
+            <div class="ic">E</div>
+            <h3>Exception Alerts</h3>
+            <p>Missing scans · Route deviations · Inventory mismatches.</p>
+          </div>
+          <div
+            class="card"
+            style="background: var(--paper-2); border-style: dashed"
+          >
+            <div class="ic">＋</div>
+            <h3>Unified View</h3>
+            <p>
+              All five capabilities surface inside a single command center for
+              senior decision-makers.
+            </p>
+          </div>
+        </div>
+
+        <div class="image_full_view">
+          <img src="A1.png" alt="Supply Chain Dashboard" class="image_full_view" />
+        </div>
+      </section>
+
+      <!-- ============== AI ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">
+              07 — AI-Based Reporting &amp; Intelligence
+            </div>
+            <h2>From raw scans to executive-ready intelligence.</h2>
+          </div>
+          <div class="right">Section · 07<br />Intelligence</div>
+        </div>
+
+        <div class="ai-grid">
+          <div class="ai-card">
+            <div class="num">01</div>
+            <div class="eyebrow">7.1</div>
+            <h3>Predictive Analytics</h3>
             <ul>
-              <li>Issued to mills</li>
-              <li>Tracked for reuse and inventory</li>
+              <li>Demand forecasting by region</li>
+              <li>Stock replenishment recommendations</li>
+              <li>Seasonal supply planning</li>
             </ul>
           </div>
-          <div style="border:1px solid var(--line);border-radius:14px;background:var(--ink);color:#FBF7EE;margin-left:12px">
-            <h4 style="color:var(--accent-2)">Filled Bags</h4>
-            <ul style="color:#FBF7EE">
-              <li style="color:#FBF7EE;border-color:rgba(255,255,255,.15)">Tagged post-processing</li>
-              <li style="color:#FBF7EE;border-color:rgba(255,255,255,.15)">Tracked until delivery to beneficiaries</li>
+          <div class="ai-card">
+            <div class="num">02</div>
+            <div class="eyebrow">7.2</div>
+            <h3>Anomaly Detection</h3>
+            <ul>
+              <li>Identify unusual losses or discrepancies</li>
+              <li>Detect potential fraud or diversion</li>
+              <li>Highlight abnormal movement patterns</li>
+            </ul>
+          </div>
+          <div class="ai-card">
+            <div class="num">03</div>
+            <div class="eyebrow">7.3</div>
+            <h3>Intelligent Alerts</h3>
+            <ul>
+              <li>Delayed shipments</li>
+              <li>Low stock levels</li>
+              <li>High damage rates</li>
+            </ul>
+          </div>
+          <div class="quote-card">
+            <div class="eyebrow">7.4 — Natural Language Reporting</div>
+            <h3>Plain-language summaries for decision-makers.</h3>
+            <div>
+              <p class="ex">
+                “Region X has a 15% increase in losses this month.”
+              </p>
+              <p class="ex">“Warehouse Y is nearing full capacity.”</p>
+            </div>
+          </div>
+          <div
+            class="ai-card"
+            style="
+              grid-column: span 2;
+              background: var(--ink);
+              color: #fbf7ee;
+              border-color: transparent;
+            "
+          >
+            <div class="num" style="color: rgba(255, 255, 255, 0.06)">05</div>
+            <div class="eyebrow" style="color: var(--accent-2)">7.5</div>
+            <h3 style="color: #fbf7ee">Decision Support</h3>
+            <p style="color: rgba(251, 247, 238, 0.7); margin-top: 8px">
+              AI-driven recommendations that translate data into action.
+            </p>
+            <ul style="margin-top: 18px">
+              <li
+                style="
+                  color: rgba(251, 247, 238, 0.85);
+                  border-color: rgba(255, 255, 255, 0.15);
+                "
+              >
+                Optimize routes
+              </li>
+              <li
+                style="
+                  color: rgba(251, 247, 238, 0.85);
+                  border-color: rgba(255, 255, 255, 0.15);
+                "
+              >
+                Reallocate stock
+              </li>
+              <li
+                style="
+                  color: rgba(251, 247, 238, 0.85);
+                  border-color: rgba(255, 255, 255, 0.15);
+                "
+              >
+                Improve distribution efficiency
+              </li>
             </ul>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div style="margin-top:32px">
-      <div class="eyebrow">4.3 — Automated Data Capture</div>
-      <h3 style="margin-top:6px;margin-bottom:18px">Due to limited government capacity for manual scanning, the system must support automated mechanisms.</h3>
-      <div class="cap-list">
-        <div class="cap"><div><div class="k">/ 01</div><h4>RFID Gate Scanners</h4></div><p>Deployed at warehouses for hands-free capture.</p></div>
-        <div class="cap"><div><div class="k">/ 02</div><h4>Conveyor Barcode Scanners</h4></div><p>Inline at mills during packaging.</p></div>
-        <div class="cap"><div><div class="k">/ 03</div><h4>IoT Scanning Tunnels</h4></div><p>High-throughput tunnels for bulk capture.</p></div>
-        <div class="cap"><div><div class="k">/ 04</div><h4>Mobile Bulk Scanning</h4></div><p>Camera-based AI recognition on handhelds.</p></div>
-        <div class="cap"><div><div class="k">/ 05</div><h4>GPS Vehicle Tracking</h4></div><p>Integrated with shipment data for geo-validation.</p></div>
-      </div>
-
-      <div class="principle">
-        <div>
-          <div class="lbl">Key Principle</div>
-          <div class="txt">“Zero or minimal manual intervention for data capture.”</div>
+        <div class="image_full_view">
+          <img src="A2.png" alt="Supply Chain Dashboard" class="image_full_view" />
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- ============== SYSTEM ARCHITECTURE ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">05 — System Architecture</div>
-        <h2>Six layers, working as one ecosystem.</h2>
-      </div>
-      <div class="right">Section · 05<br/>Components</div>
-    </div>
-    <div class="layers">
-      <div class="layer">
-        <div class="lbl">5.1 / Layer 01</div>
-        <h3>Data Capture Layer</h3>
-        <div class="tags"><span>RFID scanners</span><span>Barcode scanners</span><span>IoT devices</span><span>Mobile applications</span></div>
-      </div>
-      <div class="layer">
-        <div class="lbl">5.1 / Layer 02</div>
-        <h3>Integration Layer</h3>
-        <div class="tags"><span>APIs for external systems</span><span>Government databases</span><span>WFP platforms</span></div>
-      </div>
-      <div class="layer">
-        <div class="lbl">5.1 / Layer 03</div>
-        <h3>Processing Layer</h3>
-        <div class="tags"><span>Event processing engine</span><span>Supply chain tracking logic</span><span>Exception detection</span></div>
-      </div>
-      <div class="layer">
-        <div class="lbl">5.1 / Layer 04</div>
-        <h3>Data Storage</h3>
-        <div class="tags"><span>Centralized cloud database</span><span>Historical tracking logs</span></div>
-      </div>
-      <div class="layer">
-        <div class="lbl">5.1 / Layer 05</div>
-        <h3>Application Layer</h3>
-        <div class="tags"><span>Web portal</span><span>Mobile apps</span><span>Admin interfaces</span></div>
-      </div>
-      <div class="layer">
-        <div class="lbl">5.1 / Layer 06</div>
-        <h3>Analytics &amp; AI Layer</h3>
-        <div class="tags"><span>Predictive analytics</span><span>Anomaly detection</span><span>Reporting engine</span></div>
-      </div>
-    </div>
-  </section>
+      <!-- ============== INSPECTION COMMAND CENTER ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">08 — Inspection Command Center</div>
+            <h2>Where quality meets control.</h2>
+          </div>
+          <div class="right">Section · 08<br />Quality</div>
+        </div>
+        <div class="insp-grid">
+          <article class="insp-card insp-card--dark">
+            <div class="insp-top">
+              <span class="insp-num">/ 01</span>
+              <span class="insp-tag">Volume</span>
+            </div>
+            <div class="insp-metric">
+              <span class="insp-value">128,420</span>
+              <span class="insp-unit">checks</span>
+            </div>
+            <h3 class="insp-title">Total Inspections</h3>
+            <p class="insp-desc">
+              All inspections recorded across the selected period, ensuring
+              complete quality visibility from procurement to last-mile
+              distribution.
+            </p>
+            <div class="insp-bar">
+              <span
+                style="
+                  width: 100%;
+                  background: linear-gradient(
+                    90deg,
+                    var(--accent-2),
+                    var(--accent)
+                  );
+                "
+              ></span>
+            </div>
+          </article>
 
-  <!-- ============== DASHBOARD ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">06 — Dashboard &amp; Visualization</div>
-        <h2>The most critical component — designed for senior stakeholders.</h2>
-      </div>
-      <div class="right">Section · 06<br/>Key Feature</div>
-    </div>
+          <article class="insp-card">
+            <div class="insp-top">
+              <span class="insp-num">/ 02</span>
+              <span class="insp-tag insp-tag--ok">Compliance</span>
+            </div>
+            <div class="insp-metric">
+              <span class="insp-value"
+                >96.4<span class="insp-pct">%</span></span
+              >
+              <span class="insp-unit">pass rate</span>
+            </div>
+            <h3 class="insp-title">Pass Rate</h3>
+            <p class="insp-desc">
+              Percentage of inspections meeting safety thresholds and quality
+              compliance standards across mills, warehouses, and field points.
+            </p>
+            <div class="insp-bar">
+              <span
+                style="
+                  width: 96%;
+                  background: linear-gradient(90deg, #7bd389, #2f6b3a);
+                "
+              ></span>
+            </div>
+          </article>
 
-    <div class="dash">
-      <div class="dash-head">
-        <div class="title"><div class="brand-mark" style="width:28px;height:28px;font-size:14px">G</div> Commissioner Dashboard · National Overview</div>
-        <div class="live"><span class="pulse"></span>Live Monitoring</div>
-      </div>
-      <div class="dash-grid">
-        <div class="stat up"><div class="l">Total Stock</div><div class="v">1.84M</div><div class="d">▲ Bags across locations</div></div>
-        <div class="stat up"><div class="l">In-Transit</div><div class="v">126K</div><div class="d">▲ Live shipments</div></div>
-        <div class="stat down"><div class="l">Loss &amp; Damage</div><div class="v">0.42%</div><div class="d">▼ Bags lost in transit</div></div>
-        <div class="stat up"><div class="l">Turnaround</div><div class="v">36h</div><div class="d">▲ Avg. mill → warehouse</div></div>
-      </div>
-      <div class="dash-row">
-        <div class="panel">
-          <h4>// MOVEMENT — REGIONAL DISTRIBUTION (LIVE)</h4>
-          <div class="bars">
-            <div class="bar" style="height:60%"></div>
-            <div class="bar alt" style="height:80%"></div>
-            <div class="bar" style="height:45%"></div>
-            <div class="bar alt" style="height:92%"></div>
-            <div class="bar" style="height:70%"></div>
-            <div class="bar alt" style="height:55%"></div>
-            <div class="bar" style="height:88%"></div>
-            <div class="bar alt" style="height:38%"></div>
-            <div class="bar" style="height:74%"></div>
-            <div class="bar alt" style="height:62%"></div>
-            <div class="bar" style="height:95%"></div>
-            <div class="bar alt" style="height:50%"></div>
+          <article class="insp-card">
+            <div class="insp-top">
+              <span class="insp-num">/ 03</span>
+              <span class="insp-tag insp-tag--warn">Open</span>
+            </div>
+            <div class="insp-metric">
+              <span class="insp-value">312</span>
+              <span class="insp-unit">unresolved</span>
+            </div>
+            <h3 class="insp-title">Open Failures</h3>
+            <p class="insp-desc">
+              Unresolved inspection failures requiring action before the supply
+              chain can progress to the next custody handover.
+            </p>
+            <div class="insp-bar">
+              <span
+                style="
+                  width: 42%;
+                  background: linear-gradient(90deg, #f2b441, #e85d2f);
+                "
+              ></span>
+            </div>
+          </article>
+
+          <article class="insp-card insp-card--accent">
+            <div class="insp-top">
+              <span class="insp-num">/ 04</span>
+              <span class="insp-tag insp-tag--crit">Critical</span>
+            </div>
+            <div class="insp-metric">
+              <span class="insp-value">47</span>
+              <span class="insp-unit">high-risk</span>
+            </div>
+            <h3 class="insp-title">Critical Failures</h3>
+            <p class="insp-desc">
+              High-risk issues flagged for immediate intervention and strict
+              containment, escalated to senior commissioners in real time.
+            </p>
+            <div class="insp-bar">
+              <span
+                style="
+                  width: 78%;
+                  background: linear-gradient(90deg, #ffb199, #fff);
+                "
+              ></span>
+            </div>
+          </article>
+
+          <article class="insp-card insp-card--wide">
+            <div class="insp-top">
+              <span class="insp-num">/ 05</span>
+              <span class="insp-tag insp-tag--bio">Biohazard</span>
+            </div>
+            <div class="insp-split">
+              <div>
+                <div class="insp-metric">
+                  <span class="insp-value">9</span>
+                  <span class="insp-unit">contamination cases</span>
+                </div>
+                <h3 class="insp-title">Pathogen Detections</h3>
+                <p class="insp-desc">
+                  Detected contamination cases — including
+                  <em>Salmonella</em> and <em>E. coli</em> — automatically
+                  routed to quarantine workflows with full chain-of-custody
+                  traceback.
+                </p>
+              </div>
+              <div class="insp-pathos">
+                <div class="patho">
+                  <span class="dot dot--red"></span
+                  ><span class="lbl">Salmonella</span><span class="ct">5</span>
+                </div>
+                <div class="patho">
+                  <span class="dot dot--orange"></span
+                  ><span class="lbl">E. coli</span><span class="ct">3</span>
+                </div>
+                <div class="patho">
+                  <span class="dot dot--yellow"></span
+                  ><span class="lbl">Listeria</span><span class="ct">1</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============== AUTOMATION STRATEGY ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">09 — Automation Strategy</div>
+            <h2>Engineered to address limited manual capacity.</h2>
+          </div>
+          <div class="right">Section · 09<br />Strategy</div>
+        </div>
+        <div class="auto-grid">
+          <div>
+            <div class="eyebrow">8.1</div>
+            <h3>Infrastructure Deployment</h3>
+            <ul>
+              <li>RFID gates at entry/exit points</li>
+              <li>Fixed scanners at mills and warehouses</li>
+              <li>Smart handheld devices for field staff</li>
+            </ul>
+          </div>
+          <div>
+            <div class="eyebrow">8.2</div>
+            <h3>Smart Logistics Integration</h3>
+            <ul>
+              <li>Vehicle tracking systems</li>
+              <li>Automated shipment logging</li>
+              <li>Geo-fencing for location validation</li>
+            </ul>
+          </div>
+          <div>
+            <div class="eyebrow">8.3</div>
+            <h3>AI-Assisted Scanning</h3>
+            <ul>
+              <li>Camera-based barcode recognition</li>
+              <li>Bulk scanning using computer vision</li>
+            </ul>
           </div>
         </div>
-        <div class="panel">
-          <h4>// EXCEPTION ALERTS</h4>
-          <div class="alerts">
-            <div class="a"><div class="dot" style="background:var(--accent)"></div><div>Missing scan · WH-North-04</div><div class="t">02m</div></div>
-            <div class="a"><div class="dot" style="background:#F2A03D"></div><div>Route deviation · TRK-1182</div><div class="t">14m</div></div>
-            <div class="a"><div class="dot" style="background:#7BD389"></div><div>Inventory mismatch resolved</div><div class="t">28m</div></div>
-            <div class="a"><div class="dot" style="background:var(--accent)"></div><div>Low stock · Region E-South</div><div class="t">41m</div></div>
+      </section>
+
+      <!-- ============== BENEFITS ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">10 — Benefits</div>
+            <h2>Five outcomes that change how food reaches people.</h2>
+          </div>
+          <div class="right">Section · 10<br />Impact</div>
+        </div>
+        <div class="ben-grid">
+          <div class="ben">
+            <div>
+              <div class="num">01</div>
+              <h3>Transparency</h3>
+              <p>Full visibility of every bag in the system.</p>
+            </div>
+            <div class="eyebrow">9.1</div>
+          </div>
+          <div class="ben">
+            <div>
+              <div class="num">02</div>
+              <h3>Accountability</h3>
+              <p>Clear tracking of responsibility at each stage.</p>
+            </div>
+            <div class="eyebrow">9.2</div>
+          </div>
+          <div class="ben">
+            <div>
+              <div class="num">03</div>
+              <h3>Efficiency</h3>
+              <p>Reduced manual effort. Faster operations.</p>
+            </div>
+            <div class="eyebrow">9.3</div>
+          </div>
+          <div class="ben">
+            <div>
+              <div class="num">04</div>
+              <h3>Reduced Losses</h3>
+              <p>Early detection of leakages and inefficiencies.</p>
+            </div>
+            <div class="eyebrow">9.4</div>
+          </div>
+          <div class="ben">
+            <div>
+              <div class="num">05</div>
+              <h3>Data-Driven Decisions</h3>
+              <p>Real-time insights for policymakers.</p>
+            </div>
+            <div class="eyebrow">9.5</div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <h3 style="margin-top:48px;margin-bottom:8px">6.1 — Target Users</h3>
-    <div class="grid g-4" style="margin-top:18px">
-      <div class="card"><div class="ic">N</div><h3>National Commissioners</h3><p>Country-level oversight and accountability.</p></div>
-      <div class="card"><div class="ic">S</div><h3>State-Level Officials</h3><p>Regional performance &amp; intervention.</p></div>
-      <div class="card"><div class="ic">A</div><h3>Supply Chain Admins</h3><p>Day-to-day operational control.</p></div>
-      <div class="card"><div class="ic">W</div><h3>WFP Program Managers</h3><p>Humanitarian program oversight.</p></div>
-    </div>
+      <!-- ============== ROADMAP ============== -->
+      <section>
+        <div class="sec-head">
+          <div class="left">
+            <div class="sec-num">11 — Implementation Roadmap</div>
+            <h2>From pilot to optimization, one phase at a time.</h2>
+          </div>
+          <div class="right">Section · 11<br />Timeline</div>
+        </div>
+        <div class="road-grid">
+          <div class="phase">
+            <div class="seq">01</div>
+            <div>
+              <div class="ph">Phase 1</div>
+              <h3>Pilot</h3>
+            </div>
+            <ul>
+              <li>Select limited regions</li>
+              <li>Deploy core tracking and dashboard</li>
+            </ul>
+          </div>
+          <div class="phase p2">
+            <div class="seq">02</div>
+            <div>
+              <div class="ph">Phase 2</div>
+              <h3>Scale-Up</h3>
+            </div>
+            <ul>
+              <li>Expand to additional regions</li>
+              <li>Integrate AI capabilities</li>
+            </ul>
+          </div>
+          <div class="phase p3">
+            <div class="seq">03</div>
+            <div>
+              <div class="ph">Phase 3</div>
+              <h3>Optimization</h3>
+            </div>
+            <ul>
+              <li>Enhance automation</li>
+              <li>Improve predictive analytics</li>
+              <li>Continuous system refinement</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-    <h3 style="margin-top:48px;margin-bottom:18px">6.2 — Dashboard Capabilities</h3>
-    <div class="grid g-3">
-      <div class="card accent">
-        <div class="ic">A</div>
-        <h3>Real-Time Monitoring</h3>
-        <p>Total stock across locations · Movement of goods (live tracking) · In-transit shipments.</p>
-      </div>
-      <div class="card">
-        <div class="ic">B</div>
-        <h3>Inventory Insights</h3>
-        <p>Number of empty vs filled bags · Stock levels by region · Warehouse capacity utilization.</p>
-      </div>
-      <div class="card dark">
-        <div class="ic">C</div>
-        <h3>Loss &amp; Damage Tracking</h3>
-        <p>Bags lost in transit · Damaged goods · Leakage points in the supply chain.</p>
-      </div>
-      <div class="card">
-        <div class="ic">D</div>
-        <h3>Operational Performance</h3>
-        <p>Turnaround time at each stage · Delays and bottlenecks · Processing efficiency at mills.</p>
-      </div>
-      <div class="card dark">
-        <div class="ic">E</div>
-        <h3>Exception Alerts</h3>
-        <p>Missing scans · Route deviations · Inventory mismatches.</p>
-      </div>
-      <div class="card" style="background:var(--paper-2);border-style:dashed">
-        <div class="ic">＋</div>
-        <h3>Unified View</h3>
-        <p>All five capabilities surface inside a single command center for senior decision-makers.</p>
-      </div>
-    </div>
-  </section>
+      <!-- ============== CONCLUSION ============== -->
+      <section class="closing">
+        <div class="eyebrow">11 — Conclusion</div>
+        <h2>
+          Transforming food distribution through traceability, automation &amp;
+          intelligence.
+        </h2>
+        <p>
+          The proposed supply chain visibility platform will transform food
+          distribution systems by enabling granular tracking, automation, and
+          intelligent decision-making. By combining bag-level traceability,
+          automated scanning technologies, and AI-powered dashboards, the system
+          will significantly improve transparency, reduce losses, and ensure
+          efficient delivery of food to beneficiaries.
+        </p>
+      </section>
 
-  <!-- ============== AI ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">07 — AI-Based Reporting &amp; Intelligence</div>
-        <h2>From raw scans to executive-ready intelligence.</h2>
-      </div>
-      <div class="right">Section · 07<br/>Intelligence</div>
+      <footer>· Agroledger · Supply Chain Visibility Platform ·</footer>
     </div>
-
-    <div class="ai-grid">
-      <div class="ai-card">
-        <div class="num">01</div>
-        <div class="eyebrow">7.1</div>
-        <h3>Predictive Analytics</h3>
-        <ul>
-          <li>Demand forecasting by region</li>
-          <li>Stock replenishment recommendations</li>
-          <li>Seasonal supply planning</li>
-        </ul>
-      </div>
-      <div class="ai-card">
-        <div class="num">02</div>
-        <div class="eyebrow">7.2</div>
-        <h3>Anomaly Detection</h3>
-        <ul>
-          <li>Identify unusual losses or discrepancies</li>
-          <li>Detect potential fraud or diversion</li>
-          <li>Highlight abnormal movement patterns</li>
-        </ul>
-      </div>
-      <div class="ai-card">
-        <div class="num">03</div>
-        <div class="eyebrow">7.3</div>
-        <h3>Intelligent Alerts</h3>
-        <ul>
-          <li>Delayed shipments</li>
-          <li>Low stock levels</li>
-          <li>High damage rates</li>
-        </ul>
-      </div>
-      <div class="quote-card">
-        <div class="eyebrow">7.4 — Natural Language Reporting</div>
-        <h3>Plain-language summaries for decision-makers.</h3>
-        <div>
-          <p class="ex">“Region X has a 15% increase in losses this month.”</p>
-          <p class="ex">“Warehouse Y is nearing full capacity.”</p>
-        </div>
-      </div>
-      <div class="ai-card" style="grid-column:span 2;background:var(--ink);color:#FBF7EE;border-color:transparent">
-        <div class="num" style="color:rgba(255,255,255,.06)">05</div>
-        <div class="eyebrow" style="color:var(--accent-2)">7.5</div>
-        <h3 style="color:#FBF7EE">Decision Support</h3>
-        <p style="color:rgba(251,247,238,.7);margin-top:8px">AI-driven recommendations that translate data into action.</p>
-        <ul style="margin-top:18px">
-          <li style="color:rgba(251,247,238,.85);border-color:rgba(255,255,255,.15)">Optimize routes</li>
-          <li style="color:rgba(251,247,238,.85);border-color:rgba(255,255,255,.15)">Reallocate stock</li>
-          <li style="color:rgba(251,247,238,.85);border-color:rgba(255,255,255,.15)">Improve distribution efficiency</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== AUTOMATION STRATEGY ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">08 — Automation Strategy</div>
-        <h2>Engineered to address limited manual capacity.</h2>
-      </div>
-      <div class="right">Section · 08<br/>Strategy</div>
-    </div>
-    <div class="auto-grid">
-      <div>
-        <div class="eyebrow">8.1</div>
-        <h3>Infrastructure Deployment</h3>
-        <ul>
-          <li>RFID gates at entry/exit points</li>
-          <li>Fixed scanners at mills and warehouses</li>
-          <li>Smart handheld devices for field staff</li>
-        </ul>
-      </div>
-      <div>
-        <div class="eyebrow">8.2</div>
-        <h3>Smart Logistics Integration</h3>
-        <ul>
-          <li>Vehicle tracking systems</li>
-          <li>Automated shipment logging</li>
-          <li>Geo-fencing for location validation</li>
-        </ul>
-      </div>
-      <div>
-        <div class="eyebrow">8.3</div>
-        <h3>AI-Assisted Scanning</h3>
-        <ul>
-          <li>Camera-based barcode recognition</li>
-          <li>Bulk scanning using computer vision</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== BENEFITS ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">09 — Benefits</div>
-        <h2>Five outcomes that change how food reaches people.</h2>
-      </div>
-      <div class="right">Section · 09<br/>Impact</div>
-    </div>
-    <div class="ben-grid">
-      <div class="ben">
-        <div>
-          <div class="num">01</div>
-          <h3>Transparency</h3>
-          <p>Full visibility of every bag in the system.</p>
-        </div>
-        <div class="eyebrow">9.1</div>
-      </div>
-      <div class="ben">
-        <div>
-          <div class="num">02</div>
-          <h3>Accountability</h3>
-          <p>Clear tracking of responsibility at each stage.</p>
-        </div>
-        <div class="eyebrow">9.2</div>
-      </div>
-      <div class="ben">
-        <div>
-          <div class="num">03</div>
-          <h3>Efficiency</h3>
-          <p>Reduced manual effort. Faster operations.</p>
-        </div>
-        <div class="eyebrow">9.3</div>
-      </div>
-      <div class="ben">
-        <div>
-          <div class="num">04</div>
-          <h3>Reduced Losses</h3>
-          <p>Early detection of leakages and inefficiencies.</p>
-        </div>
-        <div class="eyebrow">9.4</div>
-      </div>
-      <div class="ben">
-        <div>
-          <div class="num">05</div>
-          <h3>Data-Driven Decisions</h3>
-          <p>Real-time insights for policymakers.</p>
-        </div>
-        <div class="eyebrow">9.5</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== ROADMAP ============== -->
-  <section>
-    <div class="sec-head">
-      <div class="left">
-        <div class="sec-num">10 — Implementation Roadmap</div>
-        <h2>From pilot to optimization, one phase at a time.</h2>
-      </div>
-      <div class="right">Section · 10<br/>Timeline</div>
-    </div>
-    <div class="road-grid">
-      <div class="phase">
-        <div class="seq">01</div>
-        <div>
-          <div class="ph">Phase 1</div>
-          <h3>Pilot</h3>
-        </div>
-        <ul>
-          <li>Select limited regions</li>
-          <li>Deploy core tracking and dashboard</li>
-        </ul>
-      </div>
-      <div class="phase p2">
-        <div class="seq">02</div>
-        <div>
-          <div class="ph">Phase 2</div>
-          <h3>Scale-Up</h3>
-        </div>
-        <ul>
-          <li>Expand to additional regions</li>
-          <li>Integrate AI capabilities</li>
-        </ul>
-      </div>
-      <div class="phase p3">
-        <div class="seq">03</div>
-        <div>
-          <div class="ph">Phase 3</div>
-          <h3>Optimization</h3>
-        </div>
-        <ul>
-          <li>Enhance automation</li>
-          <li>Improve predictive analytics</li>
-          <li>Continuous system refinement</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== CONCLUSION ============== -->
-  <section class="closing">
-    <div class="eyebrow">11 — Conclusion</div>
-    <h2>Transforming food distribution through traceability, automation &amp; intelligence.</h2>
-    <p>The proposed supply chain visibility platform will transform food distribution systems by enabling granular tracking, automation, and intelligent decision-making. By combining bag-level traceability, automated scanning technologies, and AI-powered dashboards, the system will significantly improve transparency, reduce losses, and ensure efficient delivery of food to beneficiaries.</p>
-    <div class="sig">
-      <div class="left">Prepared for<b>Government &amp; WFP-Enabled Digital Ecosystem</b></div>
-      <div class="right">— End of Proposal</div>
-    </div>
-  </section>
-
-  <footer>· Grain Trace · Supply Chain Visibility Platform · Confidential ·</footer>
-</div>
-</body>
+  </body>
 </html>
