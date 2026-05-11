@@ -1,2579 +1,1170 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Supply Chain Visibility Platform — Business Proposal</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --ink: #0b1220;
-        --ink-2: #1a2238;
-        --paper: #f6f1e7;
-        --paper-2: #efe7d6;
-        --cream: #fbf7ee;
-        --accent: #e85d2f; /* WFP-inspired warm orange */
-        --accent-2: #f2a03d; /* grain gold */
-        --green: #2f6b3a; /* harvest green */
-        --green-2: #5d8c46;
-        --line: rgba(11, 18, 32, 0.14);
-        --soft: rgba(11, 18, 32, 0.06);
-        --muted: #5a6275;
-      }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html,
-      body {
-        background: var(--paper);
-        color: var(--ink);
-        font-family: "Inter", sans-serif;
-        font-weight: 400;
-        line-height: 1.55;
-        -webkit-font-smoothing: antialiased;
-      }
-      ::selection {
-        background: var(--accent);
-        color: #fff;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StaTwig — Digital Public Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0f1e;
+    --paper: #f5f0e8;
+    --accent: #1a6b4a;
+    --accent2: #c8843a;
+    --accent3: #2d4a8a;
+    --muted: #8a8070;
+    --line: rgba(10,15,30,0.12);
+    --card-bg: #ffffff;
+  }
 
-      .doc {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 48px 56px 96px;
-      }
-      h1,
-      h2,
-      h3,
-      h4 {
-        font-family: "Fraunces", serif;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        color: var(--ink);
-      }
-      h1 {
-        font-size: clamp(48px, 7vw, 104px);
-        line-height: 0.95;
-        font-weight: 800;
-      }
-      h2 {
-        font-size: clamp(34px, 4vw, 52px);
-        line-height: 1.05;
-      }
-      h3 {
-        font-size: clamp(22px, 2.2vw, 28px);
-        line-height: 1.2;
-      }
-      h4 {
-        font-size: 18px;
-        font-family: "Inter", sans-serif;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-      }
-      p {
-        font-size: 16px;
-        color: #22304a;
-      }
-      .mono {
-        font-family: "JetBrains Mono", monospace;
-        letter-spacing: 0.04em;
-      }
-      .eyebrow {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.32em;
-        text-transform: uppercase;
-        color: var(--accent);
-        font-weight: 600;
-      }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      /* HERO */
-      .hero {
-        position: relative;
-        border-radius: 32px;
-        overflow: hidden;
-        background:
-          radial-gradient(
-            1200px 600px at 90% -10%,
-            rgba(232, 93, 47, 0.25),
-            transparent 60%
-          ),
-          radial-gradient(
-            800px 500px at -10% 110%,
-            rgba(47, 107, 58, 0.35),
-            transparent 60%
-          ),
-          linear-gradient(160deg, #0b1220 0%, #1a2238 60%, #243049 100%);
-        color: #fbf7ee;
-        padding: 64px 56px 72px;
-        isolation: isolate;
-      }
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 48px 48px;
-        mask-image: radial-gradient(
-          ellipse at center,
-          black 40%,
-          transparent 80%
-        );
-        z-index: -1;
-      }
-      .hero-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 80px;
-        flex-wrap: wrap;
-        gap: 16px;
-        padding-right: 220px;
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 12px;
-        letter-spacing: 0.32em;
-        text-transform: uppercase;
-        color: #fbf7ee;
-      }
-      .brand-mark {
-        width: 34px;
-        height: 34px;
-        border-radius: 9px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        display: grid;
-        place-items: center;
-        color: #0b1220;
-        font-family: "Fraunces", serif;
-        font-weight: 800;
-        font-size: 18px;
-      }
-      .meta {
-        display: flex;
-        gap: 28px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: rgba(251, 247, 238, 0.65);
-      }
-      .meta b {
-        display: block;
-        color: #fbf7ee;
-        margin-top: 4px;
-        font-weight: 600;
-        letter-spacing: 0.16em;
-      }
+  html { scroll-behavior: smooth; }
 
-      .hero h1 {
-        color: #fbf7ee;
-        max-width: 14ch;
-      }
-      .hero h1 em {
-        font-style: italic;
-        color: var(--accent-2);
-        font-weight: 400;
-      }
-      .hero-sub {
-        margin-top: 28px;
-        max-width: 62ch;
-        font-size: 18px;
-        color: rgba(251, 247, 238, 0.78);
-        line-height: 1.6;
-      }
-      .hero-foot {
-        margin-top: 64px;
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 24px;
-        border-top: 1px solid rgba(255, 255, 255, 0.12);
-        padding-top: 28px;
-      }
-      .hero-foot div .k {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: var(--accent-2);
-      }
-      .hero-foot div .v {
-        font-family: "Fraunces", serif;
-        font-size: 28px;
-        font-weight: 600;
-        margin-top: 6px;
-        color: #fbf7ee;
-      }
-      .hero-tag {
-        position: absolute;
-        top: 24px;
-        right: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 8px 14px;
-        border-radius: 999px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: rgba(251, 247, 238, 0.85);
-        backdrop-filter: blur(6px);
-        background: rgba(11, 18, 32, 0.5);
-      }
-      .hero-tag .dot {
-        display: inline-block;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--accent);
-        margin-right: 8px;
-        box-shadow: 0 0 0 4px rgba(232, 93, 47, 0.25);
-      }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
 
-      /* SECTIONS */
-      section {
-        margin-top: 96px;
-      }
-      .sec-head {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 32px;
-        margin-bottom: 40px;
-        border-bottom: 1px solid var(--line);
-        padding-bottom: 20px;
-      }
-      .sec-head .left {
-        max-width: 780px;
-      }
-      .sec-num {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 12px;
-        letter-spacing: 0.32em;
-        color: var(--accent);
-        font-weight: 600;
-      }
-      .sec-head h2 {
-        margin-top: 8px;
-      }
-      .sec-head .right {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        color: var(--muted);
-        text-align: right;
-        white-space: nowrap;
-      }
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
 
-      /* GRID UTILS */
-      .grid {
-        display: grid;
-        gap: 24px;
-      }
-      .g-2 {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .g-3 {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .g-4 {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .g-6 {
-        grid-template-columns: repeat(6, 1fr);
-      }
-      @media (max-width: 900px) {
-        .g-2,
-        .g-3,
-        .g-4,
-        .g-6 {
-          grid-template-columns: 1fr 1fr;
-        }
-        .hero-foot {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 560px) {
-        .g-2,
-        .g-3,
-        .g-4,
-        .g-6,
-        .hero-foot {
-          grid-template-columns: 1fr;
-        }
-        .doc {
-          padding: 24px;
-        }
-      }
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid var(--ink);
+  }
 
-      .card {
-        background: var(--cream);
-        border: 1px solid var(--line);
-        border-radius: 20px;
-        padding: 28px;
-      }
-      .card h3 {
-        margin-bottom: 10px;
-      }
-      .card p {
-        color: var(--muted);
-      }
-      .card .ic {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        background: var(--paper-2);
-        display: grid;
-        place-items: center;
-        font-family: "Fraunces", serif;
-        font-weight: 700;
-        color: var(--ink);
-        margin-bottom: 18px;
-        border: 1px solid var(--line);
-      }
-      .card.dark {
-        background: var(--ink);
-        color: #fbf7ee;
-        border-color: transparent;
-      }
-      .card.dark h3,
-      .card.dark p {
-        color: #fbf7ee;
-      }
-      .card.dark p {
-        color: rgba(251, 247, 238, 0.7);
-      }
-      .card.dark .ic {
-        background: rgba(255, 255, 255, 0.08);
-        color: var(--accent-2);
-        border-color: rgba(255, 255, 255, 0.1);
-      }
-      .card.accent {
-        background: var(--accent);
-        color: #fff;
-        border-color: transparent;
-      }
-      .card.accent h3,
-      .card.accent p {
-        color: #fff;
-      }
-      .card.accent p {
-        color: rgba(255, 255, 255, 0.85);
-      }
-      .card.accent .ic {
-        background: rgba(255, 255, 255, 0.15);
-        color: #fff;
-        border-color: rgba(255, 255, 255, 0.2);
-      }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(26,107,74,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(45,74,138,0.06) 0%, transparent 60%);
+  }
 
-      /* OBJECTIVES list */
-      .obj-list {
-        list-style: none;
-        display: grid;
-        gap: 0;
-        border-top: 1px solid var(--line);
-      }
-      .obj-list li {
-        display: grid;
-        grid-template-columns: 80px 1fr auto;
-        align-items: center;
-        gap: 24px;
-        padding: 22px 8px;
-        border-bottom: 1px solid var(--line);
-        transition: background 0.2s;
-      }
-      .obj-list li:hover {
-        background: var(--soft);
-      }
-      .obj-list li .n {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 12px;
-        color: var(--accent);
-        letter-spacing: 0.2em;
-      }
-      .obj-list li .t {
-        font-family: "Fraunces", serif;
-        font-size: 22px;
-        font-weight: 600;
-        color: var(--ink);
-      }
-      .obj-list li .b {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        color: var(--muted);
-        padding: 6px 12px;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-      }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+  }
 
-      /* SUPPLY CHAIN FLOW */
-      .flow {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 0;
-        background: var(--cream);
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        overflow: hidden;
-      }
-      .flow .stage {
-        padding: 28px 22px;
-        border-right: 1px solid var(--line);
-        position: relative;
-        background: var(--cream);
-      }
-      .flow .stage:last-child {
-        border-right: none;
-      }
-      .flow .stage .step {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.28em;
-        color: var(--accent);
-        font-weight: 600;
-      }
-      .flow .stage h3 {
-        font-size: 20px;
-        margin-top: 8px;
-        margin-bottom: 10px;
-      }
-      .flow .stage p {
-        font-size: 13px;
-        color: var(--muted);
-        line-height: 1.5;
-      }
-      .flow .stage .arrow {
-        position: absolute;
-        right: -10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
-        background: var(--accent);
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        color: #fff;
-        font-size: 10px;
-        z-index: 2;
-      }
-      .flow .stage:last-child .arrow {
-        display: none;
-      }
-      @media (max-width: 900px) {
-        .flow {
-          grid-template-columns: 1fr;
-        }
-        .flow .stage {
-          border-right: none;
-          border-bottom: 1px solid var(--line);
-        }
-        .flow .stage .arrow {
-          right: auto;
-          left: 50%;
-          top: auto;
-          bottom: -10px;
-          transform: translateX(-50%) rotate(90deg);
-        }
-      }
+  nav {
+    position: relative; z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    border-bottom: 1px solid var(--line);
+  }
 
-      /* TWO-COL feature spread */
-      .spread {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 32px;
-        align-items: stretch;
-      }
-      @media (max-width: 900px) {
-        .spread {
-          grid-template-columns: 1fr;
-        }
-      }
-      .spread .left,
-      .spread .right {
-        border-radius: 24px;
-        padding: 36px;
-        border: 1px solid var(--line);
-      }
-      .spread .left {
-        background: var(--ink);
-        color: #fbf7ee;
-        border-color: transparent;
-        position: relative;
-        overflow: hidden;
-      }
-      .spread .left::after {
-        content: "";
-        position: absolute;
-        right: -80px;
-        bottom: -80px;
-        width: 280px;
-        height: 280px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(232, 93, 47, 0.4),
-          transparent 70%
-        );
-      }
-      .spread .left h3 {
-        color: #fbf7ee;
-        font-size: 34px;
-        margin-bottom: 16px;
-      }
-      .spread .left p {
-        color: rgba(251, 247, 238, 0.75);
-      }
-      .spread .right {
-        background: var(--paper-2);
-      }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
 
-      .pill-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 24px;
-      }
-      .pill {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.08);
-        color: #fbf7ee;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-      }
+  .nav-logo span { color: var(--accent); }
 
-      .bag-vs {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0;
-        border: 1px solid var(--line);
-        border-radius: 20px;
-        overflow: hidden;
-        background: var(--cream);
-      }
-      .bag-vs > div {
-        padding: 28px;
-      }
-      .bag-vs > div + div {
-        border-left: 1px solid var(--line);
-      }
-      .bag-vs h4 {
-        color: var(--accent);
-        margin-bottom: 12px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.3em;
-      }
-      .bag-vs ul {
-        list-style: none;
-        margin-top: 16px;
-      }
-      .bag-vs ul li {
-        padding: 10px 0;
-        border-bottom: 1px dashed var(--line);
-        font-family: "Fraunces", serif;
-        font-size: 18px;
-        color: var(--ink);
-      }
-      .bag-vs ul li:last-child {
-        border-bottom: none;
-      }
-      @media (max-width: 560px) {
-        .bag-vs {
-          grid-template-columns: 1fr;
-        }
-        .bag-vs > div + div {
-          border-left: none;
-          border-top: 1px solid var(--line);
-        }
-      }
+  .nav-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+  }
 
-      /* ARCHITECTURE LAYERS */
-      .layers {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-      .layer {
-        display: grid;
-        grid-template-columns: 140px 1fr auto;
-        gap: 24px;
-        align-items: center;
-        padding: 24px 28px;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        background: var(--cream);
-        transition:
-          transform 0.2s,
-          background 0.2s;
-      }
-      .layer:hover {
-        background: var(--paper-2);
-        transform: translateX(4px);
-      }
-      .layer .lbl {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.28em;
-        color: var(--accent);
-        font-weight: 600;
-      }
-      .layer h3 {
-        font-size: 22px;
-      }
-      .layer .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: flex-end;
-        max-width: 420px;
-      }
-      .layer .tags span {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        padding: 6px 10px;
-        border-radius: 6px;
-        background: var(--paper-2);
-        color: var(--ink-2);
-        border: 1px solid var(--line);
-      }
-      @media (max-width: 900px) {
-        .layer {
-          grid-template-columns: 1fr;
-        }
-        .layer .tags {
-          justify-content: flex-start;
-          max-width: 100%;
-        }
-      }
+  .hero-content {
+    position: relative; z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 4rem 2rem;
+    max-width: 900px;
+  }
 
-      /* DASHBOARD MOCK */
-      .dash {
-        background: var(--ink);
-        border-radius: 28px;
-        padding: 36px;
-        color: #fbf7ee;
-        position: relative;
-        overflow: hidden;
-      }
-      .dash::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 32px 32px;
-        opacity: 0.5;
-      }
-      .dash > * {
-        position: relative;
-      }
-      .dash-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 28px;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .dash-head .title {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: rgba(251, 247, 238, 0.7);
-      }
-      .dash-head .live {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: #7bd389;
-      }
-      .dash-head .live .pulse {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #7bd389;
-        box-shadow: 0 0 0 4px rgba(123, 211, 137, 0.2);
-        animation: pulse 1.6s infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.4;
-        }
-      }
-      .dash-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 14px;
-        margin-bottom: 18px;
-      }
-      .stat {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 14px;
-        padding: 18px;
-      }
-      .stat .l {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        color: rgba(251, 247, 238, 0.55);
-      }
-      .stat .v {
-        font-family: "Fraunces", serif;
-        font-size: 30px;
-        font-weight: 600;
-        margin-top: 6px;
-        color: #fbf7ee;
-      }
-      .stat .d {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        margin-top: 4px;
-        color: var(--accent-2);
-      }
-      .stat.up .d {
-        color: #7bd389;
-      }
-      .stat.down .d {
-        color: #ff8e72;
-      }
-      .dash-row {
-        display: grid;
-        grid-template-columns: 1.4fr 1fr;
-        gap: 14px;
-      }
-      .panel {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 14px;
-        padding: 20px;
-      }
-      .panel h4 {
-        color: rgba(251, 247, 238, 0.7);
-        font-size: 11px;
-        letter-spacing: 0.24em;
-        margin-bottom: 14px;
-      }
-      .bars {
-        display: flex;
-        align-items: flex-end;
-        gap: 8px;
-        height: 130px;
-        margin-top: 8px;
-      }
-      .bars .bar {
-        flex: 1;
-        background: linear-gradient(180deg, var(--accent-2), var(--accent));
-        border-radius: 4px 4px 0 0;
-        position: relative;
-      }
-      .bars .bar.alt {
-        background: linear-gradient(180deg, #7bd389, var(--green));
-      }
-      .alerts {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .alerts .a {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        gap: 12px;
-        align-items: center;
-        padding: 10px 12px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.04);
-        font-size: 13px;
-        color: rgba(251, 247, 238, 0.85);
-      }
-      .alerts .a .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-      }
-      .alerts .a .t {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        color: rgba(251, 247, 238, 0.5);
-        letter-spacing: 0.18em;
-      }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
 
-      .image_full_view {
-        width: 100%;
-      }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--accent);
+  }
 
-      @media (max-width: 900px) {
-        .dash-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        .dash-row {
-          grid-template-columns: 1fr;
-        }
-      }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
 
-      .cap-list {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 14px;
-        margin-top: 24px;
-      }
-      .cap {
-        background: var(--cream);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 20px;
-        min-height: 160px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .cap .k {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.24em;
-        color: var(--accent);
-        font-weight: 600;
-      }
-      .cap h4 {
-        font-family: "Fraunces", serif;
-        font-size: 18px;
-        font-weight: 600;
-        text-transform: none;
-        letter-spacing: -0.01em;
-      }
-      .cap p {
-        font-size: 13px;
-        color: var(--muted);
-        margin-top: 6px;
-      }
-      @media (max-width: 900px) {
-        .cap-list {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 560px) {
-        .cap-list {
-          grid-template-columns: 1fr;
-        }
-      }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
 
-      /* AI FEATURES */
-      .ai-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-      }
-      @media (max-width: 900px) {
-        .ai-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-      .ai-card {
-        background: var(--cream);
-        border: 1px solid var(--line);
-        border-radius: 20px;
-        padding: 32px;
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.25s;
-      }
-      .ai-card:hover {
-        transform: translateY(-4px);
-      }
-      .ai-card .num {
-        position: absolute;
-        top: 24px;
-        right: 28px;
-        font-family: "Fraunces", serif;
-        font-size: 80px;
-        font-weight: 600;
-        color: var(--paper-2);
-        line-height: 1;
-        z-index: 0;
-      }
-      .ai-card > * {
-        position: relative;
-        z-index: 1;
-      }
-      .ai-card h3 {
-        font-size: 22px;
-        margin-bottom: 12px;
-      }
-      .ai-card ul {
-        list-style: none;
-        margin-top: 14px;
-      }
-      .ai-card ul li {
-        padding: 8px 0;
-        color: var(--muted);
-        font-size: 14px;
-        border-bottom: 1px dashed var(--line);
-      }
-      .ai-card ul li:last-child {
-        border-bottom: none;
-      }
-      .ai-card ul li::before {
-        content: "→";
-        color: var(--accent);
-        margin-right: 10px;
-        font-family: "JetBrains Mono", monospace;
-      }
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 560px;
+    font-weight: 300;
+  }
 
-      .quote-card {
-        background: var(--ink-2);
-        color: #fbf7ee;
-        border-radius: 20px;
-        padding: 32px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border: none;
-      }
-      .quote-card h3 {
-        color: var(--accent-2);
-        font-size: 22px;
-        margin-bottom: 12px;
-      }
-      .quote-card .ex {
-        font-family: "Fraunces", serif;
-        font-style: italic;
-        font-size: 24px;
-        line-height: 1.3;
-        color: #fbf7ee;
-        border-left: 3px solid var(--accent);
-        padding-left: 18px;
-        margin: 14px 0;
-      }
-      .quote-card .ex + .ex {
-        margin-top: 18px;
-      }
+  .hero-stats {
+    position: relative; z-index: 5;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+  }
 
-      /* INSPECTION COMMAND CENTER */
-      .insp-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
-      }
-      @media (max-width: 1100px) {
-        .insp-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 560px) {
-        .insp-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-      .insp-card {
-        position: relative;
-        background: var(--cream);
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 26px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        overflow: hidden;
-        transition:
-          transform 0.25s ease,
-          box-shadow 0.25s ease;
-      }
-      .insp-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 18px 40px -24px rgba(11, 18, 32, 0.25);
-      }
-      .insp-card--wide {
-        grid-column: span 4;
-        background: var(--paper-2);
-      }
-      @media (max-width: 1100px) {
-        .insp-card--wide {
-          grid-column: span 2;
-        }
-      }
-      @media (max-width: 560px) {
-        .insp-card--wide {
-          grid-column: span 1;
-        }
-      }
-      .insp-card--dark {
-        background: var(--ink);
-        color: #fbf7ee;
-        border-color: transparent;
-      }
-      .insp-card--dark .insp-title,
-      .insp-card--dark .insp-value,
-      .insp-card--dark .insp-unit {
-        color: #fbf7ee;
-      }
-      .insp-card--dark .insp-desc {
-        color: rgba(251, 247, 238, 0.7);
-      }
-      .insp-card--dark .insp-num {
-        color: var(--accent-2);
-      }
-      .insp-card--accent {
-        background: linear-gradient(160deg, var(--accent), #b8421f);
-        color: #fff;
-        border-color: transparent;
-      }
-      .insp-card--accent .insp-title,
-      .insp-card--accent .insp-value,
-      .insp-card--accent .insp-unit {
-        color: #fff;
-      }
-      .insp-card--accent .insp-desc {
-        color: rgba(255, 255, 255, 0.85);
-      }
-      .insp-card--accent .insp-num {
-        color: rgba(255, 255, 255, 0.7);
-      }
-      .insp-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .insp-num {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.28em;
-        color: var(--accent);
-        font-weight: 600;
-      }
-      .insp-tag {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        padding: 5px 10px;
-        border-radius: 999px;
-        background: var(--paper-2);
-        color: var(--ink-2);
-        border: 1px solid var(--line);
-      }
-      .insp-tag--ok {
-        background: rgba(47, 107, 58, 0.12);
-        color: #2f6b3a;
-        border-color: rgba(47, 107, 58, 0.2);
-      }
-      .insp-tag--warn {
-        background: rgba(242, 180, 65, 0.18);
-        color: #8a5a00;
-        border-color: rgba(242, 180, 65, 0.35);
-      }
-      .insp-tag--crit {
-        background: rgba(255, 255, 255, 0.18);
-        color: #fff;
-        border-color: rgba(255, 255, 255, 0.3);
-      }
-      .insp-tag--bio {
-        background: rgba(232, 93, 47, 0.12);
-        color: var(--accent);
-        border-color: rgba(232, 93, 47, 0.25);
-      }
-      .insp-card--dark .insp-tag {
-        background: rgba(255, 255, 255, 0.08);
-        color: #fbf7ee;
-        border-color: rgba(255, 255, 255, 0.15);
-      }
-      .insp-metric {
-        display: flex;
-        align-items: baseline;
-        gap: 10px;
-        margin-top: 6px;
-      }
-      .insp-value {
-        font-family: "Fraunces", serif;
-        font-size: 48px;
-        font-weight: 600;
-        line-height: 1;
-        color: var(--ink);
-        letter-spacing: -0.02em;
-      }
-      .insp-pct {
-        font-size: 24px;
-        font-weight: 500;
-        margin-left: 2px;
-      }
-      .insp-unit {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .insp-title {
-        font-family: "Fraunces", serif;
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--ink);
-        margin: 0;
-      }
-      .insp-desc {
-        font-size: 13px;
-        line-height: 1.55;
-        color: var(--muted);
-        margin: 0;
-      }
-      .insp-bar {
-        height: 6px;
-        border-radius: 999px;
-        background: rgba(11, 18, 32, 0.06);
-        overflow: hidden;
-        margin-top: auto;
-      }
-      .insp-card--dark .insp-bar,
-      .insp-card--accent .insp-bar {
-        background: rgba(255, 255, 255, 0.12);
-      }
-      .insp-bar span {
-        display: block;
-        height: 100%;
-        border-radius: 999px;
-      }
-      .insp-split {
-        display: grid;
-        grid-template-columns: 1.4fr 1fr;
-        gap: 28px;
-        align-items: center;
-      }
-      @media (max-width: 700px) {
-        .insp-split {
-          grid-template-columns: 1fr;
-        }
-      }
-      .insp-pathos {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        background: var(--cream);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 16px;
-      }
-      .patho {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-        gap: 12px;
-        padding: 8px 4px;
-        border-bottom: 1px dashed var(--line);
-      }
-      .patho:last-child {
-        border-bottom: none;
-      }
-      .patho .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-      }
-      .dot--red {
-        background: #d9342b;
-      }
-      .dot--orange {
-        background: var(--accent);
-      }
-      .dot--yellow {
-        background: #f2b441;
-      }
-      .patho .lbl {
-        font-family: "Fraunces", serif;
-        font-style: italic;
-        font-size: 16px;
-        color: var(--ink);
-      }
-      .patho .ct {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 14px;
-        color: var(--ink-2);
-        font-weight: 600;
-      }
+  .stat-cell {
+    padding: 2rem 2.5rem;
+    border-right: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
 
-      /* AUTOMATION */
-      .auto-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0;
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        overflow: hidden;
-        background: var(--cream);
-      }
-      .auto-grid > div {
-        padding: 32px;
-        border-right: 1px solid var(--line);
-      }
-      .auto-grid > div:last-child {
-        border-right: none;
-      }
-      .auto-grid h3 {
-        font-size: 22px;
-        margin-bottom: 16px;
-      }
-      .auto-grid ul {
-        list-style: none;
-      }
-      .auto-grid ul li {
-        padding: 10px 0;
-        border-bottom: 1px dashed var(--line);
-        font-size: 14px;
-        color: var(--ink-2);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .auto-grid ul li::before {
-        content: "";
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--accent);
-      }
-      .auto-grid ul li:last-child {
-        border-bottom: none;
-      }
-      @media (max-width: 900px) {
-        .auto-grid {
-          grid-template-columns: 1fr;
-        }
-        .auto-grid > div {
-          border-right: none;
-          border-bottom: 1px solid var(--line);
-        }
-      }
+  .stat-cell:hover { background: rgba(26,107,74,0.04); }
+  .stat-cell:last-child { border-right: none; }
 
-      .principle {
-        margin-top: 28px;
-        background: var(--ink);
-        color: #fbf7ee;
-        border-radius: 20px;
-        padding: 36px 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-        flex-wrap: wrap;
-        position: relative;
-        overflow: hidden;
-      }
-      .principle::after {
-        content: "❝";
-        position: absolute;
-        left: 24px;
-        top: -30px;
-        font-family: "Fraunces", serif;
-        font-size: 200px;
-        color: rgba(232, 93, 47, 0.15);
-        line-height: 1;
-      }
-      .principle .lbl {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.3em;
-        color: var(--accent-2);
-        text-transform: uppercase;
-        position: relative;
-        z-index: 1;
-      }
-      .principle .txt {
-        font-family: "Fraunces", serif;
-        font-size: 32px;
-        font-weight: 600;
-        line-height: 1.2;
-        color: #fbf7ee;
-        flex: 1;
-        min-width: 300px;
-        position: relative;
-        z-index: 1;
-      }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
 
-      /* BENEFITS */
-      .ben-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 14px;
-      }
-      @media (max-width: 900px) {
-        .ben-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 560px) {
-        .ben-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-      .ben {
-        background: var(--cream);
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        padding: 24px;
-        min-height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition: all 0.25s;
-      }
-      .ben:hover {
-        background: var(--accent);
-        color: #fff;
-        border-color: transparent;
-      }
-      .ben:hover h3,
-      .ben:hover p,
-      .ben:hover .num {
-        color: #fff;
-      }
-      .ben:hover .num {
-        opacity: 0.4;
-      }
-      .ben .num {
-        font-family: "Fraunces", serif;
-        font-size: 46px;
-        font-weight: 600;
-        color: var(--accent);
-        opacity: 0.3;
-        line-height: 1;
-      }
-      .ben h3 {
-        font-size: 20px;
-        margin-top: 14px;
-      }
-      .ben p {
-        font-size: 13px;
-        color: var(--muted);
-        margin-top: 8px;
-      }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 
-      /* ROADMAP */
-      .roadmap {
-        position: relative;
-        padding-left: 0;
-      }
-      .road-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-      }
-      @media (max-width: 900px) {
-        .road-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-      .phase {
-        background: var(--cream);
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        padding: 32px;
-        position: relative;
-        overflow: hidden;
-        min-height: 280px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .phase .ph {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.3em;
-        color: var(--accent);
-        font-weight: 600;
-      }
-      .phase h3 {
-        font-size: 34px;
-        margin-top: 8px;
-        font-weight: 800;
-      }
-      .phase ul {
-        list-style: none;
-        margin-top: 20px;
-      }
-      .phase ul li {
-        padding: 8px 0;
-        font-size: 14px;
-        color: var(--ink-2);
-        border-bottom: 1px dashed var(--line);
-        display: flex;
-        gap: 10px;
-        align-items: center;
-      }
-      .phase ul li:last-child {
-        border-bottom: none;
-      }
-      .phase ul li::before {
-        content: "●";
-        color: var(--accent);
-        font-size: 8px;
-      }
-      .phase .seq {
-        position: absolute;
-        top: 24px;
-        right: 28px;
-        font-family: "Fraunces", serif;
-        font-size: 90px;
-        font-weight: 800;
-        color: var(--paper-2);
-        line-height: 1;
-      }
-      .phase.p2 {
-        background: var(--accent);
-        color: #fff;
-        border-color: transparent;
-      }
-      .phase.p2 .ph {
-        color: #fbf7ee;
-      }
-      .phase.p2 h3,
-      .phase.p2 ul li {
-        color: #fff;
-      }
-      .phase.p2 ul li::before {
-        color: #fff;
-      }
-      .phase.p2 ul li {
-        border-color: rgba(255, 255, 255, 0.2);
-      }
-      .phase.p2 .seq {
-        color: rgba(255, 255, 255, 0.2);
-      }
-      .phase.p3 {
-        background: var(--ink);
-        color: #fbf7ee;
-        border-color: transparent;
-      }
-      .phase.p3 .ph {
-        color: var(--accent-2);
-      }
-      .phase.p3 h3,
-      .phase.p3 ul li {
-        color: #fbf7ee;
-      }
-      .phase.p3 ul li {
-        border-color: rgba(255, 255, 255, 0.15);
-      }
-      .phase.p3 .seq {
-        color: rgba(255, 255, 255, 0.08);
-      }
+  /* ── SECTION COMMON ── */
+  section { position: relative; }
 
-      /* CONCLUSION */
-      .closing {
-        margin-top: 96px;
-        background: linear-gradient(160deg, #0b1220, #1a2238 70%, #2f1a12);
-        color: #fbf7ee;
-        border-radius: 32px;
-        padding: 80px 64px;
-        position: relative;
-        overflow: hidden;
-      }
-      .closing::before {
-        content: "";
-        position: absolute;
-        right: -100px;
-        top: -100px;
-        width: 400px;
-        height: 400px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(232, 93, 47, 0.35),
-          transparent 70%
-        );
-      }
-      .closing::after {
-        content: "";
-        position: absolute;
-        left: -80px;
-        bottom: -80px;
-        width: 280px;
-        height: 280px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(242, 160, 61, 0.25),
-          transparent 70%
-        );
-      }
-      .closing > * {
-        position: relative;
-        z-index: 1;
-      }
-      .closing .eyebrow {
-        color: var(--accent-2);
-      }
-      .closing h2 {
-        color: #fbf7ee;
-        font-size: clamp(40px, 5vw, 72px);
-        max-width: 18ch;
-        margin-top: 14px;
-        font-weight: 800;
-      }
-      .closing p {
-        color: rgba(251, 247, 238, 0.78);
-        font-size: 18px;
-        max-width: 65ch;
-        margin-top: 24px;
-        line-height: 1.65;
-      }
-      .closing .sig {
-        margin-top: 48px;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        flex-wrap: wrap;
-        gap: 24px;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
-        padding-top: 28px;
-      }
-      .closing .sig .left {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: rgba(251, 247, 238, 0.6);
-      }
-      .closing .sig .left b {
-        display: block;
-        color: #fbf7ee;
-        margin-top: 6px;
-        font-size: 14px;
-        letter-spacing: 0.18em;
-      }
-      .closing .sig .right {
-        font-family: "Fraunces", serif;
-        font-style: italic;
-        font-size: 22px;
-        color: var(--accent-2);
-      }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 4rem 2rem;
+    border-bottom: 1px solid var(--line);
+  }
 
-      footer {
-        text-align: center;
-        margin-top: 48px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.32em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="doc">
-      <!-- ============== HERO ============== -->
-      <header class="hero">
-        <div class="hero-tag">
-          <span class="dot"></span>Confidential Proposal · v1.0
-        </div>
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    writing-mode: vertical-lr;
+    text-transform: uppercase;
+  }
 
-        <span class="eyebrow" style="color: var(--accent-2); font-size: 36px"
-          >AGROLEDGER</span
-        >
-        <h1 style="margin-top: 24px">
-          Supply Chain<br />Visibility <em>Platform</em><br />for Food
-          Distribution
-        </h1>
-        <p class="hero-sub">
-          A bag-level supply chain visibility platform for food distribution
-          systems operated by governments and supported by humanitarian
-          organizations such as the World Food Programme (WFP) — digitizing and
-          tracking the movement of food grains from procurement to final
-          distribution.
-        </p>
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
 
-        <div class="hero-foot">
-          <div>
-            <div class="k">Scope</div>
-            <div class="v">Bag-Level Track and Trace</div>
-          </div>
-        </div>
-      </header>
+  /* ── COMPANY OVERVIEW ── */
+  .overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 2px solid var(--ink);
+  }
 
-      <!-- ============== EXECUTIVE SUMMARY ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">01 — Executive Summary</div>
-            <h2>Transparency from farmer to beneficiary.</h2>
-          </div>
-          <div class="right">Section · 01<br />Overview</div>
-        </div>
-        <div class="grid g-2">
-          <div class="card">
-            <p style="font-size: 18px; color: var(--ink-2); line-height: 1.65">
-              This document outlines the design and implementation of a
-              <b>bag-level supply chain visibility platform</b> for food
-              distribution systems operated by governments and supported by
-              humanitarian organizations such as the World Food Programme (WFP).
-            </p>
-          </div>
-          <div class="card dark">
-            <p style="font-size: 18px; line-height: 1.65">
-              The platform aims to digitize and track the movement of food
-              grains from procurement to final distribution, ensuring
-              <span style="color: var(--accent-2)"
-                >transparency, accountability, and efficiency</span
-              >
-              across the entire supply chain. A key focus is enabling automated
-              tracking mechanisms and AI-driven dashboards for high-level
-              stakeholders, including national and state-level commissioners.
-            </p>
-          </div>
-        </div>
-      </section>
+  .overview-text {
+    padding: 4rem;
+    border-right: 1px solid var(--line);
+  }
 
-      <!-- ============== OBJECTIVES ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">02 — Objectives</div>
-            <h2>Six commitments shaping every layer of the platform.</h2>
-          </div>
-          <div class="right">Section · 02<br />Goals</div>
-        </div>
-        <ul class="obj-list">
-          <li>
-            <span class="n">/ 01</span
-            ><span class="t"
-              >Enable end-to-end visibility of food grain movement</span
-            ><span class="b">Visibility</span>
-          </li>
-          <li>
-            <span class="n">/ 02</span
-            ><span class="t"
-              >Track both empty bags and filled grain bags at the unit
-              level</span
-            ><span class="b">Traceability</span>
-          </li>
-          <li>
-            <span class="n">/ 03</span
-            ><span class="t">Reduce losses, leakages, and inefficiencies</span
-            ><span class="b">Integrity</span>
-          </li>
-          <li>
-            <span class="n">/ 04</span
-            ><span class="t">Minimize reliance on manual barcode scanning</span
-            ><span class="b">Automation</span>
-          </li>
-          <li>
-            <span class="n">/ 05</span
-            ><span class="t"
-              >Provide real-time dashboards for decision-makers</span
-            ><span class="b">Insight</span>
-          </li>
-          <li>
-            <span class="n">/ 06</span
-            ><span class="t"
-              >Incorporate AI-based reporting and predictive insights</span
-            ><span class="b">Intelligence</span>
-          </li>
-        </ul>
-      </section>
+  .overview-text p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #3a3530;
+    font-weight: 300;
+  }
 
-      <!-- ============== SUPPLY CHAIN OVERVIEW ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">03 — Supply Chain Overview</div>
-            <h2>Five stages, one continuous trail of accountability.</h2>
-          </div>
-          <div class="right">Section · 03<br />Flow</div>
-        </div>
-        <div class="flow">
-          <div class="stage">
-            <div class="step">3.1 / Stage One</div>
-            <h3>Procurement</h3>
-            <p>
-              Grains are procured directly from farmers. Initial aggregation
-              points may vary by country.
-            </p>
-            <div class="arrow">→</div>
-          </div>
-          <div class="stage">
-            <div class="step">3.2 / Stage Two</div>
-            <h3>Processing (Mills)</h3>
-            <p>
-              Grains are transported to mills (or equivalent facilities). At
-              mills, grains are processed and packaged into bags. Each bag is
-              tagged with a barcode or RFID tag.
-            </p>
-            <div class="arrow">→</div>
-          </div>
-          <div class="stage">
-            <div class="step">3.3 / Stage Three</div>
-            <h3>Central Warehousing</h3>
-            <p>
-              Bagged grains are transported to central warehouses. Bulk storage
-              and inventory management occur here.
-            </p>
-            <div class="arrow">→</div>
-          </div>
-          <div class="stage">
-            <div class="step">3.4 / Stage Four</div>
-            <h3>Regional Distribution</h3>
-            <p>
-              Goods are distributed from central warehouses to regional
-              warehouses and local storage facilities.
-            </p>
-            <div class="arrow">→</div>
-          </div>
-          <div class="stage">
-            <div class="step">3.5 / Stage Five</div>
-            <h3>Last-Mile Distribution</h3>
-            <p>
-              Bags are sent to distribution outlets and finally delivered to
-              beneficiaries.
-            </p>
-            <div class="arrow">→</div>
-          </div>
-        </div>
-      </section>
+  .overview-trust {
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-      <!-- ============== CORE FUNCTIONAL REQUIREMENTS ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">04 — Core Functional Requirements</div>
-            <h2>Every bag tracked. Every movement captured.</h2>
-          </div>
-          <div class="right">Section · 04<br />Capabilities</div>
-        </div>
+  .trust-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
 
-        <div class="spread">
-          <div class="left">
-            <div class="eyebrow" style="color: var(--accent-2)">
-              4.1 — Bag-Level Tracking
-            </div>
-            <h3>
-              Unique identification of every bag — empty and filled — across its
-              full lifecycle.
-            </h3>
-            <p style="margin-top: 14px">
-              Lifecycle tracking covers every state a bag can pass through, from
-              creation at the mill to return after use.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Creation</span>
-              <span class="pill">Filling</span>
-              <span class="pill">Movement</span>
-              <span class="pill">Delivery</span>
-              <span class="pill">Return (empty bags)</span>
-            </div>
-          </div>
-          <div class="right">
-            <div class="eyebrow">4.2 — Dual Bag Tracking</div>
-            <h3 style="margin-top: 8px">Two parallel chains, one ledger.</h3>
-            <div
-              class="bag-vs"
-              style="margin-top: 18px; border: none; background: transparent"
-            >
-              <div
-                style="
-                  border: 1px solid var(--line);
-                  border-radius: 14px;
-                  background: var(--cream);
-                "
-              >
-                <h4>Empty Bags</h4>
-                <ul>
-                  <li>Issued to mills</li>
-                  <li>Tracked for reuse and inventory</li>
-                </ul>
-              </div>
-              <div
-                style="
-                  border: 1px solid var(--line);
-                  border-radius: 14px;
-                  background: var(--ink);
-                  color: #fbf7ee;
-                  margin-left: 12px;
-                "
-              >
-                <h4 style="color: var(--accent-2)">Filled Bags</h4>
-                <ul style="color: #fbf7ee">
-                  <li
-                    style="
-                      color: #fbf7ee;
-                      border-color: rgba(255, 255, 255, 0.15);
-                    "
-                  >
-                    Tagged post-processing
-                  </li>
-                  <li
-                    style="
-                      color: #fbf7ee;
-                      border-color: rgba(255, 255, 255, 0.15);
-                    "
-                  >
-                    Tracked until delivery to beneficiaries
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+  .trust-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+    justify-content: center;
+  }
 
-        <div style="margin-top: 32px">
-          <div class="eyebrow">4.3 — Automated Data Capture</div>
-          <h3 style="margin-top: 6px; margin-bottom: 18px">
-            Due to limited government capacity for manual scanning, the system
-            must support automated mechanisms.
-          </h3>
-          <div class="cap-list">
-            <div class="cap">
-              <div>
-                <div class="k">/ 01</div>
-                <h4>RFID Gate Scanners</h4>
-              </div>
-              <p>Deployed at warehouses for hands-free capture.</p>
-            </div>
-            <div class="cap">
-              <div>
-                <div class="k">/ 02</div>
-                <h4>Conveyor Barcode Scanners</h4>
-              </div>
-              <p>Inline at mills during packaging.</p>
-            </div>
-            <div class="cap">
-              <div>
-                <div class="k">/ 03</div>
-                <h4>IoT Scanning Tunnels</h4>
-              </div>
-              <p>High-throughput tunnels for bulk capture.</p>
-            </div>
-            <div class="cap">
-              <div>
-                <div class="k">/ 04</div>
-                <h4>Mobile Bulk Scanning</h4>
-              </div>
-              <p>Camera-based AI recognition on handhelds.</p>
-            </div>
-            <div class="cap">
-              <div>
-                <div class="k">/ 05</div>
-                <h4>GPS Vehicle Tracking</h4>
-              </div>
-              <p>Integrated with shipment data for geo-validation.</p>
-            </div>
-          </div>
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    background: var(--card-bg);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 
-          <div class="principle">
-            <div>
-              <div class="lbl">Key Principle</div>
-              <div class="txt">
-                “Zero or minimal manual intervention for data capture.”
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  .trust-badge:hover {
+    transform: translateX(6px);
+    box-shadow: -4px 0 0 var(--accent);
+  }
 
-      <!-- ============== SYSTEM ARCHITECTURE ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">05 — System Architecture</div>
-            <h2>Six layers, working as one ecosystem.</h2>
-          </div>
-          <div class="right">Section · 05<br />Components</div>
-        </div>
-        <div class="layers">
-          <div class="layer">
-            <div class="lbl">5.1 / Layer 01</div>
-            <h3>Data Capture Layer</h3>
-            <div class="tags">
-              <span>RFID scanners</span><span>Barcode scanners</span
-              ><span>IoT devices</span><span>Mobile applications</span>
-            </div>
-          </div>
-          <div class="layer">
-            <div class="lbl">5.1 / Layer 02</div>
-            <h3>Integration Layer</h3>
-            <div class="tags">
-              <span>APIs for external systems</span
-              ><span>Government databases</span><span>WFP platforms</span>
-            </div>
-          </div>
-          <div class="layer">
-            <div class="lbl">5.1 / Layer 03</div>
-            <h3>Processing Layer</h3>
-            <div class="tags">
-              <span>Event processing engine</span
-              ><span>Supply chain tracking logic</span
-              ><span>Exception detection</span>
-            </div>
-          </div>
-          <div class="layer">
-            <div class="lbl">5.1 / Layer 04</div>
-            <h3>Data Storage</h3>
-            <div class="tags">
-              <span>Centralized cloud database</span
-              ><span>Historical tracking logs</span>
-            </div>
-          </div>
-          <div class="layer">
-            <div class="lbl">5.1 / Layer 05</div>
-            <h3>Application Layer</h3>
-            <div class="tags">
-              <span>Web portal</span><span>Mobile apps</span
-              ><span>Admin interfaces</span>
-            </div>
-          </div>
-          <div class="layer">
-            <div class="lbl">5.1 / Layer 06</div>
-            <h3>Analytics &amp; AI Layer</h3>
-            <div class="tags">
-              <span>Predictive analytics</span><span>Anomaly detection</span
-              ><span>Reporting engine</span>
-            </div>
-          </div>
-        </div>
-      </section>
+  .trust-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
 
-      <!-- ============== DASHBOARD ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">06 — Dashboard &amp; Visualization</div>
-            <h2>
-              The most critical component — designed for senior stakeholders.
-            </h2>
-          </div>
-          <div class="right">Section · 06<br />Key Feature</div>
-        </div>
+  .trust-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
 
-        <div class="dash">
-          <div class="dash-head">
-            <div class="title">
-              <div
-                class="brand-mark"
-                style="width: 28px; height: 28px; font-size: 14px"
-              >
-                G
-              </div>
-              Commissioner Dashboard · National Overview
-            </div>
-            <div class="live"><span class="pulse"></span>Live Monitoring</div>
-          </div>
-          <div class="dash-grid">
-            <div class="stat up">
-              <div class="l">Total Stock</div>
-              <div class="v">1.84M</div>
-              <div class="d">▲ Bags across locations</div>
-            </div>
-            <div class="stat up">
-              <div class="l">In-Transit</div>
-              <div class="v">126K</div>
-              <div class="d">▲ Live shipments</div>
-            </div>
-            <div class="stat down">
-              <div class="l">Loss &amp; Damage</div>
-              <div class="v">0.42%</div>
-              <div class="d">▼ Bags lost in transit</div>
-            </div>
-            <div class="stat up">
-              <div class="l">Turnaround</div>
-              <div class="v">36h</div>
-              <div class="d">▲ Avg. mill → warehouse</div>
-            </div>
-          </div>
-          <div class="dash-row">
-            <div class="panel">
-              <h4>// MOVEMENT — REGIONAL DISTRIBUTION (LIVE)</h4>
-              <div class="bars">
-                <div class="bar" style="height: 60%"></div>
-                <div class="bar alt" style="height: 80%"></div>
-                <div class="bar" style="height: 45%"></div>
-                <div class="bar alt" style="height: 92%"></div>
-                <div class="bar" style="height: 70%"></div>
-                <div class="bar alt" style="height: 55%"></div>
-                <div class="bar" style="height: 88%"></div>
-                <div class="bar alt" style="height: 38%"></div>
-                <div class="bar" style="height: 74%"></div>
-                <div class="bar alt" style="height: 62%"></div>
-                <div class="bar" style="height: 95%"></div>
-                <div class="bar alt" style="height: 50%"></div>
-              </div>
-            </div>
-            <div class="panel">
-              <h4>// EXCEPTION ALERTS</h4>
-              <div class="alerts">
-                <div class="a">
-                  <div class="dot" style="background: var(--accent)"></div>
-                  <div>Missing scan · WH-North-04</div>
-                  <div class="t">02m</div>
-                </div>
-                <div class="a">
-                  <div class="dot" style="background: #f2a03d"></div>
-                  <div>Route deviation · TRK-1182</div>
-                  <div class="t">14m</div>
-                </div>
-                <div class="a">
-                  <div class="dot" style="background: #7bd389"></div>
-                  <div>Inventory mismatch resolved</div>
-                  <div class="t">28m</div>
-                </div>
-                <div class="a">
-                  <div class="dot" style="background: var(--accent)"></div>
-                  <div>Low stock · Region E-South</div>
-                  <div class="t">41m</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  .trust-sub {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
 
-        <h3 style="margin-top: 48px; margin-bottom: 8px">6.1 — Target Users</h3>
-        <div class="grid g-4" style="margin-top: 18px">
-          <div class="card">
-            <div class="ic">N</div>
-            <h3>National Commissioners</h3>
-            <p>Country-level oversight and accountability.</p>
-          </div>
-          <div class="card">
-            <div class="ic">S</div>
-            <h3>State-Level Officials</h3>
-            <p>Regional performance &amp; intervention.</p>
-          </div>
-          <div class="card">
-            <div class="ic">A</div>
-            <h3>Supply Chain Admins</h3>
-            <p>Day-to-day operational control.</p>
-          </div>
-          <div class="card">
-            <div class="ic">W</div>
-            <h3>WFP Program Managers</h3>
-            <p>Humanitarian program oversight.</p>
-          </div>
-        </div>
+  /* ── PORTFOLIO GRID ARCHITECTURE ── */
+  .arch-strip {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem 4rem;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 
-        <h3 style="margin-top: 48px; margin-bottom: 18px">
-          6.2 — Dashboard Capabilities
-        </h3>
-        <div class="grid g-3">
-          <div class="card accent">
-            <div class="ic">A</div>
-            <h3>Real-Time Monitoring</h3>
-            <p>
-              Total stock across locations · Movement of goods (live tracking) ·
-              In-transit shipments.
-            </p>
-          </div>
-          <div class="card">
-            <div class="ic">B</div>
-            <h3>Inventory Insights</h3>
-            <p>
-              Number of empty vs filled bags · Stock levels by region ·
-              Warehouse capacity utilization.
-            </p>
-          </div>
-          <div class="card dark">
-            <div class="ic">C</div>
-            <h3>Loss &amp; Damage Tracking</h3>
-            <p>
-              Bags lost in transit · Damaged goods · Leakage points in the
-              supply chain.
-            </p>
-          </div>
-          <div class="card">
-            <div class="ic">D</div>
-            <h3>Operational Performance</h3>
-            <p>
-              Turnaround time at each stage · Delays and bottlenecks ·
-              Processing efficiency at mills.
-            </p>
-          </div>
-          <div class="card dark">
-            <div class="ic">E</div>
-            <h3>Exception Alerts</h3>
-            <p>Missing scans · Route deviations · Inventory mismatches.</p>
-          </div>
-          <div
-            class="card"
-            style="background: var(--paper-2); border-style: dashed"
-          >
-            <div class="ic">＋</div>
-            <h3>Unified View</h3>
-            <p>
-              All five capabilities surface inside a single command center for
-              senior decision-makers.
-            </p>
-          </div>
-        </div>
+  .arch-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
 
-        <div class="image_full_view">
-          <img
-            src="A1.png"
-            alt="Supply Chain Dashboard"
-            class="image_full_view"
-          />
-        </div>
-        <div class="image_full_view">
-          <img
-            src="A4.png"
-            alt="Supply Chain Dashboard"
-            class="image_full_view"
-          />
-        </div>
-      </section>
+  .arch-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
 
-      <!-- ============== AI ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">
-              07 — AI-Based Reporting &amp; Intelligence
-            </div>
-            <h2>From raw scans to executive-ready intelligence.</h2>
-          </div>
-          <div class="right">Section · 07<br />Intelligence</div>
-        </div>
+  .arch-strip-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-right: auto;
+    opacity: 1;
+  }
 
-        <div class="ai-grid">
-          <div class="ai-card">
-            <div class="num">01</div>
-            <div class="eyebrow">7.1</div>
-            <h3>Predictive Analytics</h3>
-            <ul>
-              <li>Demand forecasting by region</li>
-              <li>Stock replenishment recommendations</li>
-              <li>Seasonal supply planning</li>
-            </ul>
-          </div>
-          <div class="ai-card">
-            <div class="num">02</div>
-            <div class="eyebrow">7.2</div>
-            <h3>Anomaly Detection</h3>
-            <ul>
-              <li>Identify unusual losses or discrepancies</li>
-              <li>Detect potential fraud or diversion</li>
-              <li>Highlight abnormal movement patterns</li>
-            </ul>
-          </div>
-          <div class="ai-card">
-            <div class="num">03</div>
-            <div class="eyebrow">7.3</div>
-            <h3>Intelligent Alerts</h3>
-            <ul>
-              <li>Delayed shipments</li>
-              <li>Low stock levels</li>
-              <li>High damage rates</li>
-            </ul>
-          </div>
-          <div class="quote-card">
-            <div class="eyebrow">7.4 — Natural Language Reporting</div>
-            <h3>Plain-language summaries for decision-makers.</h3>
-            <div>
-              <p class="ex">
-                “Region X has a 15% increase in losses this month.”
-              </p>
-              <p class="ex">“Warehouse Y is nearing full capacity.”</p>
-            </div>
-          </div>
-          <div
-            class="ai-card"
-            style="
-              grid-column: span 2;
-              background: var(--ink);
-              color: #fbf7ee;
-              border-color: transparent;
-            "
-          >
-            <div class="num" style="color: rgba(255, 255, 255, 0.06)">05</div>
-            <div class="eyebrow" style="color: var(--accent-2)">7.5</div>
-            <h3 style="color: #fbf7ee">Decision Support</h3>
-            <p style="color: rgba(251, 247, 238, 0.7); margin-top: 8px">
-              AI-driven recommendations that translate data into action.
-            </p>
-            <ul style="margin-top: 18px">
-              <li
-                style="
-                  color: rgba(251, 247, 238, 0.85);
-                  border-color: rgba(255, 255, 255, 0.15);
-                "
-              >
-                Optimize routes
-              </li>
-              <li
-                style="
-                  color: rgba(251, 247, 238, 0.85);
-                  border-color: rgba(255, 255, 255, 0.15);
-                "
-              >
-                Reallocate stock
-              </li>
-              <li
-                style="
-                  color: rgba(251, 247, 238, 0.85);
-                  border-color: rgba(255, 255, 255, 0.15);
-                "
-              >
-                Improve distribution efficiency
-              </li>
-            </ul>
-          </div>
-        </div>
+  /* ── PRODUCT CARDS ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 2px solid var(--ink);
+  }
 
-        <div class="image_full_view">
-          <img
-            src="A2.png"
-            alt="Supply Chain Dashboard"
-            class="image_full_view"
-          />
-        </div>
-      </section>
+  .product-card {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
 
-      <!-- ============== INSPECTION COMMAND CENTER ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">08 — Inspection Command Center</div>
-            <h2>Where quality meets control.</h2>
-          </div>
-          <div class="right">Section · 08<br />Quality</div>
-        </div>
-        <div class="insp-grid">
-          <article class="insp-card insp-card--dark">
-            <div class="insp-top">
-              <span class="insp-num">/ 01</span>
-              <span class="insp-tag">Volume</span>
-            </div>
-            <div class="insp-metric">
-              <span class="insp-value">128,420</span>
-              <span class="insp-unit">checks</span>
-            </div>
-            <h3 class="insp-title">Total Inspections</h3>
-            <p class="insp-desc">
-              All inspections recorded across the selected period, ensuring
-              complete quality visibility from procurement to last-mile
-              distribution.
-            </p>
-            <div class="insp-bar">
-              <span
-                style="
-                  width: 100%;
-                  background: linear-gradient(
-                    90deg,
-                    var(--accent-2),
-                    var(--accent)
-                  );
-                "
-              ></span>
-            </div>
-          </article>
+  .product-card:nth-child(3n) { border-right: none; }
 
-          <article class="insp-card">
-            <div class="insp-top">
-              <span class="insp-num">/ 02</span>
-              <span class="insp-tag insp-tag--ok">Compliance</span>
-            </div>
-            <div class="insp-metric">
-              <span class="insp-value"
-                >96.4<span class="insp-pct">%</span></span
-              >
-              <span class="insp-unit">pass rate</span>
-            </div>
-            <h3 class="insp-title">Pass Rate</h3>
-            <p class="insp-desc">
-              Percentage of inspections meeting safety thresholds and quality
-              compliance standards across mills, warehouses, and field points.
-            </p>
-            <div class="insp-bar">
-              <span
-                style="
-                  width: 96%;
-                  background: linear-gradient(90deg, #7bd389, #2f6b3a);
-                "
-              ></span>
-            </div>
-          </article>
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--card-accent, var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
 
-          <article class="insp-card">
-            <div class="insp-top">
-              <span class="insp-num">/ 03</span>
-              <span class="insp-tag insp-tag--warn">Open</span>
-            </div>
-            <div class="insp-metric">
-              <span class="insp-value">312</span>
-              <span class="insp-unit">unresolved</span>
-            </div>
-            <h3 class="insp-title">Open Failures</h3>
-            <p class="insp-desc">
-              Unresolved inspection failures requiring action before the supply
-              chain can progress to the next custody handover.
-            </p>
-            <div class="insp-bar">
-              <span
-                style="
-                  width: 42%;
-                  background: linear-gradient(90deg, #f2b441, #e85d2f);
-                "
-              ></span>
-            </div>
-          </article>
+  .product-card:hover::before { transform: scaleX(1); }
+  .product-card:hover { background: rgba(255,255,255,0.6); }
 
-          <article class="insp-card insp-card--accent">
-            <div class="insp-top">
-              <span class="insp-num">/ 04</span>
-              <span class="insp-tag insp-tag--crit">Critical</span>
-            </div>
-            <div class="insp-metric">
-              <span class="insp-value">47</span>
-              <span class="insp-unit">high-risk</span>
-            </div>
-            <h3 class="insp-title">Critical Failures</h3>
-            <p class="insp-desc">
-              High-risk issues flagged for immediate intervention and strict
-              containment, escalated to senior commissioners in real time.
-            </p>
-            <div class="insp-bar">
-              <span
-                style="
-                  width: 78%;
-                  background: linear-gradient(90deg, #ffb199, #fff);
-                "
-              ></span>
-            </div>
-          </article>
+  .product-card--featured {
+    grid-column: span 2;
+    border-right: 1px solid var(--line);
+    background: var(--ink);
+    color: var(--paper);
+  }
 
-        
+  .product-card--featured:hover { background: #111827; }
+  .product-card--featured .product-num,
+  .product-card--featured .product-flow-label,
+  .product-card--featured .product-flow-step { color: rgba(245,240,232,0.5); }
+  .product-card--featured .product-name { color: var(--paper); }
+  .product-card--featured .product-desc { color: rgba(245,240,232,0.7); }
+  .product-card--featured .cap-item { border-color: rgba(255,255,255,0.1); color: rgba(245,240,232,0.8); }
+  .product-card--featured .product-tag { background: rgba(26,107,74,0.3); color: #6ee7b7; border-color: transparent; }
 
-          <!-- <article class="insp-card insp-card--wide">
-            <div class="insp-top">
-              <span class="insp-num">/ 05</span>
-              <span class="insp-tag insp-tag--bio">Biohazard</span>
-            </div>
-            <div class="insp-split">
-              <div>
-                <div class="insp-metric">
-                  <span class="insp-value">9</span>
-                  <span class="insp-unit">contamination cases</span>
-                </div>
-                <h3 class="insp-title">Pathogen Detections</h3>
-                <p class="insp-desc">
-                  Detected contamination cases — including
-                  <em>Salmonella</em> and <em>E. coli</em> — automatically
-                  routed to quarantine workflows with full chain-of-custody
-                  traceback.
-                </p>
-              </div>
-              <div class="insp-pathos">
-                <div class="patho">
-                  <span class="dot dot--red"></span
-                  ><span class="lbl">Salmonella</span><span class="ct">5</span>
-                </div>
-                <div class="patho">
-                  <span class="dot dot--orange"></span
-                  ><span class="lbl">E. coli</span><span class="ct">3</span>
-                </div>
-                <div class="patho">
-                  <span class="dot dot--yellow"></span
-                  ><span class="lbl">Listeria</span><span class="ct">1</span>
-                </div>
-              </div>
-            </div>
-          </article> -->
-        </div>
-          <div class="image_full_view">
-            <img
-              src="A3.png"
-              alt="Supply Chain Dashboard"
-              class="image_full_view"
-            />
-          </div>
-      </section>
+  .product-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
 
-      <!-- ============== AUTOMATION STRATEGY ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">09 — Automation Strategy</div>
-            <h2>Engineered to address limited manual capacity.</h2>
-          </div>
-          <div class="right">Section · 09<br />Strategy</div>
-        </div>
-        <div class="auto-grid">
-          <div>
-            <div class="eyebrow">8.1</div>
-            <h3>Infrastructure Deployment</h3>
-            <ul>
-              <li>RFID gates at entry/exit points</li>
-              <li>Fixed scanners at mills and warehouses</li>
-              <li>Smart handheld devices for field staff</li>
-            </ul>
-          </div>
-          <div>
-            <div class="eyebrow">8.2</div>
-            <h3>Smart Logistics Integration</h3>
-            <ul>
-              <li>Vehicle tracking systems</li>
-              <li>Automated shipment logging</li>
-              <li>Geo-fencing for location validation</li>
-            </ul>
-          </div>
-          <div>
-            <div class="eyebrow">8.3</div>
-            <h3>AI-Assisted Scanning</h3>
-            <ul>
-              <li>Camera-based barcode recognition</li>
-              <li>Bulk scanning using computer vision</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+  .product-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+    background: var(--card-icon-bg, rgba(26,107,74,0.1));
+    transition: transform 0.3s;
+  }
 
-      <!-- ============== BENEFITS ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">10 — Benefits</div>
-            <h2>Five outcomes that change how food reaches people.</h2>
-          </div>
-          <div class="right">Section · 10<br />Impact</div>
-        </div>
-        <div class="ben-grid">
-          <div class="ben">
-            <div>
-              <div class="num">01</div>
-              <h3>Transparency</h3>
-              <p>Full visibility of every bag in the system.</p>
-            </div>
-            <div class="eyebrow">9.1</div>
-          </div>
-          <div class="ben">
-            <div>
-              <div class="num">02</div>
-              <h3>Accountability</h3>
-              <p>Clear tracking of responsibility at each stage.</p>
-            </div>
-            <div class="eyebrow">9.2</div>
-          </div>
-          <div class="ben">
-            <div>
-              <div class="num">03</div>
-              <h3>Efficiency</h3>
-              <p>Reduced manual effort. Faster operations.</p>
-            </div>
-            <div class="eyebrow">9.3</div>
-          </div>
-          <div class="ben">
-            <div>
-              <div class="num">04</div>
-              <h3>Reduced Losses</h3>
-              <p>Early detection of leakages and inefficiencies.</p>
-            </div>
-            <div class="eyebrow">9.4</div>
-          </div>
-          <div class="ben">
-            <div>
-              <div class="num">05</div>
-              <h3>Data-Driven Decisions</h3>
-              <p>Real-time insights for policymakers.</p>
-            </div>
-            <div class="eyebrow">9.5</div>
-          </div>
-        </div>
-      </section>
+  .product-card:hover .product-icon { transform: scale(1.1) rotate(-3deg); }
 
-      <!-- ============== ROADMAP ============== -->
-      <section>
-        <div class="sec-head">
-          <div class="left">
-            <div class="sec-num">11 — Implementation Roadmap</div>
-            <h2>From pilot to optimization, one phase at a time.</h2>
-          </div>
-          <div class="right">Section · 11<br />Timeline</div>
-        </div>
-        <div class="road-grid">
-          <div class="phase">
-            <div class="seq">01</div>
-            <div>
-              <div class="ph">Phase 1</div>
-              <h3>Pilot</h3>
-            </div>
-            <ul>
-              <li>Select limited regions</li>
-              <li>Deploy core tracking and dashboard</li>
-            </ul>
-          </div>
-          <div class="phase p2">
-            <div class="seq">02</div>
-            <div>
-              <div class="ph">Phase 2</div>
-              <h3>Scale-Up</h3>
-            </div>
-            <ul>
-              <li>Expand to additional regions</li>
-              <li>Integrate AI capabilities</li>
-            </ul>
-          </div>
-          <div class="phase p3">
-            <div class="seq">03</div>
-            <div>
-              <div class="ph">Phase 3</div>
-              <h3>Optimization</h3>
-            </div>
-            <ul>
-              <li>Enhance automation</li>
-              <li>Improve predictive analytics</li>
-              <li>Continuous system refinement</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
 
-      <!-- ============== CONCLUSION ============== -->
-      <section class="closing">
-        <div class="eyebrow">11 — Conclusion</div>
-        <h2>
-          Transforming food distribution through traceability, automation &amp;
-          intelligence.
-        </h2>
-        <p>
-          The proposed supply chain visibility platform will transform food
-          distribution systems by enabling granular tracking, automation, and
-          intelligent decision-making. By combining bag-level traceability,
-          automated scanning technologies, and AI-powered dashboards, the system
-          will significantly improve transparency, reduce losses, and ensure
-          efficient delivery of food to beneficiaries.
-        </p>
-      </section>
+  .product-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 2rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
 
-      <footer>· Agroledger · Supply Chain Visibility Platform ·</footer>
+  .product-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #5a5248;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-caps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cap-item {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 0.25rem;
+    color: #4a4540;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cap-item::before {
+    content: '→';
+    font-size: 0.7rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .product-flow {
+    margin-top: auto;
+  }
+
+  .product-flow-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .product-flow-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .product-flow-step {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .flow-arrow {
+    color: var(--accent);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  /* ── IMPACT SPOTLIGHT ── */
+  .impact-section {
+    border-bottom: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .impact-left {
+    padding: 4rem;
+    background: var(--accent);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .impact-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .impact-sub {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+
+  .impact-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  .impact-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .impact-stat {
+    padding: 3rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .impact-stat:nth-child(2n) { border-right: none; }
+  .impact-stat:nth-child(3),
+  .impact-stat:nth-child(4) { border-bottom: none; }
+
+  .impact-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .impact-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.5);
+    max-width: 340px;
+  }
+
+  .footer-col-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-link {
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover { color: var(--paper); }
+
+  .footer-bottom {
+    background: var(--ink);
+    border-top: 1px solid rgba(245,240,232,0.08);
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(245,240,232,0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.8s ease both; }
+  .hero-title { animation: fadeUp 0.8s ease 0.15s both; }
+  .hero-desc { animation: fadeUp 0.8s ease 0.3s both; }
+  .hero-stats .stat-cell:nth-child(1) { animation: fadeUp 0.6s ease 0.45s both; }
+  .hero-stats .stat-cell:nth-child(2) { animation: fadeUp 0.6s ease 0.55s both; }
+  .hero-stats .stat-cell:nth-child(3) { animation: fadeUp 0.6s ease 0.65s both; }
+  .hero-stats .stat-cell:nth-child(4) { animation: fadeUp 0.6s ease 0.75s both; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── UN BADGE ── */
+  .un-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(26,107,74,0.1);
+    border: 1px solid rgba(26,107,74,0.2);
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-top: 2rem;
+    width: fit-content;
+  }
+
+  .un-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* Product card color variants */
+  .c-green { --card-accent: #1a6b4a; --card-icon-bg: rgba(26,107,74,0.1); }
+  .c-blue  { --card-accent: #2d4a8a; --card-icon-bg: rgba(45,74,138,0.1); }
+  .c-amber { --card-accent: #c8843a; --card-icon-bg: rgba(200,132,58,0.1); }
+  .c-teal  { --card-accent: #0e7490; --card-icon-bg: rgba(14,116,144,0.1); }
+  .c-rose  { --card-accent: #9f3a4a; --card-icon-bg: rgba(159,58,74,0.1); }
+
+  .divider-line {
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--accent2), var(--accent3));
+    opacity: 0.3;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem 2rem; }
+    .hero-content { padding: 3rem 2rem 2rem; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .overview { grid-template-columns: 1fr; }
+    .overview-text { border-right: none; border-bottom: 1px solid var(--line); }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    .product-card--featured { grid-column: span 2; }
+    .impact-section { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; gap: 2rem; }
+    .section-header { padding: 3rem 2rem 1.5rem; }
+    .arch-strip { padding: 2rem; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card--featured { grid-column: span 1; }
+    .impact-right { grid-template-columns: 1fr; }
+    footer { padding: 3rem 2rem; }
+    .footer-bottom { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <nav>
+    <div class="nav-logo">Sta<span>Twig</span></div>
+    <div class="nav-tag">Product Portfolio · 2024</div>
+  </nav>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Digital Public Infrastructure</div>
+    <h1 class="hero-title">
+      Sovereign<br>
+      <em>Supply Chains</em><br>
+      at Scale
+    </h1>
+    <p class="hero-desc">
+      StaTwig builds secure, scalable, and data-driven platforms using blockchain, AI/ML, IoT, and real-time analytics — enabling end-to-end visibility, traceability, and operational control.
+    </p>
+    <div class="un-badge">
+      <div class="un-badge-dot"></div>
+      UN Digital Public Good · Recognized Platform
     </div>
-  </body>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-cell">
+      <div class="stat-num">2016</div>
+      <div class="stat-label">Founded · Hyderabad</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">65M+</div>
+      <div class="stat-label">Beneficiaries Supported</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">100M+</div>
+      <div class="stat-label">Products Tracked Annually</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Products Across Sectors</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPANY OVERVIEW ── -->
+<section>
+  <div class="section-header reveal">
+    <div class="section-num">01</div>
+    <h2 class="section-title">Company Overview</h2>
+  </div>
+  <div class="overview">
+    <div class="overview-text reveal">
+      <p>
+        StaTwig Technology Services is a technology company focused on digitizing and optimizing supply chains at scale, with proven expertise across public health, logistics, and government ecosystems. Established in 2016 and headquartered in Hyderabad, StaTwig builds secure, scalable, and data-driven platforms using blockchain, AI/ML, IoT, and real-time analytics.
+      </p>
+      <br>
+      <p>
+        Its solutions enable end-to-end visibility, traceability, and operational control — helping organizations improve efficiency, reduce leakages, and strengthen last-mile delivery. Trusted by global institutions, StaTwig delivers national-scale implementations that support critical programs with real-time insights and decision intelligence.
+      </p>
+    </div>
+    <div class="overview-trust reveal">
+      <div class="trust-label">Trusted By Global Institutions</div>
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <div class="trust-icon" style="background:rgba(0,114,188,0.1);">🌐</div>
+          <div>
+            <div class="trust-name">UNICEF</div>
+            <div class="trust-sub">United Nations Children's Fund</div>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-icon" style="background:rgba(26,107,74,0.1);">💉</div>
+          <div>
+            <div class="trust-name">Gavi</div>
+            <div class="trust-sub">The Vaccine Alliance</div>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-icon" style="background:rgba(200,132,58,0.1);">🏛️</div>
+          <div>
+            <div class="trust-name">World Economic Forum</div>
+            <div class="trust-sub">Global Strategic Intelligence Partner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ARCHITECTURE STRIP ── -->
+<div class="arch-strip">
+  <div class="arch-strip-title">Unified Architecture Foundation</div>
+  <div class="arch-item"><div class="arch-dot"></div>End-to-End Traceability</div>
+  <div class="arch-item"><div class="arch-dot"></div>Real-Time Visibility</div>
+  <div class="arch-item"><div class="arch-dot"></div>Last-Mile Tracking</div>
+  <div class="arch-item"><div class="arch-dot"></div>AI Decision Support</div>
+  <div class="arch-item"><div class="arch-dot"></div>Blockchain Security</div>
+</div>
+
+<!-- ── PRODUCTS ── -->
+<section>
+  <div class="section-header reveal">
+    <div class="section-num">02</div>
+    <h2 class="section-title">Core Product Suite</h2>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- VaccineLedger - Featured -->
+    <div class="product-card product-card--featured reveal" style="--card-accent:#1a6b4a;">
+      <div class="product-num">01 · Flagship Platform</div>
+      <div class="product-icon" style="background:rgba(26,107,74,0.2);">💉</div>
+      <div class="product-name">VaccineLedger</div>
+      <div class="product-tag" style="color:#6ee7b7;border-color:rgba(110,231,183,0.3);">UN Digital Public Good</div>
+      <p class="product-desc">A globally recognized platform designed for national immunization and pharmaceutical logistics systems. Enabling batch-level and beneficiary-level traceability with IoT cold chain monitoring.</p>
+      <div class="product-caps">
+        <div class="cap-item">Batch-level & beneficiary-level traceability</div>
+        <div class="cap-item">Cold chain monitoring with IoT integration</div>
+        <div class="cap-item">Real-time inventory & stock visibility</div>
+        <div class="cap-item">Predictive demand forecasting with AI/ML</div>
+        <div class="cap-item">Expiry tracking and wastage reduction</div>
+      </div>
+      <div class="product-flow">
+        <div class="product-flow-label">Process Flow</div>
+        <div class="product-flow-steps">
+          <span class="product-flow-step">Manufacturer</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Central Warehouse</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Regional Storage</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Transport</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Health Facility</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Beneficiary</span>
+        </div>
+        <div style="margin-top:0.75rem;font-family:'DM Mono',monospace;font-size:0.62rem;color:rgba(245,240,232,0.4);">QR + IoT + Blockchain at every step</div>
+      </div>
+    </div>
+
+    <!-- eVLMIS -->
+    <div class="product-card c-blue reveal">
+      <div class="product-num">02</div>
+      <div class="product-icon">🇧🇩</div>
+      <div class="product-name">eVLMIS Bangladesh</div>
+      <div class="product-tag">National Immunization System</div>
+      <p class="product-desc">Country-wide implementation of VaccineLedger for Bangladesh's Expanded Program on Immunization — a model for national-scale digital health systems.</p>
+      <div class="product-caps">
+        <div class="cap-item">125,000+ users onboarded</div>
+        <div class="cap-item">AI-based demand forecasting</div>
+        <div class="cap-item">Cold chain compliance monitoring</div>
+        <div class="cap-item">Policy decision dashboards</div>
+      </div>
+      <div class="product-flow">
+        <div class="product-flow-label">Flow</div>
+        <div class="product-flow-steps">
+          <span class="product-flow-step">Procurement</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">National Store</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Regional</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">District</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Health Centers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CargoLedger -->
+    <div class="product-card c-amber reveal">
+      <div class="product-num">03</div>
+      <div class="product-icon">✈️</div>
+      <div class="product-name">CargoLedger</div>
+      <div class="product-tag">Air Cargo & Logistics</div>
+      <p class="product-desc">Digital platform for end-to-end cargo booking, tracking, and multi-stakeholder coordination across logistics networks.</p>
+      <div class="product-caps">
+        <div class="cap-item">Digital shipment booking & scheduling</div>
+        <div class="cap-item">Real-time cargo tracking</div>
+        <div class="cap-item">Automated documentation</div>
+        <div class="cap-item">Multi-stakeholder coordination</div>
+      </div>
+      <div class="product-flow">
+        <div class="product-flow-label">Flow</div>
+        <div class="product-flow-steps">
+          <span class="product-flow-step">Booking</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Documentation</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Acceptance</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Transport</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Delivery</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- UnifyAid -->
+    <div class="product-card c-rose reveal">
+      <div class="product-num">04</div>
+      <div class="product-icon">🤝</div>
+      <div class="product-name">UnifyAid</div>
+      <div class="product-tag">Humanitarian Aid</div>
+      <p class="product-desc">Designed for governments and NGOs to digitize welfare and aid distribution programs with full traceability and leakage prevention.</p>
+      <div class="product-caps">
+        <div class="cap-item">Beneficiary enrollment & verification</div>
+        <div class="cap-item">Stock indenting and approvals</div>
+        <div class="cap-item">Shipment tracking & delivery confirmation</div>
+        <div class="cap-item">Leakage prevention through traceability</div>
+      </div>
+      <div class="product-flow">
+        <div class="product-flow-label">Flow</div>
+        <div class="product-flow-steps">
+          <span class="product-flow-step">Demand ID</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Approval</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Allocation</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Dispatch</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Verification</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FoodLedger -->
+    <div class="product-card c-green reveal">
+      <div class="product-num">05</div>
+      <div class="product-icon">🌾</div>
+      <div class="product-name">FoodLedger</div>
+      <div class="product-tag">Civil Supplies · PDS</div>
+      <p class="product-desc">Blockchain-enabled solution to track food grains and commodities. Digitized tracking of millions of units, reducing manual inefficiencies and fraud.</p>
+      <div class="product-caps">
+        <div class="cap-item">RFID + QR-based tracking</div>
+        <div class="cap-item">Mill-to-FPS traceability</div>
+        <div class="cap-item">Fraud and diversion prevention</div>
+        <div class="cap-item">Inventory monitoring at every node</div>
+      </div>
+      <div class="product-flow">
+        <div class="product-flow-label">Flow</div>
+        <div class="product-flow-steps">
+          <span class="product-flow-step">Farmer</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Mill</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Warehouse</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Distribution</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Consumer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WCW Ledger -->
+    <div class="product-card c-teal reveal">
+      <div class="product-num">06</div>
+      <div class="product-icon">👶</div>
+      <div class="product-name">WCW Ledger</div>
+      <div class="product-tag">Women & Child Welfare</div>
+      <p class="product-desc">Tracking nutrition supplies to Anganwadi centers for women and children. Improved delivery transparency for welfare schemes with reduced delays.</p>
+      <div class="product-caps">
+        <div class="cap-item">Real-time supply tracking</div>
+        <div class="cap-item">Multi-level approval workflows</div>
+        <div class="cap-item">Beneficiary-level visibility</div>
+        <div class="cap-item">QR-based validation</div>
+      </div>
+      <div class="product-flow">
+        <div class="product-flow-label">Flow</div>
+        <div class="product-flow-steps">
+          <span class="product-flow-step">Supplier</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">District Warehouse</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Anganwadi Centers</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Beneficiaries</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nutrition -->
+    <div class="product-card c-amber reveal">
+      <div class="product-num">07</div>
+      <div class="product-icon">🥗</div>
+      <div class="product-name">Nutrition Supply Chain</div>
+      <div class="product-tag">Public Health</div>
+      <p class="product-desc">Ensuring efficient delivery of nutritional supplements in public health programs with beneficiary mapping and data-driven program optimization.</p>
+      <div class="product-caps">
+        <div class="cap-item">Inventory tracking and monitoring</div>
+        <div class="cap-item">Last-mile delivery visibility</div>
+        <div class="cap-item">Beneficiary mapping</div>
+        <div class="cap-item">Data-driven program optimization</div>
+      </div>
+      <div class="product-flow">
+        <div class="product-flow-label">Flow</div>
+        <div class="product-flow-steps">
+          <span class="product-flow-step">Procurement</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Storage</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Distribution</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Local Centers</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Beneficiaries</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Civil Supplies -->
+    <div class="product-card c-blue reveal">
+      <div class="product-num">08</div>
+      <div class="product-icon">🏛️</div>
+      <div class="product-name">Civil Supplies</div>
+      <div class="product-tag">Government · PDS</div>
+      <p class="product-desc">Large-scale digitization of government food supply chains, improving transparency and efficiency with real-time analytics and leakage prevention.</p>
+      <div class="product-caps">
+        <div class="cap-item">Commodity traceability</div>
+        <div class="cap-item">Inventory optimization</div>
+        <div class="cap-item">Leakage and fraud reduction</div>
+        <div class="cap-item">Real-time analytics</div>
+      </div>
+    </div>
+
+    <!-- BabyBoo -->
+    <div class="product-card c-rose reveal">
+      <div class="product-num">09</div>
+      <div class="product-icon">🍼</div>
+      <div class="product-name">BabyBoo</div>
+      <div class="product-tag">Mobile · Child Health</div>
+      <p class="product-desc">A mobile-first platform for parents and caregivers to manage child health records, immunization schedules, growth monitoring, and vaccination reminders.</p>
+      <div class="product-caps">
+        <div class="cap-item">Immunization tracking</div>
+        <div class="cap-item">Growth monitoring (height/weight)</div>
+        <div class="cap-item">Vaccination reminders & alerts</div>
+        <div class="cap-item">Digital health records</div>
+      </div>
+      <div class="product-flow">
+        <div class="product-flow-label">Flow</div>
+        <div class="product-flow-steps">
+          <span class="product-flow-step">Registration</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Health Records</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Schedule</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Alerts</span><span class="flow-arrow">→</span>
+          <span class="product-flow-step">Follow-ups</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ReCollect - spans remaining -->
+    <div class="product-card c-green reveal" style="grid-column: span 3;">
+      <div class="product-num">10 · Sustainability Initiative</div>
+      <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:260px;">
+          <div class="product-icon">♻️</div>
+          <div class="product-name">AB InBev · ReCollect / BrewCollect</div>
+          <div class="product-tag">Circular Economy</div>
+          <p class="product-desc">A sustainability-driven platform to track collection and recycling of packaging materials, enabling reverse supply chain management with incentive-driven collection systems.</p>
+        </div>
+        <div style="flex:1;min-width:220px;">
+          <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Key Capabilities</div>
+          <div class="product-caps">
+            <div class="cap-item">Reverse logistics tracking</div>
+            <div class="cap-item">Material lifecycle traceability</div>
+            <div class="cap-item">Environmental impact measurement</div>
+            <div class="cap-item">Incentive-driven collection systems</div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:220px;display:flex;flex-direction:column;justify-content:flex-end;">
+          <div class="product-flow">
+            <div class="product-flow-label">Circular Flow</div>
+            <div class="product-flow-steps">
+              <span class="product-flow-step">Consumer</span><span class="flow-arrow">→</span>
+              <span class="product-flow-step">Collection Point</span><span class="flow-arrow">→</span>
+              <span class="product-flow-step">Aggregation</span><span class="flow-arrow">→</span>
+              <span class="product-flow-step">Recycling Facility</span><span class="flow-arrow">→</span>
+              <span class="product-flow-step">Reuse</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── IMPACT ── -->
+<section class="impact-section reveal">
+  <div class="impact-left">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;margin-bottom:1rem;">Flagship Implementation</div>
+      <div class="impact-heading">eVLMIS<br>Bangladesh</div>
+      <p class="impact-sub">A country-wide deployment of VaccineLedger for Bangladesh's Expanded Program on Immunization — one of the largest national-scale immunization intelligence systems in the world.</p>
+    </div>
+    <div class="impact-source">National · Public Health · 2023 Active</div>
+  </div>
+  <div class="impact-right">
+    <div class="impact-stat">
+      <div class="impact-num">125K+</div>
+      <div class="impact-label">Users onboarded across the national system</div>
+    </div>
+    <div class="impact-stat">
+      <div class="impact-num">65M+</div>
+      <div class="impact-label">Beneficiaries supported nationwide</div>
+    </div>
+    <div class="impact-stat">
+      <div class="impact-num">100M+</div>
+      <div class="impact-label">Products tracked annually with full traceability</div>
+    </div>
+    <div class="impact-stat">
+      <div class="impact-num">AI</div>
+      <div class="impact-label">Demand forecasting & cold chain compliance at scale</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div>
+    <div class="footer-logo">Sta<span>Twig</span></div>
+    <p class="footer-desc">Digital Public Infrastructure for Sovereign Supply Chains. Building secure, scalable, data-driven platforms trusted by global institutions and governments worldwide.</p>
+  </div>
+  <div>
+    <div class="footer-col-title">Products</div>
+    <div class="footer-links">
+      <a class="footer-link" href="#">VaccineLedger</a>
+      <a class="footer-link" href="#">eVLMIS</a>
+      <a class="footer-link" href="#">CargoLedger</a>
+      <a class="footer-link" href="#">UnifyAid</a>
+      <a class="footer-link" href="#">FoodLedger</a>
+      <a class="footer-link" href="#">WCW Ledger</a>
+      <a class="footer-link" href="#">BabyBoo</a>
+      <a class="footer-link" href="#">ReCollect</a>
+    </div>
+  </div>
+  <div>
+    <div class="footer-col-title">Company</div>
+    <div class="footer-links">
+      <a class="footer-link" href="#">About StaTwig</a>
+      <a class="footer-link" href="#">Hyderabad, India</a>
+      <a class="footer-link" href="#">Est. 2016</div>
+      <a class="footer-link" href="#">UNICEF Partner</a>
+      <a class="footer-link" href="#">Gavi Partner</a>
+      <a class="footer-link" href="#">WEF Partner</a>
+    </div>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2024 StaTwig Technology Services</span>
+  <span>Digital Public Infrastructure · Sovereign Supply Chains</span>
+  <span>Hyderabad, India</span>
+</div>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
